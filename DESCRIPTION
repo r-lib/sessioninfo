@@ -1,0 +1,15 @@
+Package: sessioninfo
+Title: R Session Information
+Version: 0.0.0.9000
+Author: Gábor Csárdi
+Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
+Description: Query and print information about the current R session. It is similar to
+  'utils::sessionInfo()`, but includes more information about packages, and
+  where they were installed from.
+License: GPL-2
+LazyData: true
+URL: https://github.com/r-pkgs/sessioninfo#readme
+BugReports: https://github.com/r-pkgs/sessioninfo/issues
+RoxygenNote: 6.0.1.9000
+Suggests: 
+    testthat

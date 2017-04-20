@@ -1,0 +1,10 @@
+
+#' R Session Information
+#'
+#' Query and print information about the current R session. It is similar to
+  'utils::sessionInfo()`, but includes more information about packages, and
+  where they were installed from.
+#'
+#' @docType package
+#' @name sessioninfo
+NULL
