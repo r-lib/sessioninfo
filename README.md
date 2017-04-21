@@ -4,7 +4,7 @@
 > R Session Information
 
 [![Linux Build Status](https://travis-ci.org/r-pkgs/sessioninfo.svg?branch=master)](https://travis-ci.org/r-pkgs/sessioninfo)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/r-pkgs/sessioninfo?svg=true)](https://ci.appveyor.com/project/r-pkgs/sessioninfo)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/r-pkgs/sessioninfo?svg=true)](https://ci.appveyor.com/project/gaborcsardi/sessioninfo)
 [![](http://www.r-pkg.org/badges/version/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
 [![Coverage Status](https://img.shields.io/codecov/c/github/r-pkgs/sessioninfo/master.svg)](https://codecov.io/github/r-pkgs/sessioninfo?branch=master)
