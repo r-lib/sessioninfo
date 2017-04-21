@@ -12,6 +12,11 @@ LazyData: true
 URL: https://github.com/r-pkgs/sessioninfo#readme
 BugReports: https://github.com/r-pkgs/sessioninfo/issues
 RoxygenNote: 6.0.1.9000
-Suggests: 
+Suggests:
     testthat
+Imports:
+    clisymbols,
+    tools,
+    utils,
+    withr
 Encoding: UTF-8
