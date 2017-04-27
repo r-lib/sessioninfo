@@ -45,6 +45,12 @@ test_that("find_deps", {
         "brew", "commonmark")
     )
   )
+
+  ## An edge case
+  expect_equal(
+    find_deps("foobar", top_dep = character(), rec_dep = character()),
+    "foobar"
+  )
 })
 
 test_that("standardise_dep", {

@@ -63,6 +63,16 @@ test_that("pkg_source", {
   expect_identical(pkg_source(memoise), "cran (@1.1.0)")
 })
 
+test_that("pkg_source edge case, remote repo, but no RemoteSha", {
+  desc <- readRDS("fixtures/no-sha.rda")
+  expect_identical(pkg_source(desc), "github (r-pkgs/desc)")
+})
+
+test_that("pkg_source edge case, remote repo, no RemoteRepo", {
+  desc <- readRDS("fixtures/no-remote-repo.rda")
+  expect_identical(pkg_source(desc), "github")
+})
+
 test_that("print.packages_info", {
   info <- readRDS("fixtures/devtools-info.rda")
   expect_output(
