@@ -13,7 +13,10 @@ test_that("dependent_packages", {
     function(x) alldsc[[x]]
   )
 
-  expect_equal(dependent_packages("devtools"), dep)
+  exp <- dep[, setdiff(colnames(dep), "path")]
+  tec <- dependent_packages("devtools")
+  tec <- tec[, setdiff(colnames(tec), "path")]
+  expect_equal(exp, tec)
 })
 
 test_that("pkg_path", {

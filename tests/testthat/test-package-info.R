@@ -4,7 +4,14 @@ context("package_info")
 test_that("package_info, loaded", {
 
   descs <- readRDS("fixtures/devtools-deps.rda")
+  alldsc <- readRDS("fixtures/descs.rda")
+
   mockery::stub(package_info, "loaded_packages", descs)
+  mockery::stub(
+    package_info,
+    'utils::packageDescription',
+    function(x) alldsc[[x]]
+  )
 
   pi <- package_info()
   exp <- readRDS("fixtures/devtools-info.rda")
@@ -14,7 +21,14 @@ test_that("package_info, loaded", {
 test_that("package_info, dependent", {
 
   descs <- readRDS("fixtures/devtools-deps.rda")
+  alldsc <- readRDS("fixtures/descs.rda")
+
   mockery::stub(package_info, "dependent_packages", descs)
+  mockery::stub(
+    package_info,
+    'utils::packageDescription',
+    function(x) alldsc[[x]]
+  )
 
   pi <- package_info("devtools")
   exp <- readRDS("fixtures/devtools-info.rda")
