@@ -8,7 +8,8 @@ test_that("platform_info", {
     c("version", "os", "system", "ui", "language", "collate", "tz", "date")
   )
 
-  expect_match(pi$version, "R version [0-9][.][0-9]")
+  ## This can be a variety of strings, e.g. "R Under development"
+  expect_match(pi$version, "R ")
   expect_true(is_string(pi$os))
   expect_true(is_string(pi$system) && grepl(",", pi$system))
   expect_true(is_string(pi$ui))
