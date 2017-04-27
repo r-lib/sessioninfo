@@ -30,8 +30,12 @@ find_deps <- function(pkgs, available = utils::available.packages(),
   top_dep <- standardise_dep(top_dep)
   rec_dep <- standardise_dep(rec_dep)
 
-  top <- tools::package_dependencies(pkgs, db = available, which = top_dep)
-  top_flat <- unlist(top, use.names = FALSE)
+  if (length(top_dep) > 0) {
+    top <- tools::package_dependencies(pkgs, db = available, which = top_dep)
+    top_flat <- unlist(top, use.names = FALSE)
+  } else {
+    top_flat <- character()
+  }
 
   if (length(rec_dep) != 0 && length(top_flat) > 0) {
     rec <- tools::package_dependencies(
