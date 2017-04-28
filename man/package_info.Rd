@@ -28,6 +28,9 @@ A data frame with columns:
   * `date`: the date the package was installed or built.
   * `source`: where the package was installed from. E.g.
     `CRAN`, `GitHub`, `local` (from the local machine), etc.
+
+See [session_info()] for the description of the *printed* columns
+by `package_info` (as opposed to the *returned* columns).
 }
 \description{
 Information about the currently loaded packages, or about a chosen set

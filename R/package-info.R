@@ -20,6 +20,9 @@
 #'   * `source`: where the package was installed from. E.g.
 #'     `CRAN`, `GitHub`, `local` (from the local machine), etc.
 #'
+#' See [session_info()] for the description of the *printed* columns
+#' by `package_info` (as opposed to the *returned* columns).
+#'
 #' @export
 #' @examples
 #' package_info()
