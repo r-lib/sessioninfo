@@ -139,3 +139,9 @@ print.packages_info <- function(x, ...) {
 
   print.data.frame(px, right = FALSE, row.names = FALSE)
 }
+
+#' @export
+
+as.character.packages_info <- function(x, ...) {
+  capture.output(print(x))
+}

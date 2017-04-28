@@ -70,6 +70,18 @@ sessioninfo::session_info()
  withr           1.0.2       2016-06-20 CRAN (R 3.3.0)
 ```
 
+### Copying to the clipboard
+
+You can use the
+[`clipr` package](https://cran.rstudio.com/web/packages/clipr/) to copy
+the session info to the clipboard:
+
+```r
+clipr::write_clip(session_info())
+```
+
+(The current `clipr` version prints a warning, but you can ignore that.)
+
 ## License
 
 GPL-2

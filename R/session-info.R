@@ -40,10 +40,16 @@ session_info <- function(pkgs = NULL, include_base = FALSE) {
 
 #' @export
 
+as.character.session_info <- function(x, ...) {
+  c(rule("Session info"),
+    as.character(x$platform),
+    "",     # empty line
+    rule("Packages"),
+    as.character(x$packages)
+  )
+}
+#' @export
+
 print.session_info <- function(x, ...) {
-  rule("Session info")
-  print(x$platform)
-  cat("\n")
-  rule("Packages")
-  print(x$packages)
+  cat(as.character(x), sep = "\n")
 }

@@ -6,5 +6,5 @@ rule <- function (..., pad = NULL) {
   title <- if (length(list(...))) paste0(" ", ..., " ") else ""
 
   width <- max(getOption("width") - nchar(title) - 3, 0)
-  cat(pad, title, paste(rep(pad, width, collapse = "")), "\n", sep = "")
+  paste(pad, title, paste(rep(pad, width), collapse = ""), sep = "")
 }
