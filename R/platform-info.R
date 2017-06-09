@@ -42,6 +42,7 @@ print.platform_info <- function(x, ...) {
 }
 
 #' @export
+#' @importFrom utils capture.output
 
 as.character.platform_info <- function(x, ...) {
   capture.output(print(x))

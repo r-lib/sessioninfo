@@ -141,6 +141,7 @@ print.packages_info <- function(x, ...) {
 }
 
 #' @export
+#' @importFrom utils capture.output
 
 as.character.packages_info <- function(x, ...) {
   capture.output(print(x))
