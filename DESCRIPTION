@@ -9,8 +9,8 @@ Description: Query and print information about the current R session.
     about packages, and where they were installed from.
 License: GPL-2
 LazyData: true
-URL: https://github.com/r-pkgs/sessioninfo#readme
-BugReports: https://github.com/r-pkgs/sessioninfo/issues
+URL: https://github.com/r-lib/sessioninfo#readme
+BugReports: https://github.com/r-lib/sessioninfo/issues
 RoxygenNote: 6.0.1.9000
 Suggests:
     covr,

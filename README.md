@@ -3,11 +3,11 @@
 
 > R Session Information
 
-[![Linux Build Status](https://travis-ci.org/r-pkgs/sessioninfo.svg?branch=master)](https://travis-ci.org/r-pkgs/sessioninfo)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/r-pkgs/sessioninfo?svg=true)](https://ci.appveyor.com/project/gaborcsardi/sessioninfo)
+[![Linux Build Status](https://travis-ci.org/r-lib/sessioninfo.svg?branch=master)](https://travis-ci.org/r-lib/sessioninfo)
+[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/r-lib/sessioninfo?svg=true)](https://ci.appveyor.com/project/gaborcsardi/sessioninfo)
 [![](http://www.r-pkg.org/badges/version/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
-[![Coverage Status](https://img.shields.io/codecov/c/github/r-pkgs/sessioninfo/master.svg)](https://codecov.io/github/r-pkgs/sessioninfo?branch=master)
+[![Coverage Status](https://img.shields.io/codecov/c/github/r-lib/sessioninfo/master.svg)](https://codecov.io/github/r-lib/sessioninfo?branch=master)
 
 Query and print information about the current R session. It is similar to
 `utils::sessionInfo()`, but includes more information about packages, and
@@ -16,7 +16,7 @@ where they were installed from.
 ## Installation
 
 ```r
-devtools::install_github("r-pkgs/sessioninfo")
+devtools::install_github("r-lib/sessioninfo")
 ```
 
 ## Usage
@@ -54,8 +54,8 @@ sessioninfo::session_info()
  memoise         1.1.0       2017-04-21 cran (@1.1.0)
  mockery         0.3.0       2016-12-16 CRAN (R 3.3.2)
  parr            3.3.0       2017-03-19 Github (gaborcsardi/parr@3a2564e)
- pkgbuild        0.0.0.9000  2017-04-13 Github (r-pkgs/pkgbuild@8aab60b)
- pkgload         0.0.0.9000  2017-04-13 Github (r-pkgs/pkgload@9093b96)
+ pkgbuild        0.0.0.9000  2017-04-13 Github (r-lib/pkgbuild@8aab60b)
+ pkgload         0.0.0.9000  2017-04-13 Github (r-lib/pkgload@9093b96)
  praise          1.0.0       2015-08-11 CRAN (R 3.3.0)
  prettycode    * 1.0.0       2017-01-27 CRAN (R 3.3.2)
  prompt          1.0.0       2017-03-19 Github (gaborcsardi/prompt@5327667)

@@ -16,7 +16,7 @@
 #'   `DESCRIPTION`. (These are usually added automatically by R.)
 #'   Sometimes this data is not available, then it is `NA`.
 #' * `source`: where the package was built or installed from, if available.
-#'   Examples: `CRAN (R 3.3.2)`, `Github (r-pkgs/pkgbuild@8aab60b)`,
+#'   Examples: `CRAN (R 3.3.2)`, `Github (r-lib/pkgbuild@8aab60b)`,
 #'   `Bioconductor`, `local`.
 #'
 #' See [package_info()] for the list of columns in the data frame that
