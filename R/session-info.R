@@ -10,7 +10,9 @@
 #' Columns in the *printed* package list:
 #' * `package`: package name
 #' * `*`: whether the package is attached to the search path
-#' * `version`: package version
+#' * `version`: package version. If the version is marked with `(!)` that
+#'   means that the loaded and the on-disk version of the package are
+#'   different.
 #' * `date`: when the package was built, if this information is available.
 #'   This is the `Date/Publication` or the `Built` field from
 #'   `DESCRIPTION`. (These are usually added automatically by R.)

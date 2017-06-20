@@ -5,7 +5,8 @@ dependent_packages <- function(pkgs) {
 
   res <- data.frame(
     package = pkgs,
-    version = vapply(desc, function(x) x$Version, character(1)),
+    ondiskversion = vapply(desc, function(x) x$Version, character(1)),
+    loadedversion = vapply(pkgs, getNamespaceVersion, ""),
     path = vapply(desc, pkg_path, character(1)),
     attached = paste0("package:", pkgs) %in% search(),
     stringsAsFactors = FALSE,

@@ -17,10 +17,12 @@ false since base packages should always match the R version.}
 \value{
 A data frame with columns:
   * `package`: package name.
-  * `version`: package version. This is the version of the loaded
+  * `loadedversion`: package version. This is the version of the loaded
     namespace if `pkgs` is `NULL`, and it is the version of the package
     on disk otherwise. The two of them are almost always the same,
     though.
+  * `ondiskversion`: package version (on the disk, which is sometimes
+    not the same as the loaded version).
   * `path`: path to the package on disk.
   * `attached`: logical, whether the package is attached to the search
     path.
