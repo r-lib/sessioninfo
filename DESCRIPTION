@@ -1,6 +1,6 @@
 Package: sessioninfo
 Title: R Session Information
-Version: 0.0.0.9000
+Version: 1.0.0
 Author: Gábor Csárdi, R core, Hadley Wickham, Winston Chang,
     Robert M Flight, Kirill Müller
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
