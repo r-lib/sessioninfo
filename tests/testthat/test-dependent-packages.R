@@ -17,6 +17,11 @@ test_that("dependent_packages", {
     'getNamespaceVersion',
     function(x) alldsc[[x]]$Version
   )
+  mockery::stub(
+    dependent_packages,
+    'search',
+    function() paste0("package:", dep$package[dep$attached])
+  )
 
   exp <- dep[, setdiff(colnames(dep), "path")]
   tec <- dependent_packages("devtools")
