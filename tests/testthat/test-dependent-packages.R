@@ -14,6 +14,12 @@ test_that("dependent_packages", {
   )
   mockery::stub(
     dependent_packages,
+    'base::loadedNamespaces',
+    function() ins
+  )
+
+  mockery::stub(
+    dependent_packages,
     'getNamespaceVersion',
     function(x) alldsc[[x]]$Version
   )
