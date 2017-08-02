@@ -129,13 +129,16 @@ pkg_source <- function(desc) {
 
 print.packages_info <- function(x, ...) {
 
-  badloaded <- package_version(x$loadedversion) !=
+  unloaded <- is.na(x$loadedversion)
+  badloaded <- package_version(x$loadedversion, strict = FALSE) !=
                package_version(x$ondiskversion)
 
   px <- data.frame(
     package = x$package,
     "*"     = ifelse(x$attached, "*", ""),
-    version = paste0(x$loadedversion, ifelse(badloaded, " (!)", "")),
+    version = ifelse(unloaded,
+                     x$ondiskversion,
+                     paste0(x$loadedversion, ifelse(badloaded, " (!)", ""))),
     date    = x$date,
     source  = x$source,
     stringsAsFactors = FALSE,
