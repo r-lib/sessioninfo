@@ -14,7 +14,7 @@ test_that("dependent_packages", {
   )
   mockery::stub(
     dependent_packages,
-    'base::loadedNamespaces',
+    'loadedNamespaces',
     function() ins
   )
 
