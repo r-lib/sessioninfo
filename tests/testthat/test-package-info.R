@@ -60,7 +60,7 @@ test_that("pkg_source", {
   expect_identical(pkg_source(biobase), "Bioconductor")
 
   memoise <- readRDS("fixtures/memoise.rda")
-  expect_identical(pkg_source(memoise), "cran (@1.1.0)")
+  expect_identical(pkg_source(memoise), "CRAN (R 3.3.3)")
 })
 
 test_that("pkg_source edge case, remote repo, but no RemoteSha", {
