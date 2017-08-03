@@ -75,7 +75,7 @@ pkg_source <- function(desc) {
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
                   substr(desc$GithubSHA1, 1, 7), ")")
-  } else if (!is.null(desc$RemoteType)) {
+  } else if (!is.null(desc$RemoteType) && desc$RemoteType != "cran") {
     # want to generate these:
     # remoteType (username/repo@commit)
     # remoteType (username/repo)
