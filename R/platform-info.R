@@ -3,7 +3,7 @@
 #'
 #' @return A list with elements:
 #'   * `version`: the R version string.
-#'   * `os`: the OS name in human readable format, see [osname()].
+#'   * `os`: the OS name in human readable format, see [os_name()].
 #'   * `system`: CPU, and machine readable OS name, separated by a comma.
 #'   * `ui`: the user interface, e.g. `Rgui`, `RTerm`, etc. see `GUI`
 #'     in [base::.Platform].

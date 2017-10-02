@@ -10,7 +10,7 @@ platform_info()
 A list with elements:
 \itemize{
 \item \code{version}: the R version string.
-\item \code{os}: the OS name in human readable format, see \code{\link[=osname]{osname()}}.
+\item \code{os}: the OS name in human readable format, see \code{\link[=os_name]{os_name()}}.
 \item \code{system}: CPU, and machine readable OS name, separated by a comma.
 \item \code{ui}: the user interface, e.g. \code{Rgui}, \code{RTerm}, etc. see \code{GUI}
 in \link[base:.Platform]{base::.Platform}.

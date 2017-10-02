@@ -15,6 +15,6 @@ On macOS it includes the code names, on Linux it includes the
 distribution names and codenames if appropriate.
 }
 \details{
-It uses \code{\link[utils:sesssionInfo]{utils::sesssionInfo()}}, but simplifies its output a bit
+It uses \code{\link[utils:sessionInfo]{utils::sessionInfo()}}, but simplifies its output a bit
 on Windows, to make it more concise.
 }
