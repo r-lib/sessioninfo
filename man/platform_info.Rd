@@ -8,16 +8,18 @@ platform_info()
 }
 \value{
 A list with elements:
-  * `version`: the R version string.
-  * `os`: the OS name in human readable format, see [osname()].
-  * `system`: CPU, and machine readable OS name, separated by a comma.
-  * `ui`: the user interface, e.g. `Rgui`, `RTerm`, etc. see `GUI`
-    in [base::.Platform].
-  * `language`: The current language setting. The `LANGUAGE` environment
-    variable, if set, or `(EN)` if unset.
-  * `collate`: Collation rule, from the current locale.
-  * `tz`: The current time zone.
-  * `date`: The current date.
+\itemize{
+\item \code{version}: the R version string.
+\item \code{os}: the OS name in human readable format, see \code{\link[=osname]{osname()}}.
+\item \code{system}: CPU, and machine readable OS name, separated by a comma.
+\item \code{ui}: the user interface, e.g. \code{Rgui}, \code{RTerm}, etc. see \code{GUI}
+in \link[base:.Platform]{base::.Platform}.
+\item \code{language}: The current language setting. The \code{LANGUAGE} environment
+variable, if set, or \code{(EN)} if unset.
+\item \code{collate}: Collation rule, from the current locale.
+\item \code{tz}: The current time zone.
+\item \code{date}: The current date.
+}
 }
 \description{
 Information about the current platform
@@ -27,6 +29,6 @@ platform_info()
 }
 \seealso{
 Similar functions and objects in the base packages:
-  [base::R.version.string], [utils::sessionInfo()], [base::version],
-  [base::.Platform], [base::Sys.getlocale()], [base::Sys.timezone()].
+\link[base:R.version.string]{base::R.version.string}, \code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:version]{base::version},
+\link[base:.Platform]{base::.Platform}, \code{\link[base:Sys.getlocale]{base::Sys.getlocale()}}, \code{\link[base:Sys.timezone]{base::Sys.timezone()}}.
 }

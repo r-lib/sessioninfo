@@ -16,23 +16,25 @@ false since base packages should always match the R version.}
 }
 \value{
 A data frame with columns:
-  * `package`: package name.
-  * `loadedversion`: package version. This is the version of the loaded
-    namespace if `pkgs` is `NULL`, and it is the version of the package
-    on disk otherwise. The two of them are almost always the same,
-    though.
-  * `ondiskversion`: package version (on the disk, which is sometimes
-    not the same as the loaded version).
-  * `path`: path to the package on disk.
-  * `attached`: logical, whether the package is attached to the search
-    path.
-  * `is_base`: logical, whether the package is a base package.
-  * `date`: the date the package was installed or built.
-  * `source`: where the package was installed from. E.g.
-    `CRAN`, `GitHub`, `local` (from the local machine), etc.
+\itemize{
+\item \code{package}: package name.
+\item \code{loadedversion}: package version. This is the version of the loaded
+namespace if \code{pkgs} is \code{NULL}, and it is the version of the package
+on disk otherwise. The two of them are almost always the same,
+though.
+\item \code{ondiskversion}: package version (on the disk, which is sometimes
+not the same as the loaded version).
+\item \code{path}: path to the package on disk.
+\item \code{attached}: logical, whether the package is attached to the search
+path.
+\item \code{is_base}: logical, whether the package is a base package.
+\item \code{date}: the date the package was installed or built.
+\item \code{source}: where the package was installed from. E.g.
+\code{CRAN}, \code{GitHub}, \code{local} (from the local machine), etc.
+}
 
-See [session_info()] for the description of the *printed* columns
-by `package_info` (as opposed to the *returned* columns).
+See \code{\link[=session_info]{session_info()}} for the description of the \emph{printed} columns
+by \code{package_info} (as opposed to the \emph{returned} columns).
 }
 \description{
 Information about the currently loaded packages, or about a chosen set
