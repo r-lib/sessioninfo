@@ -1,7 +1,7 @@
 
 #' Print session information
 #'
-#' This is [base::sessionInfo()] re-written from scratch to both exclude
+#' This is [utils::sessionInfo()] re-written from scratch to both exclude
 #' data that's rarely useful (e.g., the full collate string or base packages
 #' loaded) and include stuff you'd like to know (e.g., where a package was
 #' installed from).
