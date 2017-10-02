@@ -12,6 +12,7 @@ LazyData: true
 URL: https://github.com/r-lib/sessioninfo#readme
 BugReports: https://github.com/r-lib/sessioninfo/issues
 RoxygenNote: 6.0.1.9000
+Roxygen: list(markdown = TRUE)
 Suggests:
     covr,
     mockery,

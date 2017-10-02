@@ -15,28 +15,30 @@ all dependencies of the package.}
 false since base packages should always match the R version.}
 }
 \description{
-This is [base::sessionInfo()] re-written from scratch to both exclude
+This is \code{\link[base:sessionInfo]{base::sessionInfo()}} re-written from scratch to both exclude
 data that's rarely useful (e.g., the full collate string or base packages
 loaded) and include stuff you'd like to know (e.g., where a package was
 installed from).
 }
 \details{
-Columns in the *printed* package list:
-* `package`: package name
-* `*`: whether the package is attached to the search path
-* `version`: package version. If the version is marked with `(!)` that
-  means that the loaded and the on-disk version of the package are
-  different.
-* `date`: when the package was built, if this information is available.
-  This is the `Date/Publication` or the `Built` field from
-  `DESCRIPTION`. (These are usually added automatically by R.)
-  Sometimes this data is not available, then it is `NA`.
-* `source`: where the package was built or installed from, if available.
-  Examples: `CRAN (R 3.3.2)`, `Github (r-lib/pkgbuild@8aab60b)`,
-  `Bioconductor`, `local`.
+Columns in the \emph{printed} package list:
+\itemize{
+\item \code{package}: package name
+\item \code{*}: whether the package is attached to the search path
+\item \code{version}: package version. If the version is marked with \code{(!)} that
+means that the loaded and the on-disk version of the package are
+different.
+\item \code{date}: when the package was built, if this information is available.
+This is the \code{Date/Publication} or the \code{Built} field from
+\code{DESCRIPTION}. (These are usually added automatically by R.)
+Sometimes this data is not available, then it is \code{NA}.
+\item \code{source}: where the package was built or installed from, if available.
+Examples: \code{CRAN (R 3.3.2)}, \code{Github (r-lib/pkgbuild@8aab60b)},
+\code{Bioconductor}, \code{local}.
+}
 
-See [package_info()] for the list of columns in the data frame that
-is *returned* (as opposed to *printed*).
+See \code{\link[=package_info]{package_info()}} for the list of columns in the data frame that
+is \emph{returned} (as opposed to \emph{printed}).
 }
 \examples{
 session_info()

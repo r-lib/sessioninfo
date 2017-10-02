@@ -5,7 +5,7 @@
 #' On macOS it includes the code names, on Linux it includes the
 #' distribution names and codenames if appropriate.
 #'
-#' It uses [utils::sesssionInfo()], but simplifies its output a bit
+#' It uses [utils::sessionInfo()], but simplifies its output a bit
 #' on Windows, to make it more concise.
 #'
 #' @return A character scalar.
