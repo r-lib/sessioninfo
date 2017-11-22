@@ -17,6 +17,7 @@ in \link[base:.Platform]{base::.Platform}.
 \item \code{language}: The current language setting. The \code{LANGUAGE} environment
 variable, if set, or \code{(EN)} if unset.
 \item \code{collate}: Collation rule, from the current locale.
+\item \code{ctype}: Native character encoding, from the current locale.
 \item \code{tz}: The current time zone.
 \item \code{date}: The current date.
 }

@@ -10,6 +10,7 @@
 #'   * `language`: The current language setting. The `LANGUAGE` environment
 #'     variable, if set, or `(EN)` if unset.
 #'   * `collate`: Collation rule, from the current locale.
+#'   * `ctype`: Native character encoding, from the current locale.
 #'   * `tz`: The current time zone.
 #'   * `date`: The current date.
 #'
@@ -29,6 +30,7 @@ platform_info <- function() {
     ui = .Platform$GUI,
     language = Sys.getenv("LANGUAGE", "(EN)"),
     collate = Sys.getlocale("LC_COLLATE"),
+    ctype = Sys.getlocale("LC_CTYPE"),
     tz = Sys.timezone(),
     date = format(Sys.Date())
   ), class = "platform_info")
