@@ -38,7 +38,7 @@ platform_info <- function() {
 
 print.platform_info <- function(x, ...) {
   df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
-  print(df, right = FALSE, row.names = FALSE)
+  print(df, right = FALSE, row.names = FALSE, max = 99999)
 }
 
 #' @export
