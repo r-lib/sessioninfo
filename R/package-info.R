@@ -145,7 +145,7 @@ print.packages_info <- function(x, ...) {
     check.names = FALSE
   )
 
-  print.data.frame(px, right = FALSE, row.names = FALSE)
+  print.data.frame(px, right = FALSE, row.names = FALSE, max = 99999)
 }
 
 #' @export
