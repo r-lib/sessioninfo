@@ -22,3 +22,11 @@ test_that("platform_info", {
 test_that("print.platform_info", {
   expect_output(print(platform_info()), "setting  value", fixed = TRUE)
 })
+
+test_that("print.platform_info ignores max.print", {
+  pi <- platform_info()
+  withr::local_options(list(max.print = 1))
+  out <- capture_output(print(pi))
+  out <- tail(strsplit(out, split = "\n")[[1]], -1)
+  expect_length(out, length(pi))
+})

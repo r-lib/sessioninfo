@@ -80,3 +80,11 @@ test_that("print.packages_info", {
     fixed = TRUE
   )
 })
+
+test_that("print.packages_info ignores max.print", {
+  info <- readRDS("fixtures/devtools-info.rda")
+  withr::local_options(list(max.print = 1))
+  out <- capture_output(print(info))
+  out <- tail(strsplit(out, split = "\n")[[1]], -1)
+  expect_length(out, nrow(info))
+})
