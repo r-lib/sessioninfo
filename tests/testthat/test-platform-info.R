@@ -27,6 +27,6 @@ test_that("print.platform_info ignores max.print", {
   pi <- platform_info()
   withr::local_options(list(max.print = 1))
   out <- capture_output(print(pi))
-  out <- tail(strsplit(out, split = "\n")[[1]], -1)
+  out <- tail(strsplit(out, split = "\r?\n")[[1]], -1)
   expect_length(out, length(pi))
 })
