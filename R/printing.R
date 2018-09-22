@@ -1,5 +1,5 @@
 
-#' @importFrom clisymbols symbol
+#' @importFrom cli symbol
 
 rule <- function (..., pad = NULL) {
   if (is.null(pad)) pad <- symbol$line
