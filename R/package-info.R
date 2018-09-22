@@ -145,7 +145,8 @@ print.packages_info <- function(x, ...) {
     check.names = FALSE
   )
 
-  print.data.frame(px, right = FALSE, row.names = FALSE, max = 99999)
+  withr::local_options(list(max.print = 99999))
+  print.data.frame(px, right = FALSE, row.names = FALSE)
 }
 
 #' @export
