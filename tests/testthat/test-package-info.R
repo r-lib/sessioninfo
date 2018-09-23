@@ -88,8 +88,8 @@ test_that("pkg_md5_disk", {
   dir.create(file.path(tmp, "libs"))
   dir.create(file.path(tmp, "libs", "i386"))
   dir.create(file.path(tmp, "libs", "x64"))
-  cat("foo\n", file = file.path(tmp, "libs", "i386", "foo.dll"))
-  cat("bar\n", file = file.path(tmp, "libs", "x64", "foo.dll"))
+  writeBin(charToRaw("foo\n"), con = file.path(tmp, "libs", "i386", "foo.dll"))
+  writeBin(charToRaw("bar\n"), con = file.path(tmp, "libs", "x64", "foo.dll"))
   md5 <- pkg_md5_disk(tmp)
 
   exp <- c(`libs/i386/foo.dll` = "d3b07384d113edec49eaa6238ad5ff00",
