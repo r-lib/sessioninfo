@@ -15,6 +15,7 @@ test_that("package_info, loaded", {
 
   pi <- package_info()
   exp <- readRDS("fixtures/devtools-info.rda")
+  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -32,6 +33,7 @@ test_that("package_info, dependent", {
 
   pi <- package_info("devtools")
   exp <- readRDS("fixtures/devtools-info.rda")
+  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -81,9 +83,17 @@ test_that("pkg_md5_stored", {
 })
 
 test_that("pkg_md5_disk", {
-  md5 <- pkg_md5_disk("fixtures")
-  exp <- c(`libs/i386/foo.dll` = "2145971cf82058b108229a3a2e3bff35",
-           `libs/x64/foo.dll` = "367a88937dd1f9e50c69ec138c056ba9")
+  dir.create(tmp <- tempfile())
+  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+  dir.create(file.path(tmp, "libs"))
+  dir.create(file.path(tmp, "libs", "i386"))
+  dir.create(file.path(tmp, "libs", "x64"))
+  cat("foo\n", file = file.path(tmp, "libs", "i386", "foo.dll"))
+  cat("bar\n", file = file.path(tmp, "libs", "x64", "foo.dll"))
+  md5 <- pkg_md5_disk(tmp)
+
+  exp <- c(`libs/i386/foo.dll` = "d3b07384d113edec49eaa6238ad5ff00",
+           `libs/x64/foo.dll` = "c157a79031e1c40f85931829bc5fc552")
   expect_identical(md5,exp)
 })
 
