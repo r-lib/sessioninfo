@@ -48,7 +48,7 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
   pkgs$source <- vapply(desc, pkg_source, character(1))
   pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
-  libpath <- normalizePath(.libPaths())
+  libpath <- normalizePath(.libPaths(), winslash = "/")
   pkgs$library <- factor(
     pkg_dir(vapply(desc, attr, which = "file", "")),
     levels = libpath)
@@ -60,7 +60,7 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
 }
 
 pkg_dir <- function(dfile) {
-  dfile <- normalizePath(dfile)
+  dfile <- normalizePath(dfile, winslash = "/")
   ifelse(
     basename(dfile) == "DESCRIPTION",
     dirname(dfile),
