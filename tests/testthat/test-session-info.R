@@ -13,5 +13,5 @@ test_that("session_info", {
 test_that("print.session_info", {
   si <- session_info()
   expect_output(print(si), "setting  value", fixed = TRUE)
-  expect_output(print(si), "package[ ]+\\* version[ ]+date[ ]+source")
+  expect_output(print(si), "package[ ]+\\* version[ ]+date[ ]+lib[ ]+source")
 })

@@ -11,11 +11,14 @@ test_that("package_info, loaded", {
     package_info,
     'utils::packageDescription',
     function(x) alldsc[[x]]
-  )
+    )
+  lp <- c("/Users/gaborcsardi/r_pkgs",
+          "/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
+  mockery::stub(package_info, ".libPaths", lp)
 
   pi <- package_info()
   exp <- readRDS("fixtures/devtools-info.rda")
-  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
+  pi$md5ok[] <- NA
   expect_identical(pi, exp)
 })
 
@@ -30,10 +33,13 @@ test_that("package_info, dependent", {
     'utils::packageDescription',
     function(x) alldsc[[x]]
   )
+  lp <- c("/Users/gaborcsardi/r_pkgs",
+          "/Library/Frameworks/R.framework/Versions/3.5/Resources/library")
+  mockery::stub(package_info, ".libPaths", lp)
 
   pi <- package_info("devtools")
   exp <- readRDS("fixtures/devtools-info.rda")
-  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
+  pi$md5ok[] <- NA
   expect_identical(pi, exp)
 })
 
@@ -100,7 +106,7 @@ test_that("pkg_md5_disk", {
 test_that("print.packages_info", {
   info <- readRDS("fixtures/devtools-info.rda")
   expect_output(
-    print(info), "package    * version     date       source",
+    print(info), "package    * version     date       lib source",
     fixed = TRUE
   )
 })
@@ -110,5 +116,5 @@ test_that("print.packages_info ignores max.print", {
   withr::local_options(list(max.print = 1))
   out <- capture_output(print(info))
   out <- tail(strsplit(out, split = "\r?\n")[[1]], -1)
-  expect_length(out, nrow(info))
+  expect_length(out, nrow(info) + 3)
 })

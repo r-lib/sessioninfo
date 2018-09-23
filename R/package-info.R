@@ -48,10 +48,23 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
   pkgs$source <- vapply(desc, pkg_source, character(1))
   pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
+  libpath <- normalizePath(.libPaths())
+  pkgs$library <- factor(
+    pkg_dir(vapply(desc, attr, which = "file", "")),
+    levels = libpath)
+
   if (!include_base) pkgs <- pkgs[! pkgs$is_base, ]
 
   class(pkgs) <- c("packages_info", "data.frame")
   pkgs
+}
+
+pkg_dir <- function(dfile) {
+  dfile <- normalizePath(dfile)
+  ifelse(
+    basename(dfile) == "DESCRIPTION",
+    dirname(dfile),
+    dirname(dirname(dirname(dfile))))
 }
 
 pkg_date <- function (desc) {
@@ -169,11 +182,14 @@ print.packages_info <- function(x, ...) {
 
   badmd5 <- !is.na(x$md5ok) & !x$md5ok
 
+  flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
+
   px <- data.frame(
     package = x$package,
     "*"     = ifelse(x$attached, "*", ""),
     version = ifelse(unloaded, x$ondiskversion, x$loadedversion),
     date    = x$date,
+    lib     = paste0("[", flib(x$library), "]"),
     source  = x$source,
     stringsAsFactors = FALSE,
     check.names = FALSE
@@ -189,7 +205,12 @@ print.packages_info <- function(x, ...) {
   withr::local_options(list(max.print = 99999))
   pr <- print.data.frame(px, right = FALSE, row.names = FALSE)
 
-  if ("!" %in% names(px)) cat_ln(dash(4))
+  cat("\n")
+  lapply(
+    seq_along(levels(x$library)),
+    function(i) cat_ln(paste0("[", i, "] ", levels(x$library)[i])))
+
+  if ("!" %in% names(px)) cat("\n")
   if (any(badloaded)) {
     cat_ln(" V ", dash(2), ", Loaded and on-disk version mismatch.")
   }
