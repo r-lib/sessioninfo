@@ -15,6 +15,7 @@ test_that("package_info, loaded", {
 
   pi <- package_info()
   exp <- readRDS("fixtures/devtools-info.rda")
+  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -32,6 +33,7 @@ test_that("package_info, dependent", {
 
   pi <- package_info("devtools")
   exp <- readRDS("fixtures/devtools-info.rda")
+  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -71,6 +73,28 @@ test_that("pkg_source edge case, remote repo, but no RemoteSha", {
 test_that("pkg_source edge case, remote repo, no RemoteRepo", {
   desc <- readRDS("fixtures/no-remote-repo.rda")
   expect_identical(pkg_source(desc), "github")
+})
+
+test_that("pkg_md5_stored", {
+  md5 <- pkg_md5_stored("fixtures")
+  exp <- c(`libs/i386/fansi.dll` = "7b96ab4bf019b0cfed86425634d640e8",
+           `libs/x64/fansi.dll` = "6503170d698e5a7916bf2457edc5de8d")
+  expect_identical(md5, exp)
+})
+
+test_that("pkg_md5_disk", {
+  dir.create(tmp <- tempfile())
+  on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+  dir.create(file.path(tmp, "libs"))
+  dir.create(file.path(tmp, "libs", "i386"))
+  dir.create(file.path(tmp, "libs", "x64"))
+  writeBin(charToRaw("foo\n"), con = file.path(tmp, "libs", "i386", "foo.dll"))
+  writeBin(charToRaw("bar\n"), con = file.path(tmp, "libs", "x64", "foo.dll"))
+  md5 <- pkg_md5_disk(tmp)
+
+  exp <- c(`libs/i386/foo.dll` = "d3b07384d113edec49eaa6238ad5ff00",
+           `libs/x64/foo.dll` = "c157a79031e1c40f85931829bc5fc552")
+  expect_identical(md5,exp)
 })
 
 test_that("print.packages_info", {

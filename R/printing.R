@@ -8,3 +8,11 @@ rule <- function (..., pad = NULL) {
   width <- max(getOption("width") - nchar(title) - 3, 0)
   paste(pad, title, paste(rep(pad, width), collapse = ""), sep = "")
 }
+
+dash <- function(n = 2) {
+  paste(rep(symbol$line, n), collapse = "")
+}
+
+cat_ln <- function(..., sep = "") {
+  cat(..., "\n", sep = sep)
+}
