@@ -46,6 +46,7 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
 
   pkgs$date <- vapply(desc, pkg_date, character(1))
   pkgs$source <- vapply(desc, pkg_source, character(1))
+  pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
   if (!include_base) pkgs <- pkgs[! pkgs$is_base, ]
 
@@ -125,6 +126,38 @@ pkg_source <- function(desc) {
   }
 }
 
+pkg_md5ok_dlls <- function(desc) {
+  if (.Platform$OS.type != "windows") return(NA)
+  pkgdir <- dirname(dirname(attr(desc, "file")))
+  if (!file.exists(file.path(pkgdir, "libs"))) return(TRUE)
+  stored <- pkg_md5_stored(pkgdir)
+  if (is.null(stored)) return(NA)
+  disk <- pkg_md5_disk(pkgdir)
+  identical(stored, disk)
+}
+
+pkg_md5_stored <- function(pkgdir) {
+  md5file <- file.path(pkgdir, "MD5")
+  md5 <- tryCatch(
+    suppressWarnings(readLines(md5file)),
+    error = function(e) NULL)
+  if (is.null(md5)) return(NULL)
+  hash <- sub(" .*$", "", md5)
+  filename <- sub("^[^ ]* \\*", "", md5)
+  dll <- grep("[dD][lL][lL]$", filename)
+  order_by_name(structure(hash[dll], names = tolower(filename[dll])))
+}
+
+pkg_md5_disk <- function(pkgdir) {
+  withr::with_dir(pkgdir, {
+    dll_files <- file.path(
+      "libs",
+      dir("libs", pattern = "[dD][lL][lL]$", recursive = TRUE))
+    md5_files <- tools::md5sum(dll_files)
+    order_by_name(structure(unname(md5_files), names = tolower(dll_files)))
+  })
+}
+
 #' @export
 
 print.packages_info <- function(x, ...) {
@@ -132,21 +165,39 @@ print.packages_info <- function(x, ...) {
   unloaded <- is.na(x$loadedversion)
   badloaded <- package_version(x$loadedversion, strict = FALSE) !=
                package_version(x$ondiskversion)
+  badloaded <- !is.na(badloaded) & badloaded
+
+  badmd5 <- !is.na(x$md5ok) & !x$md5ok
 
   px <- data.frame(
     package = x$package,
     "*"     = ifelse(x$attached, "*", ""),
-    version = ifelse(unloaded,
-                     x$ondiskversion,
-                     paste0(x$loadedversion, ifelse(badloaded, " (!)", ""))),
+    version = ifelse(unloaded, x$ondiskversion, x$loadedversion),
     date    = x$date,
     source  = x$source,
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
 
+  if (any(badloaded) || any(badmd5)) {
+    prob <- paste0(
+      ifelse(badloaded, "V", ""),
+      ifelse(badmd5, "D", ""))
+    px <- cbind("!" = prob, px)
+  }
+
   withr::local_options(list(max.print = 99999))
-  print.data.frame(px, right = FALSE, row.names = FALSE)
+  pr <- print.data.frame(px, right = FALSE, row.names = FALSE)
+
+  if ("!" %in% names(px)) cat_ln(dash(4))
+  if (any(badloaded)) {
+    cat_ln(" V ", dash(2), ", Loaded and on-disk version mismatch.")
+  }
+  if (any(badmd5)) {
+    cat_ln(" D ", dash(2), " DLL MD5 mismatch, broken installation.")
+  }
+
+  invisible(x)
 }
 
 #' @export

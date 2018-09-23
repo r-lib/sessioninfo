@@ -73,6 +73,20 @@ test_that("pkg_source edge case, remote repo, no RemoteRepo", {
   expect_identical(pkg_source(desc), "github")
 })
 
+test_that("pkg_md5_stored", {
+  md5 <- pkg_md5_stored("fixtures")
+  exp <- c(`libs/i386/fansi.dll` = "7b96ab4bf019b0cfed86425634d640e8",
+           `libs/x64/fansi.dll` = "6503170d698e5a7916bf2457edc5de8d")
+  expect_identical(md5, exp)
+})
+
+test_that("pkg_md5_disk", {
+  md5 <- pkg_md5_disk("fixtures")
+  exp <- c(`libs/i386/foo.dll` = "2145971cf82058b108229a3a2e3bff35",
+           `libs/x64/foo.dll` = "367a88937dd1f9e50c69ec138c056ba9")
+  expect_identical(md5,exp)
+})
+
 test_that("print.packages_info", {
   info <- readRDS("fixtures/devtools-info.rda")
   expect_output(
