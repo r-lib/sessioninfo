@@ -2,7 +2,7 @@
 context("session_info")
 
 test_that("session_info", {
-  pi <- readRDS("fixtures/devtools-info.rda")
+  info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   mockery::stub(session_info, "package_info", pi)
 
   si <- session_info()
