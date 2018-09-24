@@ -29,14 +29,14 @@ test_that("dependent_packages", {
     function() paste0("package:", dep$package[dep$attached])
   )
 
-  exp <- dep[, setdiff(colnames(dep), "path")]
+  exp <- dep[, setdiff(colnames(dep), c("path", "loadedpath"))]
   tec <- dependent_packages("devtools")
-  tec <- tec[, setdiff(colnames(tec), "path")]
+  tec <- tec[, setdiff(colnames(tec), c("path", "loadedpath"))]
   expect_equal(exp, tec)
 })
 
-test_that("pkg_path", {
-  p1 <- pkg_path(utils::packageDescription("stats"))
+test_that("pkg_path_disk", {
+  p1 <- pkg_path_disk(utils::packageDescription("stats"))
   expect_equal(
     read.dcf(file.path(p1, "DESCRIPTION"))[, "Package"],
     c(Package = "stats")

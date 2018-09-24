@@ -8,19 +8,25 @@
 #'   false since base packages should always match the R version.
 #' @return A data frame with columns:
 #'   * `package`: package name.
+#'   * `ondiskversion`: package version (on the disk, which is sometimes
+#'     not the same as the loaded version).
 #'   * `loadedversion`: package version. This is the version of the loaded
 #'     namespace if `pkgs` is `NULL`, and it is the version of the package
 #'     on disk otherwise. The two of them are almost always the same,
 #'     though.
-#'   * `ondiskversion`: package version (on the disk, which is sometimes
-#'     not the same as the loaded version).
 #'   * `path`: path to the package on disk.
+#'   * `loadedpath`: the path the package was originally loaded from.
 #'   * `attached`: logical, whether the package is attached to the search
 #'     path.
 #'   * `is_base`: logical, whether the package is a base package.
 #'   * `date`: the date the package was installed or built.
 #'   * `source`: where the package was installed from. E.g.
 #'     `CRAN`, `GitHub`, `local` (from the local machine), etc.
+#'   * `md5ok`: Whether MD5 hashes for package DLL files match, on Windows.
+#'     `NA` on other platforms.
+#'   * `library`: factor, which package library the package was loaded from.
+#'     For loaded packages, this is (the factor representation of)
+#'     `loadedpath`, for others `path`.
 #'
 #' See [session_info()] for the description of the *printed* columns
 #' by `package_info` (as opposed to the *returned* columns).
@@ -49,25 +55,18 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
   pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
   libpath <- pkg_lib_paths()
-  pkgs$library <- factor(vapply(desc, pkg_dir, character(1)), levels = libpath)
+  path <- ifelse(is.na(pkgs$loadedpath), pkgs$path, pkgs$loadedpath)
+  pkgs$library <- factor(dirname(path), levels = libpath)
 
   if (!include_base) pkgs <- pkgs[! pkgs$is_base, ]
 
+  rownames(pkgs) <- pkgs$package
   class(pkgs) <- c("packages_info", "data.frame")
   pkgs
 }
 
 pkg_lib_paths <- function() {
   normalizePath(.libPaths(), winslash = "/")
-}
-
-pkg_dir <- function(desc) {
-  dfile <- attr(desc, "file")
-  dfile <- normalizePath(dfile, winslash = "/")
-  ifelse(
-    basename(dfile) == "DESCRIPTION",
-    dirname(dfile),
-    dirname(dirname(dirname(dfile))))
 }
 
 pkg_date <- function (desc) {
@@ -179,12 +178,6 @@ pkg_md5_disk <- function(pkgdir) {
 print.packages_info <- function(x, ...) {
 
   unloaded <- is.na(x$loadedversion)
-  badloaded <- package_version(x$loadedversion, strict = FALSE) !=
-               package_version(x$ondiskversion)
-  badloaded <- !is.na(badloaded) & badloaded
-
-  badmd5 <- !is.na(x$md5ok) & !x$md5ok
-
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
 
   px <- data.frame(
@@ -198,9 +191,18 @@ print.packages_info <- function(x, ...) {
     check.names = FALSE
   )
 
-  if (any(badloaded) || any(badmd5)) {
+  badloaded <- package_version(x$loadedversion, strict = FALSE) !=
+               package_version(x$ondiskversion)
+  badloaded <- !is.na(badloaded) & badloaded
+
+  badmd5 <- !is.na(x$md5ok) & !x$md5ok
+
+  badpath <- !is.na(x$loadedpath) & x$loadedpath != x$path
+
+  if (any(badloaded) || any(badmd5) || any(badpath)) {
     prob <- paste0(
       ifelse(badloaded, "V", ""),
+      ifelse(badpath, "P", ""),
       ifelse(badmd5, "D", ""))
     px <- cbind("!" = prob, px)
   }
@@ -215,7 +217,10 @@ print.packages_info <- function(x, ...) {
 
   if ("!" %in% names(px)) cat("\n")
   if (any(badloaded)) {
-    cat_ln(" V ", dash(2), ", Loaded and on-disk version mismatch.")
+    cat_ln(" V ", dash(2), " Loaded and on-disk version mismatch.")
+  }
+  if (any(badpath))  {
+    cat_ln(" P ", dash(2), " Loaded and on-disk path mismatch.")
   }
   if (any(badmd5)) {
     cat_ln(" D ", dash(2), " DLL MD5 mismatch, broken installation.")
