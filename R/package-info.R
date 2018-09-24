@@ -44,7 +44,7 @@ package_info <- function(pkgs = NULL, include_base = FALSE) {
     pkgs <- dependent_packages(pkgs)
   }
 
-  desc <- lapply(pkgs$package, utils::packageDescription)
+  desc <- lapply(pkgs$package, utils::packageDescription, lib.loc = .libPaths())
 
   pkgs$is_base <- vapply(
     desc, function(x) identical(x$Priority, "base"), logical(1)

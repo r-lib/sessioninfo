@@ -6,7 +6,9 @@ loaded_packages <- function() {
   ## 'base' is special, because getNamespaceInfo does not work on it.
   ## Luckily, the path for 'base' is just system.file()
 
-  spackageVersion <- function(pkg) as.character(packageVersion(pkg))
+  spackageVersion <- function(pkg) {
+    as.character(packageVersion(pkg, lib.loc = .libPaths()))
+  }
 
   packages <- setdiff(loadedNamespaces(), "base")
   loadedversion <- vapply(packages, getNamespaceVersion, "")

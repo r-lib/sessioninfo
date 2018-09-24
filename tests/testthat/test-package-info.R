@@ -11,7 +11,7 @@ test_that("package_info, loaded", {
   mockery::stub(
     package_info,
     'utils::packageDescription',
-    function(x) alldsc[[x]]
+    function(x, ...) alldsc[[x]]
     )
   mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
 
@@ -29,7 +29,7 @@ test_that("package_info, dependent", {
   mockery::stub(
     package_info,
     'utils::packageDescription',
-    function(x) alldsc[[x]]
+    function(x, ...) alldsc[[x]]
   )
   mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
 
