@@ -6,6 +6,8 @@
 #'   all dependencies of the package.
 #' @param include_base Include base packages in summary? By default this is
 #'   false since base packages should always match the R version.
+#' @param dependencies Whether to include the (recursive) dependencies
+#'   as well. See the `dependencies` argument of [utils::install.packages()].
 #' @return A data frame with columns:
 #'   * `package`: package name.
 #'   * `ondiskversion`: package version (on the disk, which is sometimes
@@ -36,12 +38,13 @@
 #' package_info()
 #' package_info("sessioninfo")
 
-package_info <- function(pkgs = NULL, include_base = FALSE) {
+package_info <- function(pkgs = NULL, include_base = FALSE,
+                         dependencies = NA) {
 
   if (is.null(pkgs)) {
     pkgs <- loaded_packages()
   } else {
-    pkgs <- dependent_packages(pkgs)
+    pkgs <- dependent_packages(pkgs, dependencies)
   }
 
   desc <- lapply(pkgs$package, utils::packageDescription, lib.loc = .libPaths())

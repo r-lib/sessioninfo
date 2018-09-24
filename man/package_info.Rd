@@ -4,7 +4,7 @@
 \alias{package_info}
 \title{Information about the currently loaded packages, or about a chosen set}
 \usage{
-package_info(pkgs = NULL, include_base = FALSE)
+package_info(pkgs = NULL, include_base = FALSE, dependencies = NA)
 }
 \arguments{
 \item{pkgs}{Either a vector of package names or NULL. If \code{NULL},
@@ -13,6 +13,9 @@ all dependencies of the package.}
 
 \item{include_base}{Include base packages in summary? By default this is
 false since base packages should always match the R version.}
+
+\item{dependencies}{Whether to include the (recursive) dependencies
+as well. See the \code{dependencies} argument of \code{\link[utils:install.packages]{utils::install.packages()}}.}
 }
 \value{
 A data frame with columns:

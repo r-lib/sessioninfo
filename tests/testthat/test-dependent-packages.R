@@ -35,7 +35,7 @@ test_that("dependent_packages", {
   )
 
   exp <- dep[, setdiff(colnames(dep), c("path", "loadedpath"))]
-  tec <- dependent_packages("devtools")
+  tec <- dependent_packages("devtools", NA)
   tec <- tec[, setdiff(colnames(tec), c("path", "loadedpath"))]
   expect_equal(exp, tec)
 })
@@ -71,27 +71,5 @@ test_that("find_deps", {
   expect_equal(
     find_deps("foobar", top_dep = character(), rec_dep = character()),
     "foobar"
-  )
-})
-
-test_that("standardise_dep", {
-
-  cases <- list(
-    NA,
-    TRUE,
-    FALSE,
-    "Imports"
-  )
-
-  for (c in cases) {
-    expect_true(
-      all(standardise_dep(c) %in%
-          c("Depends", "Imports", "Suggests", "LinkingTo"))
-    )
-  }
-
-  expect_error(
-    standardise_dep(list(1,2,3)),
-    "Dependencies must be a boolean or a character"
   )
 })
