@@ -5,17 +5,17 @@ test_that("package_info, loaded", {
 
   descs <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
+  exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
 
   mockery::stub(package_info, "loaded_packages", descs)
   mockery::stub(
     package_info,
     'utils::packageDescription',
     function(x) alldsc[[x]]
-  )
+    )
+  mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
 
   pi <- package_info()
-  exp <- readRDS("fixtures/devtools-info.rda")
-  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -23,6 +23,7 @@ test_that("package_info, dependent", {
 
   descs <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
+  exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
 
   mockery::stub(package_info, "dependent_packages", descs)
   mockery::stub(
@@ -30,10 +31,9 @@ test_that("package_info, dependent", {
     'utils::packageDescription',
     function(x) alldsc[[x]]
   )
+  mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
 
   pi <- package_info("devtools")
-  exp <- readRDS("fixtures/devtools-info.rda")
-  if (.Platform$OS.type != "windows") pi$md5ok[] <- TRUE
   expect_identical(pi, exp)
 })
 
@@ -98,17 +98,17 @@ test_that("pkg_md5_disk", {
 })
 
 test_that("print.packages_info", {
-  info <- readRDS("fixtures/devtools-info.rda")
+  info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   expect_output(
-    print(info), "package    * version     date       source",
+    print(info), "package    * version     date       lib source",
     fixed = TRUE
   )
 })
 
 test_that("print.packages_info ignores max.print", {
-  info <- readRDS("fixtures/devtools-info.rda")
+  info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   withr::local_options(list(max.print = 1))
   out <- capture_output(print(info))
   out <- tail(strsplit(out, split = "\r?\n")[[1]], -1)
-  expect_length(out, nrow(info))
+  expect_length(out, nrow(info) + 3)
 })

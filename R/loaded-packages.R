@@ -11,7 +11,11 @@ loaded_packages <- function() {
   packages <- setdiff(loadedNamespaces(), "base")
   loadedversion <- vapply(packages, getNamespaceVersion, "")
   ondiskversion <- vapply(packages, spackageVersion, "")
-  path <- vapply(packages, getNamespaceInfo, "", "path")
+  path <- vapply(
+    packages,
+    function(p) system.file(package = p, lib.loc = .libPaths()),
+    character(1))
+  loadedpath <- vapply(packages, getNamespaceInfo, "", which = "path")
   attached <- paste0("package:", packages) %in% search()
 
   res <- data.frame(
@@ -19,6 +23,7 @@ loaded_packages <- function() {
     ondiskversion = c(ondiskversion, spackageVersion("base")),
     loadedversion = c(loadedversion, getNamespaceVersion("base")),
     path = c(path, system.file()),
+    loadedpath = c(loadedpath, NA_character_),
     attached = c(attached, TRUE),
     stringsAsFactors = FALSE,
     row.names = NULL
