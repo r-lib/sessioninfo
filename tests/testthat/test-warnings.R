@@ -2,7 +2,7 @@
 context("warnings")
 
 test_that("broken dll", {
-  if (.Platform$OS.type != "windows") return()
+  if (.Platform$OS.type != "windows") { expect_true(TRUE); return() }
   skip_on_cran()
 
   ## To check this, we need a package with a dll.
