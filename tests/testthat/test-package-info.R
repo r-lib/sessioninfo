@@ -14,7 +14,6 @@ test_that("package_info, loaded", {
     function(x) alldsc[[x]]
     )
   mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
-  mockery::stub(package_info, "pkg_dir", function(x) levels(exp$library)[1])
 
   pi <- package_info()
   expect_identical(pi, exp)
@@ -33,7 +32,6 @@ test_that("package_info, dependent", {
     function(x) alldsc[[x]]
   )
   mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
-  mockery::stub(package_info, "pkg_dir", function(x) levels(exp$library)[1])
 
   pi <- package_info("devtools")
   expect_identical(pi, exp)
