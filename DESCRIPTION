@@ -14,6 +14,7 @@ BugReports: https://github.com/r-lib/sessioninfo/issues
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
 Suggests:
+    callr,
     covr,
     mockery,
     testthat
