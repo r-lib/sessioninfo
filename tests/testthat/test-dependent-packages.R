@@ -28,6 +28,11 @@ test_that("dependent_packages", {
     'search',
     function() paste0("package:", dep$package[dep$attached])
   )
+  mockery::stub(
+    dependent_packages,
+    'getNamespaceInfo',
+    function(x, ...) alldsc[[x]]$Version
+  )
 
   exp <- dep[, setdiff(colnames(dep), c("path", "loadedpath"))]
   tec <- dependent_packages("devtools")
