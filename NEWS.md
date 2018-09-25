@@ -1,14 +1,35 @@
 
-# 1.0.0.9000
+# 1.1.0
 
-* `session_info()` and `package_info()` now only lists loaded versions
+* `session_info()` and `package_info()` now show the library search path,
+  and also which library each package was loaded from. They also warn
+  if the on-disk version of the package has a different path than the
+  loaded version (#9, #20).
+
+* `package_info()`'s `ondiskversion` entry is now correct.
+
+* `session_info()` and `package_info()` now verify the MD5 hashes of DLL
+  files on Windows, and warns for micmatches, as these are usually
+  broken packages (#12, #16).
+
+* We use now the cli package, instead of clisymbols, and this fixes
+  printing bugs in LaTeX documents (#14).
+
+* `session_info()` and `platform_info()` now include the `LC_CTYPE`
+  locale category (@patperry, #11)
+
+* `session_info()` and `package_info()` now print source of the CRAN
+  packages in uppercase, always, even if they were installed by devtools.
+
+* `session_info()` and `platform_info()` now handle the case when
+  `utils::sessionInfo()$running` is `NULL` (@HenrikBengtsson, #7).
+
+* `session_info()` and `package_info()` now only list loaded versions
   for namespaces which are already loaded. This only makes a difference
-  if the `pkgs` argument is given.
+  if the `pkgs` argument is given (#4).
 
 * Do not consult the `max.print` option, for platform and package info
   (@jennybc, #13).
-
-* Report `LC_CTYPE` in `platform_info()` (@patperry, #11).
 
 # 1.0.0
 
