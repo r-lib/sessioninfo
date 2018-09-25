@@ -1,6 +1,9 @@
 
 # 1.1.0
 
+* `package_info()` now has a `dependencies` argument, to filter the type
+  of dependent packages in the output (#22).
+
 * `session_info()` and `package_info()` now show the library search path,
   and also which library each package was loaded from. They also warn
   if the on-disk version of the package has a different path than the
