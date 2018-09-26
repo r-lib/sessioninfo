@@ -1,4 +1,6 @@
 
+# devel
+
 # 1.1.0
 
 * `package_info()` now has a `dependencies` argument, to filter the type
