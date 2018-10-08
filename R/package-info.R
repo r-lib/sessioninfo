@@ -138,7 +138,7 @@ pkg_source <- function(desc) {
     repo
 
   } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
-      "Bioconductor"
+    "Bioconductor"
   } else {
     "local"
   }
