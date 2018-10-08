@@ -1,3 +1,5 @@
+# sessioninfo 1.1.1
+
 
 # devel
 
