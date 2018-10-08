@@ -1,8 +1,8 @@
-# sessioninfo 1.1.1
-
-
 # devel
 
+* `pkg_source()` now checks if biocViews is empty or not before assigning a 
+  source (@llrs, #24)
+  
 # 1.1.0
 
 * `package_info()` now has a `dependencies` argument, to filter the type
