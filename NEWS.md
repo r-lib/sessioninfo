@@ -1,7 +1,7 @@
 # devel
 
 * `package_info()` and `session_info()` now detect locally installed packages 
-  correctly if they have an empty `biocViews` field in `DESCRIPTION (#25, @llrs)
+  correctly if they have an empty `biocViews` field in `DESCRIPTION (@llrs, #25)
   
 # 1.1.0
 
