@@ -1,7 +1,7 @@
 # devel
 
-* `pkg_source()` now checks if biocViews is empty or not before assigning a 
-  source (@llrs, #24)
+* `package_info()` and `session_info()` now detect locally installed packages 
+  correctly if they have an empty `biocViews` field in `DESCRIPTION (#25, @llrs)
   
 # 1.1.0
 
