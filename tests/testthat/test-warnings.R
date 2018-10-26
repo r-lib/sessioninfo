@@ -98,3 +98,42 @@ test_that("loaded & on-disk version mismatch", {
   expect_false(pi$ondiskversion[wh] == pi$loadedversion[wh])
   expect_output(print(pi), "Loaded and on-disk version mismatch")
 })
+
+test_that("deleted package", {
+  skip_on_cran()
+
+  foo <- "fsdfgwetdhsdfhq4yqh"
+
+  dir.create(lib <- tempfile())
+  on.exit(unlink(lib, recursive = TRUE), add = TRUE)
+  pkgfile <- normalizePath(paste0("fixtures/", foo, "_0.0.0.9000.tar.gz"))
+  install.packages(pkgfile, lib = lib, repos = NULL, type = "source",
+                   quiet = TRUE)
+
+  pis <- callr::r(
+    function(lib, foo) {
+      library(foo, character.only = TRUE, lib.loc = lib)
+      unlink(file.path(lib, foo), recursive = TRUE)
+      list(
+        sessioninfo::session_info(),
+        sessioninfo::session_info(pkgs = foo)
+      )
+    },
+    args = list(lib = lib, foo = foo),
+    libpath = c(lib, .libPaths()),
+    timeout = 10,
+    error = "stack"
+  )
+
+  expect_true(is.list(pis))
+  expect_equal(length(pis), 2)
+
+  for (i in seq_along(pis)) {
+    pi <- pis[[i]]$packages
+    wh <- which(pi$package == foo)
+    expect_equal(pi$ondiskversion[wh], NA_character_)
+    expect_equal(pi$path[wh], NA_character_)
+    expect_equal(pi$date[wh], NA_character_)
+    expect_equal(pi$source[wh], NA_character_)
+  }
+})

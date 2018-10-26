@@ -47,7 +47,7 @@ package_info <- function(pkgs = NULL, include_base = FALSE,
     pkgs <- dependent_packages(pkgs, dependencies)
   }
 
-  desc <- lapply(pkgs$package, utils::packageDescription, lib.loc = .libPaths())
+  desc <- lapply(pkgs$package, pkg_desc, lib.loc = .libPaths())
 
   pkgs$is_base <- vapply(
     desc, function(x) identical(x$Priority, "base"), logical(1)
@@ -66,6 +66,12 @@ package_info <- function(pkgs = NULL, include_base = FALSE,
   rownames(pkgs) <- pkgs$package
   class(pkgs) <- c("packages_info", "data.frame")
   pkgs
+}
+
+pkg_desc <- function(package, lib.loc = NULL) {
+  desc <- suppressWarnings(
+    utils::packageDescription(package, lib.loc = lib.loc))
+  if (inherits(desc, "packageDescription")) desc else NULL
 }
 
 pkg_lib_paths <- function() {
@@ -89,7 +95,9 @@ pkg_date <- function (desc) {
 
 pkg_source <- function(desc) {
 
-  if (!is.null(desc$GithubSHA1)) {
+  if (is.null(desc)) {
+    NA_character_
+  } else if (!is.null(desc$GithubSHA1)) {
     str <- paste0("Github (",
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
@@ -195,18 +203,22 @@ print.packages_info <- function(x, ...) {
   )
 
   badloaded <- package_version(x$loadedversion, strict = FALSE) !=
-               package_version(x$ondiskversion)
+               package_version(x$ondiskversion, strict = FALSE)
   badloaded <- !is.na(badloaded) & badloaded
 
   badmd5 <- !is.na(x$md5ok) & !x$md5ok
 
   badpath <- !is.na(x$loadedpath) & x$loadedpath != x$path
 
-  if (any(badloaded) || any(badmd5) || any(badpath)) {
+  baddel <- is.na(x$ondiskversion)
+  badpath[baddel] <- FALSE
+
+  if (any(badloaded) || any(badmd5) || any(badpath) ||  any(baddel)) {
     prob <- paste0(
       ifelse(badloaded, "V", ""),
       ifelse(badpath, "P", ""),
-      ifelse(badmd5, "D", ""))
+      ifelse(badmd5, "D", ""),
+      ifelse(baddel, "R", ""))
     px <- cbind("!" = prob, px)
   }
 
@@ -227,6 +239,9 @@ print.packages_info <- function(x, ...) {
   }
   if (any(badmd5)) {
     cat_ln(" D ", dash(2), " DLL MD5 mismatch, broken installation.")
+  }
+  if (any(baddel)) {
+    cat_ln(" R ", dash(2), " Package was removed from disk.")
   }
 
   invisible(x)

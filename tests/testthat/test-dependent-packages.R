@@ -9,7 +9,7 @@ test_that("dependent_packages", {
   mockery::stub(dependent_packages, 'utils::installed.packages', ins)
   mockery::stub(
     dependent_packages,
-    'utils::packageDescription',
+    'pkg_desc',
     function(x) alldsc[[x]]
   )
   mockery::stub(

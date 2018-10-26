@@ -4,9 +4,11 @@ dependent_packages <- function(pkgs, dependencies) {
   ideps <- interpret_dependencies(dependencies)
 
   pkgs <- find_deps(pkgs, utils::installed.packages(), ideps[[1]], ideps[[2]])
-  desc <- lapply(pkgs, utils::packageDescription)
+  desc <- lapply(pkgs, pkg_desc)
 
   loaded_pkgs <- pkgs %in% setdiff(loadedNamespaces(), "base")
+  ondiskversion <- vapply(
+    desc, function(x) x$Version %||% NA_character_, character(1))
   loadedversion <- rep(NA_character_, length(pkgs))
   loadedversion[loaded_pkgs] <- vapply(pkgs[loaded_pkgs], getNamespaceVersion, "")
   loadedpath <- rep(NA_character_, length(pkgs))
@@ -14,7 +16,7 @@ dependent_packages <- function(pkgs, dependencies) {
     vapply(pkgs[loaded_pkgs], getNamespaceInfo, "", which = "path")
   res <- data.frame(
     package = pkgs,
-    ondiskversion = vapply(desc, function(x) x$Version, character(1)),
+    ondiskversion = ondiskversion,
     loadedversion = loadedversion,
     path = vapply(desc, pkg_path_disk, character(1)),
     loadedpath = loadedpath,
@@ -30,7 +32,11 @@ dependent_packages <- function(pkgs, dependencies) {
 }
 
 pkg_path_disk <- function(desc) {
-  system.file(package = desc$Package, lib.loc = .libPaths())
+  if (is.null(desc)) {
+    NA_character_
+  } else {
+    system.file(package = desc$Package, lib.loc = .libPaths())
+  }
 }
 
 find_deps <- function(pkgs, available = utils::available.packages(),

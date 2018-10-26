@@ -2,7 +2,10 @@
 
 * `package_info()` and `session_info()` now detect locally installed packages 
   correctly if they have an empty `biocViews` field in `DESCRIPTION (@llrs, #25)
-  
+
+* `package_info()` and `session_info()` now handle the case when a loaded
+  package was removed from the disk.
+
 # 1.1.0
 
 * `package_info()` now has a `dependencies` argument, to filter the type

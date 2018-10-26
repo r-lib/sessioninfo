@@ -13,7 +13,7 @@
 #' @export
 
 os_name <- function() {
-  x <- utils::sessionInfo()$running
+  x <- suppressWarnings(utils::sessionInfo("base")$running)
   if (is.null(x)) return(NA_character_)
   
   # Regexps to clean up long windows strings generated at

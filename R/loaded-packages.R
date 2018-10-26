@@ -7,17 +7,26 @@ loaded_packages <- function() {
   ## Luckily, the path for 'base' is just system.file()
 
   spackageVersion <- function(pkg) {
-    as.character(packageVersion(pkg, lib.loc = .libPaths()))
+    ## Error may happen if the package was loaded, and then removed from
+    ## the disk. In this case we'll have NA
+    tryCatch(
+      as.character(packageVersion(pkg, lib.loc = .libPaths())),
+      error = function(e) NA_character_)
   }
 
   packages <- setdiff(loadedNamespaces(), "base")
+
   loadedversion <- vapply(packages, getNamespaceVersion, "")
   ondiskversion <- vapply(packages, spackageVersion, "")
+
   path <- vapply(
     packages,
     function(p) system.file(package = p, lib.loc = .libPaths()),
     character(1))
+  ## If we can't fine the package on disk, have NA instead of ""
+  path[path == ""] <- NA_character_
   loadedpath <- vapply(packages, getNamespaceInfo, "", which = "path")
+
   attached <- paste0("package:", packages) %in% search()
 
   res <- data.frame(

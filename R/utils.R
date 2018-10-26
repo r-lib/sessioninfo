@@ -1,4 +1,6 @@
 
+`%||%` <- function(l, r) if (is.null(l)) r else l
+
 #' @importFrom withr with_collate
 
 sort_ci <- function(x) {
