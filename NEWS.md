@@ -1,3 +1,6 @@
+
+# dev
+
 # 1.1.1
 
 * `package_info()` and `session_info()` now detect locally installed packages 
