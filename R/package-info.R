@@ -153,6 +153,7 @@ pkg_source <- function(desc) {
 }
 
 pkg_md5ok_dlls <- function(desc) {
+  if (is.null(desc)) return(NA)
   if (.Platform$OS.type != "windows") return(NA)
   pkgdir <- dirname(dirname(attr(desc, "file")))
   if (!file.exists(file.path(pkgdir, "libs"))) return(TRUE)
