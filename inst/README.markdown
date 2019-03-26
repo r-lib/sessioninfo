@@ -16,7 +16,7 @@ where they were installed from.
 ## Installation
 
 ```r
-devtools::install_github("r-lib/sessioninfo")
+install.packages("sessioninfo")
 ```
 
 ## Usage
