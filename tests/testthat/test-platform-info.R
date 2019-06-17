@@ -14,7 +14,7 @@ test_that("platform_info", {
   expect_true(is_string(pi$system) && grepl(",", pi$system))
   expect_true(is_string(pi$ui))
   expect_true(is_string(pi$language))
-  expect_true(is_string(pi$tz))
+  expect_true(is_string(pi$tz) || identical(pi$tz, NA_character_))
   expect_true(is_string(pi$date))
   expect_equal(pi$date, as.character(as.Date(pi$date)))
 })
