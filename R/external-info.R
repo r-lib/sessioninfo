@@ -37,9 +37,7 @@ external_info <- function() {
   ex["LAPACK"] <- La_library()
   names(ex) <- gsub("^lib", "", names(ex))
 
-  structure(list(
-    ex[c("BLAS", "LAPACK")]
-  ), class = "external_info")
+  structure(as.list(ex), class = "external_info")
 }
 
 #' @export
