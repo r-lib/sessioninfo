@@ -1,6 +1,4 @@
 
-context("platform_info")
-
 test_that("platform_info", {
   pi <- platform_info()
   expect_equal(

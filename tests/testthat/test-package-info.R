@@ -1,6 +1,4 @@
 
-context("package_info")
-
 test_that("package_info, loaded", {
 
   descs <- readRDS("fixtures/devtools-deps.rda")

@@ -1,6 +1,4 @@
 
-context("session_info")
-
 test_that("session_info", {
   info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   mockery::stub(session_info, "package_info", pi)

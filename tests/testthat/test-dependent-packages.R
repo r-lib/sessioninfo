@@ -1,6 +1,4 @@
 
-context("dependent_packages")
-
 test_that("dependent_packages", {
   ins <- readRDS("fixtures/installed.rda")
   dep <- readRDS("fixtures/devtools-deps.rda")
