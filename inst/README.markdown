@@ -3,11 +3,13 @@
 
 > R Session Information
 
-[![Linux Build Status](https://travis-ci.org/r-lib/sessioninfo.svg?branch=master)](https://travis-ci.org/r-lib/sessioninfo)
-[![Windows Build status](https://ci.appveyor.com/api/projects/status/github/r-lib/sessioninfo?svg=true)](https://ci.appveyor.com/project/gaborcsardi/sessioninfo)
-[![](http://www.r-pkg.org/badges/version/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/sessioninfo)](http://www.r-pkg.org/pkg/sessioninfo)
+<!-- badges: start -->
+[Lifecycle: maturing](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R build status](https://github.com/r-lib/sessioninfo/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/sessioninfo/actions)
+[![](https://www.r-pkg.org/badges/version/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
 [![Coverage Status](https://img.shields.io/codecov/c/github/r-lib/sessioninfo/master.svg)](https://codecov.io/github/r-lib/sessioninfo?branch=master)
+<!-- badges: end -->
 
 Query and print information about the current R session. It is similar to
 `utils::sessionInfo()`, but includes more information about packages, and
