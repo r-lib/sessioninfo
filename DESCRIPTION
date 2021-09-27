@@ -23,8 +23,6 @@ Authors@R:
              role = "aut"),
       person(given = "R Core team",
              role = "ctb"))
-Author: Gábor Csárdi, R core, Hadley Wickham, Winston Chang,
-    Robert M Flight, Kirill Müller, Jim Hester
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Query and print information about the current R
     session.  It is similar to 'utils::sessionInfo()', but includes more
