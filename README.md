@@ -59,7 +59,7 @@ sessioninfo::session_info()
 ### Copying to the clipboard
 
 You can use the
-[`clipr` package](https://cran.rstudio.com/web/packages/clipr/) to copy
+[`clipr` package](https://cran.r-project.org/package=clipr) to copy
 the session info to the clipboard:
 
 ```r
