@@ -5,3 +5,9 @@ test_that("sort_ci", {
     c("ant", "bottom", "\u00a0nt")
   )
 })
+
+test_that("order_by_name", {
+  expect_equal(order_by_name(list()), list())
+
+  expect_error(order_by_name(c("foo", "bar")), "no names")
+})
