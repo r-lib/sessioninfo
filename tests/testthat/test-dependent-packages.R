@@ -81,12 +81,16 @@ test_that("find_deps", {
 })
 
 test_that("dep_types", {
+  skip_on_cran()
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
   expect_silent(
     tools::package_dependencies("sessioninfo", which = dep_types())
   )
 })
 
 test_that("interpret_dependencies", {
+  skip_on_cran()
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
   expect_silent(
     tools::package_dependencies(
       "sessioninfo",
