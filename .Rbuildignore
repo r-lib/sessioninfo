@@ -6,3 +6,4 @@
 ^appveyor.yml$
 ^revdep$
 ^\.github$
+^dev[-]lib$
