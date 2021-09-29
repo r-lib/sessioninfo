@@ -27,17 +27,23 @@
 #' @export
 #' @examples
 #' external_info()
-#' @importFrom grDevices grSoftVersion
-#' @importFrom tcltk tclVersion
 
 external_info <- function() {
 
-  ex <- c(grDevices::grSoftVersion(), tcl = tcltk::tclVersion(),
+  ex <- c(get_grsoft_version(), tcl = get_tcl_version(),
           curl = libcurlVersion(), extSoftVersion())
   ex["LAPACK"] <- La_library()
   names(ex) <- gsub("^lib", "", names(ex))
 
   structure(as.list(ex), class = "external_info")
+}
+
+get_tcl_version <- function() {
+  tryCatch(tcltk::tclVersion(), error = function(err) NA_character_)
+}
+
+get_grsoft_version <- function() {
+  grDevices::grSoftVersion()
 }
 
 #' @export

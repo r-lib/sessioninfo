@@ -35,6 +35,6 @@ external_info()
 }
 \seealso{
 Similar functions and objects in the base packages:
-\code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:extSoftVersion]{base::extSoftVersion}, \code{\link[tcltk:tclVersion]{tcltk::tclVersion()}}
+\code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:extSoftVersion]{base::extSoftVersion}, \code{\link[tcltk:TclInterface]{tcltk::tclVersion()}}
 \link[base:La_library]{base::La_library}, \code{\link[base:La_version]{base::La_version()}}, \code{\link[base:libcurlVersion]{base::libcurlVersion()}}.
 }
