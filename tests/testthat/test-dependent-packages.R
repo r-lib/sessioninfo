@@ -1,6 +1,4 @@
 
-context("dependent_packages")
-
 test_that("dependent_packages", {
   ins <- readRDS("fixtures/installed.rda")
   dep <- readRDS("fixtures/devtools-deps.rda")
@@ -71,5 +69,61 @@ test_that("find_deps", {
   expect_equal(
     find_deps("foobar", top_dep = character(), rec_dep = character()),
     "foobar"
+  )
+})
+
+test_that("find_deps", {
+  ins <- readRDS("fixtures/installed.rda")
+  expect_equal(
+    find_deps("devtools", ins, top_dep = FALSE),
+    character()
+  )
+})
+
+test_that("dep_types", {
+  skip_on_cran()
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
+  expect_silent(
+    tools::package_dependencies("sessioninfo", which = dep_types())
+  )
+})
+
+test_that("interpret_dependencies", {
+  skip_on_cran()
+  withr::local_options(repos = c(CRAN = "https://cloud.r-project.org"))
+  expect_silent(
+    tools::package_dependencies(
+      "sessioninfo",
+      which = interpret_dependencies(TRUE)[[1]]
+    )
+  )
+  expect_silent(
+    tools::package_dependencies(
+      "sessioninfo",
+      which = interpret_dependencies(TRUE)[[2]]
+    )
+  )
+
+  expect_equal(
+    interpret_dependencies(FALSE),
+    list(character(), character())
+  )
+
+  expect_silent(
+    tools::package_dependencies(
+      "sessioninfo",
+      which = interpret_dependencies(NA)[[1]]
+    )
+  )
+  expect_silent(
+    tools::package_dependencies(
+      "sessioninfo",
+      which = interpret_dependencies(NA)[[2]]
+    )
+  )
+
+  expect_equal(
+    interpret_dependencies("Depends"),
+    list("Depends", "Depends")
   )
 })
