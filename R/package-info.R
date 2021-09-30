@@ -3,7 +3,7 @@
 #'
 #' @param pkgs Either a vector of package names or NULL. If \code{NULL},
 #'   displays all loaded packages. If a character vector, also, includes
-#'   all dependencies of the package.
+#'   all dependencies of the package(s).
 #' @param include_base Include base packages in summary? By default this is
 #'   false since base packages should always match the R version.
 #' @param dependencies Whether to include the (recursive) dependencies

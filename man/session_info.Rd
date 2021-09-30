@@ -4,15 +4,30 @@
 \alias{session_info}
 \title{Print session information}
 \usage{
-session_info(pkgs = NULL, include_base = FALSE)
+session_info(
+  pkgs = NULL,
+  include_base = FALSE,
+  info = c("auto", "all", "platform", "packages", "python", "external")
+)
 }
 \arguments{
 \item{pkgs}{Either a vector of package names or NULL. If \code{NULL},
 displays all loaded packages. If a character vector, also, includes
-all dependencies of the package.}
+all dependencies of the package(s).}
 
 \item{include_base}{Include base packages in summary? By default this is
 false since base packages should always match the R version.}
+
+\item{info}{What information to show, it can be \code{"auto"} to choose
+automatically, \code{"all"} to show everything, or a character vector
+with elements from:
+\itemize{
+\item \code{"platform"}: show platform information via \code{\link[=platform_info]{platform_info()}},
+\item \code{"packages"}: show package information via \code{\link[=package_info]{package_info()}},
+\item \code{"python"}: show Python configuration via \code{\link[=python_info]{python_info()}},
+\item \code{"external"}: show information about external software, via
+\code{\link[=external_info]{external_info()}}.
+}}
 }
 \description{
 This is \code{\link[utils:sessionInfo]{utils::sessionInfo()}} re-written from scratch to both exclude

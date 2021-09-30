@@ -25,17 +25,48 @@
 #' is *returned* (as opposed to *printed*).
 #'
 #' @inheritParams package_info
+#' @param info What information to show, it can be `"auto"` to choose
+#'   automatically, `"all"` to show everything, or a character vector
+#'   with elements from:
+#'   * `"platform"`: show platform information via [platform_info()],
+#'   * `"packages"`: show package information via [package_info()],
+#'   * `"python"`: show Python configuration via [python_info()],
+#'   * `"external"`: show information about external software, via
+#'      [external_info()].
+#'
 #' @export
 #' @examples
 #' session_info()
 #' session_info("sessioninfo")
 
-session_info <- function(pkgs = NULL, include_base = FALSE) {
+session_info <- function(pkgs = NULL, include_base = FALSE,
+                         info = c("auto", "all", "platform", "packages",
+                                  "python", "external")) {
+
+  if (missing(info)) info <- "auto"
+  choices <- c("platform", "packages", "python", "external")
+  if (info != "auto" && info != "all") {
+    info <- match.arg(info, choices, several.ok = TRUE)
+  }
+  if ("all" %in% info) {
+    info <- choices
+  } else if ("auto" %in% info) {
+    info <- c(
+      "platform",
+      "packages",
+      if (should_show_python(pkgs)) "python"
+    )
+  }
+
   structure(
-    list(
-      platform = platform_info(),
-      packages = package_info(pkgs, include_base = include_base)
-    ),
+    drop_null(list(
+      platform = if ("platform" %in% info) platform_info(),
+      packages = if ("packages" %in% info) {
+        package_info(pkgs, include_base = include_base)
+                 },
+      external = if ("external" %in% info) external_info(),
+      python = if ("python" %in% info) python_info()
+    )),
     class = "session_info"
   )
 }
@@ -43,13 +74,21 @@ session_info <- function(pkgs = NULL, include_base = FALSE) {
 #' @export
 
 as.character.session_info <- function(x, ...) {
-  c(rule("Session info"),
-    as.character(x$platform),
-    "",     # empty line
-    rule("Packages"),
-    as.character(x$packages)
+  c(if ("platform" %in% names(x)) {
+      c(rule("Session info"), as.character(x$platform), "")
+    },
+    if ("packages" %in% names(x)) {
+      c(rule("Packages"), as.character(x$packages), "")
+    },
+    if ("external" %in% names(x)) {
+      c(rule("External software"), as.character(x$external), "")
+    },
+    if ("python" %in% names(x)) {
+      c(rule("Python configuration"), as.character(x$python), "")
+    }
   )
 }
+
 #' @export
 
 print.session_info <- function(x, ...) {

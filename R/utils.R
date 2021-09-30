@@ -20,3 +20,7 @@ order_by_name <- function(x) {
     x[order(names(x))]
   }
 }
+
+drop_null <- function(x) {
+  x[! vapply(x, is.null, logical(1))]
+}
