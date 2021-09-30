@@ -40,7 +40,7 @@ platform_info <- function() {
 
 print.platform_info <- function(x, ...) {
   df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
-  withr::local_options(list(max.print = 99999))
+  withr::local_options(list(max.print = 99999, width = 10000))
   print(df, right = FALSE, row.names = FALSE)
 }
 
