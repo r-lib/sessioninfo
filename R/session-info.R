@@ -33,15 +33,27 @@
 #'   * `"python"`: show Python configuration via [python_info()],
 #'   * `"external"`: show information about external software, via
 #'      [external_info()].
+#' @param to_file Whether to print the session information to a file.
+#'   If `TRUE` the name of the file will be `session-info.txt`, but
+#'   `to_file` may also be a string to specify the file name.
+#'
+#' @return
+#' A `session_info` object.
+#'
+#' If `to_file` is not `FALSE` then it is
+#' returned invisibly. (To print it to both a file and to the screen,
+#' use `(session_info(to_file = TRUE))`.)
 #'
 #' @export
 #' @examples
 #' session_info()
 #' session_info("sessioninfo")
 
-session_info <- function(pkgs = NULL, include_base = FALSE,
-                         info = c("auto", "all", "platform", "packages",
-                                  "python", "external")) {
+session_info <- function(
+    pkgs = NULL,
+    include_base = FALSE,
+    info = c("auto", "all", "platform", "packages", "python", "external"),
+    to_file = FALSE) {
 
   if (missing(info)) info <- "auto"
   choices <- c("platform", "packages", "python", "external")
@@ -58,7 +70,10 @@ session_info <- function(pkgs = NULL, include_base = FALSE,
     )
   }
 
-  structure(
+  stopifnot(is_flag(to_file) || is_string(to_file))
+  if (is_flag(to_file) && to_file) to_file <- "session-info.txt"
+
+  si <- structure(
     drop_null(list(
       platform = if ("platform" %in% info) platform_info(),
       packages = if ("packages" %in% info) {
@@ -69,6 +84,13 @@ session_info <- function(pkgs = NULL, include_base = FALSE,
     )),
     class = "session_info"
   )
+
+  if (is_string(to_file)) {
+    writeLines(as.character(si), to_file)
+    invisible(si)
+  } else {
+    si
+  }
 }
 
 #' @export

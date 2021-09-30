@@ -7,7 +7,8 @@
 session_info(
   pkgs = NULL,
   include_base = FALSE,
-  info = c("auto", "all", "platform", "packages", "python", "external")
+  info = c("auto", "all", "platform", "packages", "python", "external"),
+  to_file = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,17 @@ with elements from:
 \item \code{"external"}: show information about external software, via
 \code{\link[=external_info]{external_info()}}.
 }}
+
+\item{to_file}{Whether to print the session information to a file.
+If \code{TRUE} the name of the file will be \code{session-info.txt}, but
+\code{to_file} may also be a string to specify the file name.}
+}
+\value{
+A \code{session_info} object.
+
+If \code{to_file} is not \code{FALSE} then it is
+returned invisibly. (To print it to both a file and to the screen,
+use \code{(session_info(to_file = TRUE))}.)
 }
 \description{
 This is \code{\link[utils:sessionInfo]{utils::sessionInfo()}} re-written from scratch to both exclude
