@@ -15,12 +15,8 @@
 os_name <- function() {
   x <- suppressWarnings(utils::sessionInfo("base")$running)
   if (is.null(x)) return(NA_character_)
-  
-  # Regexps to clean up long windows strings generated at
-  # https://github.com/wch/r-source/blob/af7f52f70101960861e5d995d3a4bec010bc89e6/src/library/utils/src/windows/util.c
 
   x <- gsub("Service Pack", "SP", x)
-  x <- gsub(" \\(build \\d+\\)", "", x)
 
   x
 }
