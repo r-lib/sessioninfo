@@ -39,6 +39,7 @@ Suggests:
     callr,
     covr,
     mockery,
+    reticulate,
     testthat
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
