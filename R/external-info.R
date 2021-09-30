@@ -32,18 +32,30 @@ external_info <- function() {
 
   ex <- c(get_grsoft_version(), tcl = get_tcl_version(),
           curl = libcurlVersion(), extSoftVersion())
-  ex["LAPACK"] <- La_library()
+  ex["lapack"] <- get_la_library()
+  ex["lapack_version"] <- get_la_version()
   names(ex) <- gsub("^lib", "", names(ex))
 
   structure(as.list(ex), class = "external_info")
 }
 
 get_tcl_version <- function() {
-  tryCatch(tcltk::tclVersion(), error = function(err) NA_character_)
+  tryCatch(
+    suppressWarnings(tcltk::tclVersion()),
+    error = function(err) ""
+  )
 }
 
 get_grsoft_version <- function() {
   grDevices::grSoftVersion()
+}
+
+get_la_library <- function() {
+  tryCatch(base::La_library(), error = function(err) NA_character_)
+}
+
+get_la_version <- function() {
+  tryCatch(base::La_version(), error = function(err) NA_character_)
 }
 
 #' @export
