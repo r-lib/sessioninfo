@@ -98,7 +98,7 @@ test_that("pkg_md5_disk", {
 test_that("print.packages_info", {
   info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   expect_output(
-    print(info), "package    * version     date       lib source",
+    print(info), "package    * version     date (UTC) lib source",
     fixed = TRUE
   )
 })
