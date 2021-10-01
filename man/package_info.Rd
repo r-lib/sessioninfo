@@ -32,7 +32,7 @@ though.
 \item \code{attached}: logical, whether the package is attached to the search
 path.
 \item \code{is_base}: logical, whether the package is a base package.
-\item \code{date}: the date the package was installed or built.
+\item \code{date}: the date the package was installed or built, in UTC.
 \item \code{source}: where the package was installed from. E.g.
 \code{CRAN}, \code{GitHub}, \code{local} (from the local machine), etc.
 \item \code{md5ok}: Whether MD5 hashes for package DLL files match, on Windows.

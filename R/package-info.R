@@ -21,7 +21,7 @@
 #'   * `attached`: logical, whether the package is attached to the search
 #'     path.
 #'   * `is_base`: logical, whether the package is a base package.
-#'   * `date`: the date the package was installed or built.
+#'   * `date`: the date the package was installed or built, in UTC.
 #'   * `source`: where the package was installed from. E.g.
 #'     `CRAN`, `GitHub`, `local` (from the local machine), etc.
 #'   * `md5ok`: Whether MD5 hashes for package DLL files match, on Windows.
@@ -193,12 +193,12 @@ format.packages_info <- function(x, ...) {
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
 
   px <- data.frame(
-    package = x$package,
-    "*"     = ifelse(x$attached, "*", ""),
-    version = ifelse(unloaded, x$ondiskversion, x$loadedversion),
-    date    = x$date,
-    lib     = paste0("[", flib(x$library), "]"),
-    source  = x$source,
+    package      = x$package,
+    "*"          = ifelse(x$attached, "*", ""),
+    version      = ifelse(unloaded, x$ondiskversion, x$loadedversion),
+    "date (UTC)" = x$date,
+    lib          = paste0("[", flib(x$library), "]"),
+    source       = x$source,
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
