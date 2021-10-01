@@ -30,6 +30,10 @@ A list with elements:
 \description{
 Information about related software
 }
+\details{
+Note that calling this function will attempt to load the tcltk and
+grDevices packages.
+}
 \examples{
 external_info()
 }

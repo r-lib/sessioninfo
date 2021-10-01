@@ -1,6 +1,10 @@
 
 #' Information about related software
 #'
+#' @details
+#' Note that calling this function will attempt to load the tcltk and
+#' grDevices packages.
+#'
 #' @return A list with elements:
 #'   * `cairo`: The cairo version string.
 #'   * `libpng`: The png version string.
