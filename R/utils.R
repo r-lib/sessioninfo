@@ -1,10 +1,11 @@
 
 `%||%` <- function(l, r) if (is.null(l)) r else l
 
-#' @importFrom withr with_collate
-
 sort_ci <- function(x) {
-  with_collate("C", x[order(tolower(x), x)])
+  old <- Sys.getlocale("LC_COLLATE")
+  on.exit(Sys.setlocale("LC_COLLATE", old), add = TRUE)
+  Sys.setlocale("LC_COLLATE", "C")
+  x[order(tolower(x), x)]
 }
 
 is_string <- function(x) {

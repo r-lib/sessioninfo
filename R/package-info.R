@@ -176,13 +176,14 @@ pkg_md5_stored <- function(pkgdir) {
 }
 
 pkg_md5_disk <- function(pkgdir) {
-  withr::with_dir(pkgdir, {
-    dll_files <- file.path(
-      "libs",
-      dir("libs", pattern = "[dD][lL][lL]$", recursive = TRUE))
-    md5_files <- tools::md5sum(dll_files)
-    order_by_name(structure(unname(md5_files), names = tolower(dll_files)))
-  })
+  old <- getwd()
+  on.exit(setwd(old), add = TRUE)
+  setwd(pkgdir)
+  dll_files <- file.path(
+    "libs",
+    dir("libs", pattern = "[dD][lL][lL]$", recursive = TRUE))
+  md5_files <- tools::md5sum(dll_files)
+  order_by_name(structure(unname(md5_files), names = tolower(dll_files)))
 }
 
 #' @export
