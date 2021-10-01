@@ -40,12 +40,19 @@ python_info <- function() {
 
 #' @export
 
+format.python_info <- function(x, ...) {
+  x <- NextMethod(x, ...)
+  paste0(" ", unlist(strsplit(x, "\n", fixed = TRUE)))
+}
+
+#' @export
+
 as.character.python_info <- function(x, ...) {
-  paste0(" ", unlist(strsplit(format(x), "\n", fixed = TRUE)))
+  format(x, ...)
 }
 
 #' @export
 
 print.python_info <- function(x, ...) {
-  cat(as.character(x), sep = "\n")
+  cat(format(x, ...), sep = "\n")
 }

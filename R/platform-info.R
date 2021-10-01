@@ -38,15 +38,23 @@ platform_info <- function() {
 
 #' @export
 
-print.platform_info <- function(x, ...) {
-  df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
-  withr::local_options(list(max.print = 99999, width = 10000))
-  print(df, right = FALSE, row.names = FALSE)
+format.platform_info <- function(x, ...) {
+  df <- data.frame(
+    setting = names(x),
+    value = unlist(x),
+    stringsAsFactors = FALSE
+  )
+  format_df(df)
 }
 
 #' @export
-#' @importFrom utils capture.output
+
+print.platform_info <- function(x, ...) {
+  cat(format(x, ...), sep = "\n")
+}
+
+#' @export
 
 as.character.platform_info <- function(x, ...) {
-  capture.output(print(x))
+  format(x, ...)
 }

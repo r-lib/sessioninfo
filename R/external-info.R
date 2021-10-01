@@ -60,15 +60,23 @@ get_la_version <- function() {
 
 #' @export
 
-print.external_info <- function(x, ...) {
-  df <- data.frame(setting = names(x), value = unlist(x), stringsAsFactors = FALSE)
-  withr::local_options(list(max.print = 99999, width = 10000))
-  print(df, right = FALSE, row.names = FALSE)
+format.external_info <- function(x, ...) {
+  df <- data.frame(
+    setting = names(x),
+    value = unlist(x),
+    stringsAsFactors = FALSE
+  )
+  format_df(df)
 }
 
 #' @export
-#' @importFrom utils capture.output
+
+print.external_info <- function(x, ...) {
+  cat(format(x, ...), sep = "\n")
+}
+
+#' @export
 
 as.character.external_info <- function(x, ...) {
-  capture.output(print(x))
+  format(x, ...)
 }

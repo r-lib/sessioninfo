@@ -187,7 +187,7 @@ pkg_md5_disk <- function(pkgdir) {
 
 #' @export
 
-print.packages_info <- function(x, ...) {
+format.packages_info <- function(x, ...) {
 
   unloaded <- is.na(x$loadedversion)
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
@@ -223,34 +223,40 @@ print.packages_info <- function(x, ...) {
     px <- cbind("!" = prob, px)
   }
 
-  withr::local_options(list(max.print = 99999, width = 10000))
-  pr <- print.data.frame(px, right = FALSE, row.names = FALSE)
+  fmt <- c(format_df(px), "")
 
-  cat("\n")
   lapply(
     seq_along(levels(x$library)),
-    function(i) cat_ln(paste0("[", i, "] ", levels(x$library)[i])))
+    function(i) {
+      fmt <<- c(fmt, paste0("[", i, "] ", levels(x$library)[i]))
+    }
+  )
 
-  if ("!" %in% names(px)) cat("\n")
+  if ("!" %in% names(px)) fmt <- c(fmt, "")
   if (any(badloaded)) {
-    cat_ln(" V ", dash(2), " Loaded and on-disk version mismatch.")
+    fmt <- c(fmt, paste0(" V ", dash(2), " Loaded and on-disk version mismatch."))
   }
   if (any(badpath))  {
-    cat_ln(" P ", dash(2), " Loaded and on-disk path mismatch.")
+    fmt <- c(fmt, paste0(" P ", dash(2), " Loaded and on-disk path mismatch."))
   }
   if (any(badmd5)) {
-    cat_ln(" D ", dash(2), " DLL MD5 mismatch, broken installation.")
+    fmt <- c(fmt, paste0(" D ", dash(2), " DLL MD5 mismatch, broken installation."))
   }
   if (any(baddel)) {
-    cat_ln(" R ", dash(2), " Package was removed from disk.")
+    fmt <- c(fmt, paste0(" R ", dash(2), " Package was removed from disk."))
   }
 
-  invisible(x)
+  fmt
 }
 
 #' @export
-#' @importFrom utils capture.output
+
+print.packages_info <- function(x, ...) {
+  cat(format(x, ...), sep = "\n")
+}
+
+#' @export
 
 as.character.packages_info <- function(x, ...) {
-  capture.output(print(x))
+  format(x, ...)
 }
