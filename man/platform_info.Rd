@@ -20,6 +20,7 @@ variable, if set, or \code{(EN)} if unset.
 \item \code{ctype}: Native character encoding, from the current locale.
 \item \code{tz}: The current time zone.
 \item \code{date}: The current date.
+\item \code{rstudio_version}: RStudio format string, only added in RStudio.
 }
 }
 \description{

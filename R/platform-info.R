@@ -13,6 +13,7 @@
 #'   * `ctype`: Native character encoding, from the current locale.
 #'   * `tz`: The current time zone.
 #'   * `date`: The current date.
+#'   * `rstudio_version`: RStudio format string, only added in RStudio.
 #'
 #' @seealso Similar functions and objects in the base packages:
 #'   [base::R.version.string], [utils::sessionInfo()], [base::version],
@@ -23,7 +24,7 @@
 #' platform_info()
 
 platform_info <- function() {
-  structure(list(
+  structure(drop_null(list(
     version = R.version.string,
     os = os_name(),
     system = version$system,
@@ -32,8 +33,16 @@ platform_info <- function() {
     collate = Sys.getlocale("LC_COLLATE"),
     ctype = Sys.getlocale("LC_CTYPE"),
     tz = Sys.timezone(),
-    date = format(Sys.Date())
-  ), class = "platform_info")
+    date = format(Sys.Date()),
+    rstudio_version = get_rstudio_version()
+  )), class = "platform_info")
+}
+
+get_rstudio_version <- function() {
+  tryCatch({
+    ver <- get("RStudio.Version", "tools:rstudio")()
+    paste0(ver$long_version, " ", ver$release_name, " (", ver$mode, ")")
+  }, error = function(e) NULL)
 }
 
 #' @export
