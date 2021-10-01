@@ -42,7 +42,11 @@ platform_info <- function() {
 get_rstudio_version <- function() {
   tryCatch({
     ver <- get("RStudio.Version", "tools:rstudio")()
-    paste0(ver$long_version, " ", ver$release_name, " (", ver$mode, ")")
+    paste0(
+      ver$long_version %||% ver$version,
+      if (!is.null(ver$release_name)) paste0(" ", ver$release_name),
+      " (", ver$mode, ")"
+    )
   }, error = function(e) NULL)
 }
 
