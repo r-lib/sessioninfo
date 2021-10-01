@@ -115,6 +115,15 @@ pkg_source <- function(desc) {
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
                   substr(desc$GithubSHA1, 1, 7), ")")
+  } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
+    if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
+      pkg_source_cran(desc)
+    } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
+      "Bioconductor"
+    } else {
+      "Custom"
+    }
+
   } else if (!is.null(desc$RemoteType) && desc$RemoteType != "cran") {
     # want to generate these:
     # remoteType (username/repo@commit)
@@ -147,22 +156,30 @@ pkg_source <- function(desc) {
     str <- paste0(remote_type, user_repo_and_sha)
 
   } else if (!is.null(desc$Repository)) {
-    repo <- desc$Repository
-
-    if (!is.null(desc$Built)) {
-      built <- strsplit(desc$Built, "; ")[[1]]
-      ver <- sub("$R ", "", built[1])
-
-      repo <- paste0(repo, " (", ver, ")")
-    }
-
-    repo
+    pkg_source_cran(desc)
 
   } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
     "Bioconductor"
+
+  } else if (isNamespaceLoaded(desc$Package) &&
+             !is.null(asNamespace(desc$Package)$.__DEVTOOLS__)) {
+    "load_all()"
+
   } else {
     "local"
   }
+}
+
+pkg_source_cran <- function(desc) {
+  repo <- desc$Repository
+
+  if (!is.null(desc$Built)) {
+    built <- strsplit(desc$Built, "; ")[[1]]
+    ver <- sub("$R ", "", built[1])
+    repo <- paste0(repo, " (", ver, ")")
+  }
+
+  repo
 }
 
 pkg_md5ok_dlls <- function(desc) {
@@ -220,6 +237,12 @@ format.packages_info <- function(x, ...) {
   badloaded <- package_version(x$loadedversion, strict = FALSE) !=
                package_version(x$ondiskversion, strict = FALSE)
   badloaded <- !is.na(badloaded) & badloaded
+
+  px$source <- ifelse(
+    badloaded,
+    paste0(px$source, " (on disk ", x$ondiskversion, ")"),
+    px$source
+  )
 
   badmd5 <- !is.na(x$md5ok) & !x$md5ok
 
