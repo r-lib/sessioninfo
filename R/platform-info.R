@@ -34,7 +34,8 @@ platform_info <- function() {
     ctype = Sys.getlocale("LC_CTYPE"),
     tz = Sys.timezone(),
     date = format(Sys.Date()),
-    rstudio_version = get_rstudio_version()
+    rstudio_version = get_rstudio_version(),
+    pandoc_version = get_pandoc_version()
   )), class = "platform_info")
 }
 
@@ -43,6 +44,32 @@ get_rstudio_version <- function() {
     ver <- get("RStudio.Version", "tools:rstudio")()
     paste0(ver$long_version, " ", ver$release_name, " (", ver$mode, ")")
   }, error = function(e) NULL)
+}
+
+get_pandoc_version <- function() {
+  if (isNamespaceLoaded("rmarkdown")) {
+    ver <- rmarkdown::find_pandoc()
+    if (is.null(ver$dir)) {
+      "NA (via rmarkdown)"
+    } else {
+      paste0(ver$version, " @ ", ver$dir, "/ (via rmarkdown)")
+    }
+  } else {
+    path <- Sys.which("pandoc")
+    if (path == "") {
+      "NA"
+    } else {
+      ver <- parse_pandoc_version(path)
+      paste0(ver, " @ ", path)
+    }
+  }
+}
+
+parse_pandoc_version <- function(path) {
+  tryCatch({
+    out <- system2(path, "--version", stdout = TRUE)[1]
+    last(strsplit(out, " ", fixed = TRUE)[[1]])
+  }, error = function(e) "NA")
 }
 
 #' @export

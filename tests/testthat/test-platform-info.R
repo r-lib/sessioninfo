@@ -3,7 +3,8 @@ test_that("platform_info", {
   pi <- platform_info()
   expect_equal(
     names(pi),
-    c("version", "os", "system", "ui", "language", "collate", "ctype", "tz", "date")
+    c("version", "os", "system", "ui", "language", "collate", "ctype",
+      "tz", "date", "pandoc_version")
   )
 
   ## This can be a variety of strings, e.g. "R Under development"
@@ -18,7 +19,7 @@ test_that("platform_info", {
 })
 
 test_that("print.platform_info", {
-  expect_output(print(platform_info()), "setting  value", fixed = TRUE)
+  expect_output(print(platform_info()), "setting[ ]+value")
 })
 
 test_that("print.platform_info ignores max.print", {

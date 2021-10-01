@@ -39,6 +39,7 @@ Suggests:
     covr,
     mockery,
     reticulate,
+    rmarkdown,
     testthat,
     withr
 Encoding: UTF-8
