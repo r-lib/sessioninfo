@@ -50,9 +50,10 @@
 #' session_info("sessioninfo")
 
 session_info <- function(
-    pkgs = NULL,
+    pkgs = c("!loaded", "!attached", "!installed")[1],
     include_base = FALSE,
     info = c("auto", "all", "platform", "packages", "python", "external"),
+    dependencies = NA,
     to_file = FALSE) {
 
   if (missing(info)) info <- "auto"
@@ -77,8 +78,12 @@ session_info <- function(
     drop_null(list(
       platform = if ("platform" %in% info) platform_info(),
       packages = if ("packages" %in% info) {
-        package_info(pkgs, include_base = include_base)
-                 },
+        package_info(
+          pkgs,
+          include_base = include_base,
+          dependencies = dependencies
+        )
+      },
       external = if ("external" %in% info) external_info(),
       python = if ("python" %in% info) python_info()
     )),

@@ -4,12 +4,21 @@
 \alias{package_info}
 \title{Information about the currently loaded packages, or about a chosen set}
 \usage{
-package_info(pkgs = NULL, include_base = FALSE, dependencies = NA)
+package_info(
+  pkgs = c("!loaded", "!attached", "!installed")[1],
+  include_base = FALSE,
+  dependencies = NA
+)
 }
 \arguments{
-\item{pkgs}{Either a vector of package names or NULL. If \code{NULL},
-displays all loaded packages. If a character vector, also, includes
-all dependencies of the package(s).}
+\item{pkgs}{Which packages to show. It may be:
+\itemize{
+\item \code{NULL} or \code{"!loaded"}: show all loaded packages,
+\item \code{"!attached"}: show all attached packages,
+\item \code{"!installed"}: show all installed packages,
+\item a character vector of package names. Their (hard) dependencies are
+also shown by default, see the \code{dependencies} argument.
+}}
 
 \item{include_base}{Include base packages in summary? By default this is
 false since base packages should always match the R version.}

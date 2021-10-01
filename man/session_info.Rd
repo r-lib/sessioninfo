@@ -5,16 +5,22 @@
 \title{Print session information}
 \usage{
 session_info(
-  pkgs = NULL,
+  pkgs = c("!loaded", "!attached", "!installed")[1],
   include_base = FALSE,
   info = c("auto", "all", "platform", "packages", "python", "external"),
+  dependencies = NA,
   to_file = FALSE
 )
 }
 \arguments{
-\item{pkgs}{Either a vector of package names or NULL. If \code{NULL},
-displays all loaded packages. If a character vector, also, includes
-all dependencies of the package(s).}
+\item{pkgs}{Which packages to show. It may be:
+\itemize{
+\item \code{NULL} or \code{"!loaded"}: show all loaded packages,
+\item \code{"!attached"}: show all attached packages,
+\item \code{"!installed"}: show all installed packages,
+\item a character vector of package names. Their (hard) dependencies are
+also shown by default, see the \code{dependencies} argument.
+}}
 
 \item{include_base}{Include base packages in summary? By default this is
 false since base packages should always match the R version.}
@@ -29,6 +35,9 @@ with elements from:
 \item \code{"external"}: show information about external software, via
 \code{\link[=external_info]{external_info()}}.
 }}
+
+\item{dependencies}{Whether to include the (recursive) dependencies
+as well. See the \code{dependencies} argument of \code{\link[utils:install.packages]{utils::install.packages()}}.}
 
 \item{to_file}{Whether to print the session information to a file.
 If \code{TRUE} the name of the file will be \code{session-info.txt}, but

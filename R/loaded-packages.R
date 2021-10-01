@@ -2,6 +2,23 @@
 #' @importFrom utils packageVersion
 
 loaded_packages <- function() {
+  get_package_info(loadedNamespaces())
+}
+
+attached_packages <- function() {
+  packages <- intersect(
+    loadedNamespaces(),
+    sub("^package:", "", search())
+  )
+  get_package_info(packages)
+}
+
+installed_packages <- function() {
+  pkgs <- rownames(utils::installed.packages(noCache = TRUE))
+  dependent_packages(pkgs, dependencies = FALSE)
+}
+
+get_package_info <- function(packages) {
 
   ## 'base' is special, because getNamespaceInfo does not work on it.
   ## Luckily, the path for 'base' is just system.file()
@@ -14,7 +31,7 @@ loaded_packages <- function() {
       error = function(e) NA_character_)
   }
 
-  packages <- setdiff(loadedNamespaces(), "base")
+  packages <- setdiff(packages, "base")
 
   loadedversion <- vapply(packages, getNamespaceVersion, "")
   ondiskversion <- vapply(packages, spackageVersion, "")
