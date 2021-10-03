@@ -34,7 +34,7 @@ python_info <- function() {
     "Python is not available"
   }
 
-  class(conf) <- c("python_info", class(conf))
+  class(conf) <- unique(c("python_info", class(conf), "list"))
   conf
 }
 

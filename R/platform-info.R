@@ -36,7 +36,7 @@ platform_info <- function() {
     date = format(Sys.Date()),
     rstudio_version = get_rstudio_version(),
     pandoc_version = get_pandoc_version()
-  )), class = "platform_info")
+  )), class = c("platform_info", "list"))
 }
 
 get_rstudio_version <- function() {

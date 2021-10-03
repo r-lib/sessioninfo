@@ -40,7 +40,7 @@ external_info <- function() {
   ex["lapack_version"] <- get_la_version()
   names(ex) <- gsub("^lib", "", names(ex))
 
-  structure(as.list(ex), class = "external_info")
+  structure(as.list(ex), class = c("external_info", "list"))
 }
 
 get_tcl_version <- function() {

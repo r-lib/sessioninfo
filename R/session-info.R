@@ -87,7 +87,7 @@ session_info <- function(
       external = if ("external" %in% info) external_info(),
       python = if ("python" %in% info) python_info()
     )),
-    class = "session_info"
+    class = c("session_info", "list")
   )
 
   if (is_string(to_file)) {
