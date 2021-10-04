@@ -149,7 +149,7 @@ has_emoji <- function () {
 emo_hash <- function(x) {
   if (is.null(x$hash)) return("")
   if (has_emoji()) {
-    paste0(" ", paste(x$hash$emoji, " ", collapse = ""))
+    paste0(" ", paste0(x$hash$emoji, " ", collapse = ""))
   } else {
     ""
   }
