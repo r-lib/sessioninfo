@@ -24,7 +24,7 @@
 #' platform_info()
 
 platform_info <- function() {
-  structure(drop_null(list(
+  as_platform_info(drop_null(list(
     version = R.version.string,
     os = os_name(),
     system = version$system,
@@ -36,7 +36,7 @@ platform_info <- function() {
     date = format(Sys.Date()),
     rstudio_version = get_rstudio_version(),
     pandoc_version = get_pandoc_version()
-  )), class = c("platform_info", "list"))
+  )))
 }
 
 get_rstudio_version <- function() {
@@ -97,4 +97,16 @@ print.platform_info <- function(x, ...) {
 
 as.character.platform_info <- function(x, ...) {
   format(x, ...)
+}
+
+#' @export
+
+c.platform_info <- function(...) {
+  as_platform_info(NextMethod())
+}
+
+as_platform_info <- function(x) {
+  stopifnot(is.list(x))
+  class(x) <- c("platform_info", "list")
+  x
 }

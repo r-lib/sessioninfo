@@ -1,11 +1,11 @@
 
 #' @importFrom cli symbol
 
-rule <- function (..., pad = NULL) {
-  if (is.null(pad)) pad <- symbol$line
+rule <- function (..., pad = NULL, double = FALSE) {
+  if (is.null(pad)) pad <- if (double) symbol$double_line else symbol$line
   title <- if (length(list(...))) paste0(" ", ..., " ") else ""
 
-  width <- max(cli::console_width() - nchar(title) - 3, 0)
+  width <- max(cli::console_width() - cli::ansi_nchar(title, "width") - 3, 0)
   paste(pad, title, paste(rep(pad, width), collapse = ""), sep = "")
 }
 

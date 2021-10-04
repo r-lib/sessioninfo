@@ -90,6 +90,8 @@ session_info <- function(
     class = c("session_info", "list")
   )
 
+  si <- add_hash(si)
+
   if (is_string(to_file)) {
     writeLines(as.character(si), to_file)
     invisible(si)
@@ -100,24 +102,67 @@ session_info <- function(
 
 #' @export
 
-as.character.session_info <- function(x, ...) {
-  c(if ("platform" %in% names(x)) {
-      c(rule("Session info"), as.character(x$platform), "")
+format.session_info <- function(x, ...) {
+
+  has_platform <- !is.null(x$platform)
+
+  c(if (!"platform" %in% names(x)) {
+      c(rule(paste("Session info", emo_hash(x)), double = TRUE), text_hash(x))
+    },
+    if ("platform" %in% names(x)) {
+      c(rule(paste("Session info", emo_hash(x))),
+        text_hash(x),
+        format(x$platform),
+        ""
+      )
     },
     if ("packages" %in% names(x)) {
-      c(rule("Packages"), as.character(x$packages), "")
+      c(rule("Packages"), format(x$packages), "")
     },
     if ("external" %in% names(x)) {
-      c(rule("External software"), as.character(x$external), "")
+      c(rule("External software"), format(x$external), "")
     },
     if ("python" %in% names(x)) {
-      c(rule("Python configuration"), as.character(x$python), "")
+      c(rule("Python configuration"), format(x$python), "")
     }
   )
 }
 
 #' @export
 
+as.character.session_info <- function(x, ...) {
+  format(x, ...)
+}
+
+has_emoji <- function () {
+  if (isTRUE(opt <- getOption("sessioninfo.emoji"))) {
+    TRUE
+  } else if (identical(opt, FALSE)) {
+    FALSE
+  } else if (!cli::is_utf8_output()) {
+    FALSE
+  } else {
+    Sys.info()[["sysname"]] == "Darwin"
+  }
+}
+
+emo_hash <- function(x) {
+  if (is.null(x$hash)) return("")
+  if (has_emoji()) {
+    paste0(" ", paste(x$hash$emoji, " ", collapse = ""))
+  } else {
+    ""
+  }
+}
+
+text_hash <- function(x) {
+  if (!is.null(x$hash) && !has_emoji()) {
+    c(paste0(" hash: ", paste(x$hash$emo_text, collapse = ", ")), "")
+  }
+}
+
+#' @export
+
 print.session_info <- function(x, ...) {
-  cat(as.character(x), sep = "\n")
+  cat(format(x), sep = "\n")
 }
