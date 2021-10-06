@@ -13,7 +13,8 @@
 #'   * `ctype`: Native character encoding, from the current locale.
 #'   * `tz`: The current time zone.
 #'   * `date`: The current date.
-#'   * `rstudio_version`: RStudio format string, only added in RStudio.
+#'   * `rstudio`: RStudio format string, only added in RStudio.
+#'   * `pandoc`: pandoc version and path
 #'
 #' @seealso Similar functions and objects in the base packages:
 #'   [base::R.version.string], [utils::sessionInfo()], [base::version],
@@ -34,8 +35,8 @@ platform_info <- function() {
     ctype = Sys.getlocale("LC_CTYPE"),
     tz = Sys.timezone(),
     date = format(Sys.Date()),
-    rstudio_version = get_rstudio_version(),
-    pandoc_version = get_pandoc_version()
+    rstudio = get_rstudio_version(),
+    pandoc = get_pandoc_version()
   )))
 }
 

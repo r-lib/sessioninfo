@@ -4,7 +4,7 @@ test_that("platform_info", {
   expect_equal(
     names(pi),
     c("version", "os", "system", "ui", "language", "collate", "ctype",
-      "tz", "date", "pandoc_version")
+      "tz", "date", "pandoc")
   )
 
   ## This can be a variety of strings, e.g. "R Under development"
