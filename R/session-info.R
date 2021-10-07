@@ -93,7 +93,9 @@ session_info <- function(
   si <- add_hash(si)
 
   if (is_string(to_file)) {
-    writeLines(as.character(si), to_file)
+    old <- options(cli.num_colors = 1)
+    on.exit(options(old), add = TRUE)
+    writeLines(format(si), to_file)
     invisible(si)
   } else {
     si
@@ -149,7 +151,7 @@ has_emoji <- function () {
 emo_hash <- function(x) {
   if (is.null(x$hash)) return("")
   if (has_emoji()) {
-    paste0(" ", paste0(x$hash$emoji, " ", collapse = ""))
+    paste0(" ", paste(x$hash$emoji, " ", collapse = ""))
   } else {
     ""
   }

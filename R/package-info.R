@@ -260,27 +260,54 @@ format.packages_info <- function(x, ...) {
     px <- cbind("!" = prob, px)
   }
 
-  fmt <- c(format_df(px), "")
+  dng <- function(x) cli::bg_red(cli::col_white(x))
+
+  highlighters <- list(
+    "!" = function(x) {
+      ifelse(empty(x), x, dng(x))
+    },
+    version = function(x) {
+      highlight_version(x)
+    },
+    "date (UTC)" = function(x) {
+      cli::col_grey(x)
+    },
+    lib = function(x) {
+      cli::col_grey(x)
+    },
+    source = function(x) {
+      common <- grepl("^(Bioconductor|CRAN)", x)
+      x[!common] <- cli::style_bold(cli::col_magenta(x[!common]))
+      x[common] <- cli::col_grey(x[common])
+      x
+    }
+  )
+
+  fmt <- c(format_df(px, highlighters = highlighters), "")
 
   lapply(
     seq_along(levels(x$library)),
     function(i) {
-      fmt <<- c(fmt, paste0("[", i, "] ", levels(x$library)[i]))
+      fmt <<- c(fmt, cli::col_grey(paste0(" [", i, "] ", levels(x$library)[i])))
     }
   )
 
   if ("!" %in% names(px)) fmt <- c(fmt, "")
   if (any(badloaded)) {
-    fmt <- c(fmt, paste0(" V ", dash(2), " Loaded and on-disk version mismatch."))
+    fmt <- c(fmt, paste0(" ", dng("V"), " ", dash(2),
+                         " Loaded and on-disk version mismatch."))
   }
   if (any(badpath))  {
-    fmt <- c(fmt, paste0(" P ", dash(2), " Loaded and on-disk path mismatch."))
+    fmt <- c(fmt, paste0(" ", dng("P"), " ", dash(2),
+                         " Loaded and on-disk path mismatch."))
   }
   if (any(badmd5)) {
-    fmt <- c(fmt, paste0(" D ", dash(2), " DLL MD5 mismatch, broken installation."))
+    fmt <- c(fmt, paste0(" ", dng("D"), " ", dash(2),
+                         " DLL MD5 mismatch, broken installation."))
   }
   if (any(baddel)) {
-    fmt <- c(fmt, paste0(" R ", dash(2), " Package was removed from disk."))
+    fmt <- c(fmt, paste0(" ", dng("R"), " ", dash(2),
+                         " Package was removed from disk."))
   }
 
   fmt

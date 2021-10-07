@@ -33,3 +33,7 @@ drop_null <- function(x) {
 last <- function(x) {
   x[length(x)]
 }
+
+empty <- function(x) {
+  grepl("^\\s*$", x)
+}
