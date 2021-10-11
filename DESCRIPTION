@@ -44,6 +44,8 @@ Suggests:
     rmarkdown,
     testthat,
     withr
+Remotes:
+    r-lib/cli
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
