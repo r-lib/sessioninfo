@@ -91,7 +91,7 @@ get_session_info_clipboard <- function() {
 get_session_info_url <- function(url) {
   tmp <- tempfile("session-diff-")
   on.exit(unlink(tmp), add = TRUE)
-  suppressWarnings(download.file(url, tmp, quiet = TRUE, mode = "wb"))
+  suppressWarnings(utils::download.file(url, tmp, quiet = TRUE, mode = "wb"))
   html <- readLines(url, warn = FALSE, encoding = "UTF-8")
   find_session_info_in_html(url, html)
 }
@@ -237,7 +237,7 @@ diff_drop_empty <- function(x) {
     1:empty$lengths[1]
   }
   post <- if (utils::tail(empty$values, 1)) {
-    (len - tail(empty$lengths, 1) + 1):len
+    (len - utils::tail(empty$lengths, 1) + 1):len
   }
   del <- as.integer(c(pre, post))
   if (length(del)) x <- x[-del]
@@ -262,7 +262,7 @@ diff_min_line <- function(x) {
     grep("[-\u2500][-\u2500][-\u2500]$", x),
     grep("[=\u2550][=\u2550][=\u2550]$", x)
   )
-  min(c(80, cli:::utf8_nchar(x[lines], "width")))
+  min(c(80, cli::utf8_nchar(x[lines], "width")))
 }
 
 diff_fix_lines <- function(x, w) {
@@ -345,7 +345,7 @@ parse_pkgs_section <- function(lines) {
   hdr <- sub("date (UTC)", "date-(UTC)", fixed = TRUE, lines[1])
   wth <- find_word_lengths(hdr)
   wth[length(wth)] <- max(nchar(lines))
-  df <- read.fwf(textConnection(lines), widths = wth)
+  df <- utils::read.fwf(textConnection(lines), widths = wth)
   df[] <- lapply(df, trimws)
   names(df) <- as.character(df[1,])
   df <- df[-1, , drop = FALSE]

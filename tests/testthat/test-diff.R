@@ -104,7 +104,7 @@ test_that("get_session_info_url", {
 
   mockery::stub(
     get_session_info_url,
-    "download.file",
+    "utils::download.file",
     function(url, destfile, ...) {
       writeLines(html, destfile)
     }
