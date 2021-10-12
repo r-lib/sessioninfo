@@ -159,9 +159,7 @@ emo_hash <- function(x) {
 }
 
 text_hash <- function(x) {
-  if (!is.null(x$hash) && !has_emoji()) {
-    c(paste0(" hash: ", paste(x$hash$emo_text, collapse = ", ")), "")
-  }
+  c(paste0(" hash: ", paste(x$hash$emo_text, collapse = ", ")), "")
 }
 
 #' @export
