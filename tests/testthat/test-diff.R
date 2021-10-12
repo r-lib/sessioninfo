@@ -118,6 +118,13 @@ test_that("get_session_info_url", {
 })
 
 test_that("find_session_info_in_html", {
+  # We skip this on old R, because it does not calculate the width
+  # of the emojis properly, and that messes up the output of the
+  # character vector of lines. We also cannot compare the UTF-8 text
+  # on Windows.
+  if (getRversion() < "4.0") skip("Needs R 4.0 at least")
+  skip_on_os("windows")
+
   html <- readLines(
     gz <- gzfile(test_path("fixtures", "gh.html.gz")),
     encoding = "UTF-8"
