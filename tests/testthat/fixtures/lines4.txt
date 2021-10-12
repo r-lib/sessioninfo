@@ -1,0 +1,47 @@
+- Session info  ------------------------------------------------
+ hash: envelope, right arrow curving down, thumbs up: light skin tone
+
+ setting  value
+ version  R version 4.1.1 (2021-08-10)
+ os       macOS Mojave 10.14.6
+ system   x86_64, darwin17.0
+ ui       X11
+ language (EN)
+ collate  C
+ ctype    en_US.UTF-8
+ tz       Europe/Madrid
+ date     2021-10-12
+ pandoc   2.7.3 @ /usr/local/bin/pandoc
+
+- Packages -----------------------------------------------------
+ ! package      * version    date (UTC) lib source
+   cli            3.0.1.9000 2021-10-11 [1] local
+   covr           3.5.1      2020-09-16 [1] CRAN (R 4.1.0)
+   crayon         1.4.1      2021-02-08 [1] CRAN (R 4.1.0)
+   desc           1.4.0.9000 2021-10-04 [1] local
+   evaluate       0.14       2019-05-28 [1] CRAN (R 4.1.0)
+   glue           1.4.2      2021-10-04 [1] local
+   lazyeval       0.2.2      2019-03-15 [1] CRAN (R 4.1.0)
+   lifecycle      1.0.1      2021-09-24 [1] CRAN (R 4.1.0)
+   magrittr       2.0.1      2020-11-17 [1] CRAN (R 4.1.0)
+   pkgload        1.2.2      2021-09-11 [1] CRAN (R 4.1.0)
+   prettycode     1.1.0      2019-12-16 [1] CRAN (R 4.1.0)
+   prompt         1.0.0      2021-03-02 [1] local
+   ps             1.6.0      2021-02-28 [1] CRAN (R 4.1.0)
+   R6             2.5.1      2021-08-19 [1] CRAN (R 4.1.0)
+   rex            1.2.0      2020-04-21 [1] CRAN (R 4.1.0)
+   rlang          0.4.11     2021-04-30 [1] CRAN (R 4.1.0)
+   rprojroot      2.0.2      2020-11-15 [1] CRAN (R 4.1.0)
+   rstudioapi     0.13       2020-11-12 [1] CRAN (R 4.1.0)
+ P sessioninfo  * 1.1.1.9000 2021-10-12 [?] local
+   testthat     * 3.0.4      2021-07-01 [1] CRAN (R 4.1.0)
+   testthatlabs   0.0.0.9000 2021-09-15 [1] local
+   waldo          0.3.1      2021-09-14 [1] CRAN (R 4.1.0)
+   withr          2.4.2      2021-04-18 [1] CRAN (R 4.1.0)
+
+ [1] /Users/gaborcsardi/Library/R/x86_64/4.1/library
+ [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library
+
+ P -- Loaded and on-disk path mismatch.
+
+----------------------------------------------------------------

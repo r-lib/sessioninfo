@@ -70,8 +70,8 @@ get_session_info <- function(src, name = NULL, ...) {
   si
 }
 
-get_session_info_local <- function() {
-  si <- session_info()
+get_session_info_local <- function(...) {
+  si <- session_info(...)
   old <- options(cli.num_colors = 1)
   on.exit(options(old), add = TRUE)
   list(arg = "local", si = si, text = format(si))
@@ -80,7 +80,7 @@ get_session_info_local <- function() {
 get_session_info_clipboard <- function() {
   cnt <- clipboard_read()
   if (is_string(cnt) && cnt == "clipboard") {
-    si <- cnt
+    si <- list(arg = "clipboard", si = cnt, text = cnt)
   } else {
     si <- get_session_info(cnt)
   }
@@ -92,7 +92,7 @@ get_session_info_url <- function(url) {
   tmp <- tempfile("session-diff-")
   on.exit(unlink(tmp), add = TRUE)
   suppressWarnings(download.file(url, tmp, quiet = TRUE, mode = "wb"))
-  html <- readLines(url, warn = FALSE)
+  html <- readLines(url, warn = FALSE, encoding = "UTF-8")
   find_session_info_in_html(url, html)
 }
 
@@ -209,8 +209,6 @@ session_diff_text <- function(old, new) {
   old <- diff_fix_lines(old, min)
   new <- diff_fix_lines(new, min)
 
-  tryCatch <- function(x, ...) x
-
   # expand thinner package info to match the wider one
   # do not error, in case we cannot parse sessioninfo output
   suppressWarnings(tryCatch({
@@ -227,6 +225,8 @@ session_diff_text <- function(old, new) {
   diff$new <- new
   diff
 }
+
+# drop leading and trailing empty lines
 
 diff_drop_empty <- function(x) {
   len <- length(x)
@@ -245,6 +245,8 @@ diff_drop_empty <- function(x) {
   x
 }
 
+# Drop the first `date` line
+
 diff_no_date <- function(x) {
   date <- grep("^[ ]*date[ ]+[0-9][0-9][0-9][0-9]-", x)
   if (length(date) > 0) {
@@ -252,6 +254,8 @@ diff_no_date <- function(x) {
   }
   x
 }
+
+# Calculate the minimum width of the header lines
 
 diff_min_line <- function(x) {
   lines <- c(
@@ -278,7 +282,7 @@ expand_diff_text <- function(old, new) {
   if (is.null(opkgs) || is.null(opkgs)) return(list(old = old, new = new))
 
   # Add the "!" column if needed
-  if ("!" %in% names(opkgs$pkgs) || "!" %in% names(opkgs$pkgs)) {
+  if ("!" %in% names(opkgs$pkgs) || "!" %in% names(npkgs$pkgs)) {
     if (! "!" %in% names(opkgs$pkgs)) {
       opkgs$pkgs <- cbind("!" = "", opkgs$pkgs)
     }
@@ -288,7 +292,9 @@ expand_diff_text <- function(old, new) {
   }
 
   # If the column names differ, we keep it as is
-  if (any(names(opkgs$pkgs) != names(npkgs$pkgs))) {
+  onms <- names(opkgs$pkgs)
+  nnms <- names(npkgs$pkgs)
+  if (length(onms) != length(nnms) || any(onms != nnms)) {
     return(list(old = old, new = new))
   }
 
@@ -304,7 +310,6 @@ expand_diff_text <- function(old, new) {
 
   old <- insert_instead(old, opkgs$begin, opkgs$end, fmt_old)
   new <- insert_instead(new, npkgs$begin, npkgs$end, fmt_new)
-  browser()
 
   list(old = old, new = new)
 }
@@ -323,7 +328,7 @@ parse_pkgs <- function(lines) {
 
   # now find the end
   end <- begin + grep(
-    "^\\s*[a-zA-Z]",
+    "^\\s*[!a-zA-Z]",
     lines[begin:length(lines)],
     invert = TRUE,
     perl = TRUE
@@ -338,21 +343,35 @@ parse_pkgs <- function(lines) {
 parse_pkgs_section <- function(lines) {
   lines[1] <- sub(" date  ", " date (UTC) ", fixed = TRUE, lines[1])
   hdr <- sub("date (UTC)", "date-(UTC)", fixed = TRUE, lines[1])
-  wth <- find_words(hdr)
+  wth <- find_word_lengths(hdr)
   wth[length(wth)] <- max(nchar(lines))
   df <- read.fwf(textConnection(lines), widths = wth)
   df[] <- lapply(df, trimws)
   names(df) <- as.character(df[1,])
   df <- df[-1, , drop = FALSE]
+  rownames(df) <- NULL
   df
 }
 
-find_words <- function(x) {
-  tmp <- paste0(gsub("[^\\s]", "X", x, perl = TRUE), " ")
+find_word_lengths <- function(x) {
+  # add a dummy word to the end for simplicity
+  tmp <- paste0(gsub("[^\\s]", "X", x, perl = TRUE), " X")
+
+  # word & ws lengths, but first absorb leading space into the first word
   ltr <- strsplit(tmp, "")[[1]]
   rl <- rle(ltr)
-  pos <- cumsum(rl$length)
-  diff(pos[which(rl$values == " ")])
+  if (ltr[1] == " ") {
+    rl$lengths[2] <- rl$lengths[2] + rl$lengths[1]
+    rl$lengths <- rl$lengths[-1]
+    rl$values <- rl$values[-1]
+  }
+
+  # positions of "X" and " " parts
+  pos <- cumsum(c(1, rl$lengths))
+
+  # lengths of words, this drops the dummy word
+  wpos <- which(rl$values == "X")
+  pos[wpos[-1]] - pos[wpos[-length(wpos)]]
 }
 
 get_symbol_name <- function(x) {
