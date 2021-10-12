@@ -284,10 +284,10 @@ expand_diff_text <- function(old, new) {
   # Add the "!" column if needed
   if ("!" %in% names(opkgs$pkgs) || "!" %in% names(npkgs$pkgs)) {
     if (! "!" %in% names(opkgs$pkgs)) {
-      opkgs$pkgs <- cbind("!" = "", opkgs$pkgs)
+      opkgs$pkgs <- cbind("!" = "", opkgs$pkgs, stringsAsFactors = FALSE)
     }
     if (! "!" %in% names(npkgs$pkgs)) {
-      npkgs$pkgs <- cbind("!" = "", npkgs$pkgs)
+      npkgs$pkgs <- cbind("!" = "", npkgs$pkgs, stringsAsFactors = FALSE)
     }
   }
 
