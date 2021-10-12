@@ -1,6 +1,50 @@
 
 # dev
 
+* New function `external_info()`, information about external software.
+  It can be also requested with the new `info` argument of
+  `session_info()` (@llrs).
+
+* New function `python_info()`, information about Python configuration.
+  It is automatically included in `session_info()` if the reticulate
+  package is loaded and Python is available. You can also request it
+  manually via the new `info` argument of `session_info()` (#33).
+
+* The output of `session_info()` now has an emoji hash, consisting of
+  three emojis. This allows quick comparison of two session infos (#26).
+
+* All `*_info()` functions use ANSI colors on systems that support them.
+  In particular, it highlights unusual package versions and sources,
+  and possible package problems (#3).
+
+* New `session_diff()` function, to compare two session infos from
+  various sources (#6).
+
+* `session_info()` has a new argument named `info`, to select which parts
+  of the session information should be printed.
+
+* `session_info()` now has a `to_file` argument, to write the output to a
+  file (#30).
+
+* `session_inf()` has a `dependencies` argument now, and passes it to
+  `package_info()`.
+
+* `package_info()` and `session_info()` can now list the attached or
+  installed packages, see the `pkgs` argument in the manual for
+  details (#42).
+
+* `platform_info()` and `session_info()` now include the Windows build
+  number in the output (#40).
+
+* sessioninfo now never wraps the output if the screen is too narrow (#31).
+
+* All `*_info()` functions have a `format()` S3 method now.
+
+* `platform_info()` and `session_info()` now include the RStudio version if
+  the R session is in RStudio (#29).
+
+* The `source` column of the package list is now more informative.
+
 # 1.1.1
 
 * `package_info()` and `session_info()` now detect locally installed packages 
