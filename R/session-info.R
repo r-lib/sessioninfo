@@ -126,7 +126,8 @@ format.session_info <- function(x, ...) {
     },
     if ("python" %in% names(x)) {
       c(rule("Python configuration"), format(x$python), "")
-    }
+    },
+    rule()
   )
 }
 
