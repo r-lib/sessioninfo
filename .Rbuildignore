@@ -7,3 +7,6 @@
 ^revdep$
 ^\.github$
 ^dev[-]lib$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -1,0 +1,36 @@
+url: https://r-lib.github.io/sessioninfo
+
+destination: docs
+
+development:
+  mode: auto
+
+navbar:
+  type: default
+  left:
+  - text: Intro
+    href: articles/introduction.html
+  - text: Reference
+    href: reference/index.html
+  - text: News
+    href: news/index.html
+
+reference:
+- title: Session information
+  contents:
+  - session_info
+
+- title: Advanced session information
+  contents:
+  - external_info
+  - package_info
+  - platform_info
+  - python_info
+
+- title: Comparing sessions
+  contents:
+  - session_diff
+
+- title: Utility functions
+  contents:
+  - os_name
