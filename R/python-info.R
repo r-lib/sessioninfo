@@ -48,6 +48,8 @@ format.python_info <- function(x, ...) {
 #' @export
 
 as.character.python_info <- function(x, ...) {
+  old <- options(cli.num_colors = 1)
+  on.exit(options(old), add = TRUE)
   format(x, ...)
 }
 
