@@ -50,7 +50,7 @@ format_df <- function(x, highlighters = NULL) {
   }
 
   # remove trailing space, to avoid superfluous wrapping
-  trimws(do.call("paste", c("", cols)), "right")
+  cli::ansi_trimws(do.call("paste", c("", cols)), "right")
 }
 
 highlight_version <- function(x) {
