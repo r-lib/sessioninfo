@@ -33,7 +33,7 @@ BugReports: https://github.com/r-lib/sessioninfo/issues
 Depends: 
     R (>= 2.10)
 Imports:
-    cli,
+    cli (>= 3.0.1.9000),
     tools,
     utils
 Suggests:
