@@ -136,7 +136,11 @@ pkg_source <- function(desc) {
     if (!is.null(desc$RemoteUsername) && (!is.null(desc$RemoteRepo))) {
       user_repo <- paste0(desc$RemoteUsername, "/", desc$RemoteRepo)
     } else {
-      user_repo <- NULL
+      if (!is.null(desc$RemoteUrl)) {
+        user_repo <- desc$RemoteUrl
+      } else {
+        user_repo <- NULL
+      }
     }
 
     if (!is.null(desc$RemoteSha)) {
