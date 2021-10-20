@@ -42,9 +42,9 @@
 #' package_info("sessioninfo")
 
 package_info <- function(
-    pkgs = c("!loaded", "!attached", "!installed")[1],
-    include_base = FALSE,
-    dependencies = NA) {
+  pkgs = c("!loaded", "!attached", "!installed")[1],
+  include_base = FALSE,
+  dependencies = NA) {
 
   if (is.null(pkgs)) pkgs <- "!loaded"
   if (identical(pkgs, "!loaded")) {
@@ -135,12 +135,10 @@ pkg_source <- function(desc) {
     # RemoteUsername and RemoteRepo should always be present together
     if (!is.null(desc$RemoteUsername) && (!is.null(desc$RemoteRepo))) {
       user_repo <- paste0(desc$RemoteUsername, "/", desc$RemoteRepo)
+    } else if (!is.null(desc$RemoteUrl)) {
+      user_repo <- desc$RemoteUrl
     } else {
-      if (!is.null(desc$RemoteUrl)) {
-        user_repo <- desc$RemoteUrl
-      } else {
-        user_repo <- NULL
-      }
+      user_repo <- NULL
     }
 
     if (!is.null(desc$RemoteSha)) {
@@ -239,7 +237,7 @@ format.packages_info <- function(x, ...) {
   )
 
   badloaded <- package_version(x$loadedversion, strict = FALSE) !=
-               package_version(x$ondiskversion, strict = FALSE)
+    package_version(x$ondiskversion, strict = FALSE)
   badloaded <- !is.na(badloaded) & badloaded
 
   px$source <- ifelse(
