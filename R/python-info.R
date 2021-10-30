@@ -16,7 +16,7 @@ should_show_python <- function(pkgs) {
 #' it does not have a `py_config` class.
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' python_info()
 #' session_info(info = "all")
 

@@ -45,7 +45,7 @@
 #' use `(session_info(to_file = TRUE))`.)
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' session_info()
 #' session_info("sessioninfo")
 

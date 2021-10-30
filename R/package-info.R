@@ -37,7 +37,7 @@
 #' by `package_info` (as opposed to the *returned* columns).
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' package_info()
 #' package_info("sessioninfo")
 

@@ -58,6 +58,8 @@ by \code{package_info} (as opposed to the \emph{returned} columns).
 Information about the currently loaded packages, or about a chosen set
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 package_info()
 package_info("sessioninfo")
+\dontshow{\}) # examplesIf}
 }

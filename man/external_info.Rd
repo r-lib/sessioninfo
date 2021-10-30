@@ -35,7 +35,9 @@ Note that calling this function will attempt to load the tcltk and
 grDevices packages.
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 external_info()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Similar functions and objects in the base packages:
