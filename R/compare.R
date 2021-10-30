@@ -220,7 +220,7 @@ session_diff_text <- function(old, new) {
   old2 <- gsub("\\s+", " ", old)
   new2 <- gsub("\\s+", " ", new)
 
-  diff <- cli::ediff_chr(old2, new2)
+  diff <- cli::diff_chr(old2, new2)
   diff$old <- old
   diff$new <- new
   diff
