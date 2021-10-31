@@ -1,5 +1,5 @@
 
-# dev
+# 1.2.0
 
 * New function `external_info()`, information about external software.
   It can be also requested with the new `info` argument of
