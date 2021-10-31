@@ -1,4 +1,6 @@
 
+# development version
+
 # 1.2.0
 
 * New function `external_info()`, information about external software.
