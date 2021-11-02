@@ -8,8 +8,9 @@ development:
 navbar:
   type: default
   left:
-  - text: Intro
-    href: articles/introduction.html
+  # TODO: uncomment once this vignette is added
+  #- text: Intro
+  #  href: articles/introduction.html
   - text: Reference
     href: reference/index.html
   - text: News
