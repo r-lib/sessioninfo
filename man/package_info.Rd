@@ -5,7 +5,7 @@
 \title{Information about the currently loaded packages, or about a chosen set}
 \usage{
 package_info(
-  pkgs = c("!loaded", "!attached", "!installed")[1],
+  pkgs = c("loaded", "attached", "installed")[1],
   include_base = FALSE,
   dependencies = NA
 )
@@ -13,9 +13,9 @@ package_info(
 \arguments{
 \item{pkgs}{Which packages to show. It may be:
 \itemize{
-\item \code{NULL} or \code{"!loaded"}: show all loaded packages,
-\item \code{"!attached"}: show all attached packages,
-\item \code{"!installed"}: show all installed packages,
+\item \code{NULL} or \code{"loaded"}: show all loaded packages,
+\item \code{"attached"}: show all attached packages,
+\item \code{"installed"}: show all installed packages,
 \item a character vector of package names. Their (hard) dependencies are
 also shown by default, see the \code{dependencies} argument.
 }}

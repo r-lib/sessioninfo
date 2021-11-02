@@ -5,7 +5,7 @@
 \title{Print session information}
 \usage{
 session_info(
-  pkgs = c("!loaded", "!attached", "!installed")[1],
+  pkgs = c("loaded", "attached", "installed")[1],
   include_base = FALSE,
   info = c("auto", "all", "platform", "packages", "python", "external"),
   dependencies = NA,
@@ -15,9 +15,9 @@ session_info(
 \arguments{
 \item{pkgs}{Which packages to show. It may be:
 \itemize{
-\item \code{NULL} or \code{"!loaded"}: show all loaded packages,
-\item \code{"!attached"}: show all attached packages,
-\item \code{"!installed"}: show all installed packages,
+\item \code{NULL} or \code{"loaded"}: show all loaded packages,
+\item \code{"attached"}: show all attached packages,
+\item \code{"installed"}: show all installed packages,
 \item a character vector of package names. Their (hard) dependencies are
 also shown by default, see the \code{dependencies} argument.
 }}

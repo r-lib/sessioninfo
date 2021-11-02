@@ -50,7 +50,7 @@
 #' session_info("sessioninfo")
 
 session_info <- function(
-    pkgs = c("!loaded", "!attached", "!installed")[1],
+    pkgs = c("loaded", "attached", "installed")[1],
     include_base = FALSE,
     info = c("auto", "all", "platform", "packages", "python", "external"),
     dependencies = NA,
