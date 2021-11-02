@@ -118,7 +118,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>package_info</span><span class='op'>(</span>
-  pkgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"!loaded"</span>, <span class='st'>"!attached"</span>, <span class='st'>"!installed"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
+  pkgs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"loaded"</span>, <span class='st'>"attached"</span>, <span class='st'>"installed"</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>,
   include_base <span class='op'>=</span> <span class='cn'>FALSE</span>,
   dependencies <span class='op'>=</span> <span class='cn'>NA</span>
 <span class='op'>)</span></pre>
@@ -129,9 +129,9 @@
     <tr>
       <th>pkgs</th>
       <td><p>Which packages to show. It may be:</p><ul>
-<li><p><code>NULL</code> or <code>"!loaded"</code>: show all loaded packages,</p></li>
-<li><p><code>"!attached"</code>: show all attached packages,</p></li>
-<li><p><code>"!installed"</code>: show all installed packages,</p></li>
+<li><p><code>NULL</code> or <code>"loaded"</code>: show all loaded packages,</p></li>
+<li><p><code>"attached"</code>: show all attached packages,</p></li>
+<li><p><code>"installed"</code>: show all installed packages,</p></li>
 <li><p>a character vector of package names. Their (hard) dependencies are
 also shown by default, see the <code>dependencies</code> argument.</p></li>
 </ul></td>
