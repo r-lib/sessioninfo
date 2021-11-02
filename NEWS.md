@@ -1,5 +1,5 @@
 
-# development version
+# 1.2.1
 
 * `package_info()` and `session_info()` now do not fail if the version
   number of an installed package is invalid.
