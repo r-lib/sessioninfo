@@ -54,7 +54,8 @@ format_df <- function(x, highlighters = NULL) {
 }
 
 highlight_version <- function(x) {
-  ver <- package_version(trimws(x))
+  ver <- tryCatch(package_version(trimws(x)), error = function(err) NULL)
+  if (is.null(ver)) return(x)
   large <- vapply(ver, function(x) any(unlist(x) >= 1234), logical(1))
   x[large] <- cli::style_bold(cli::col_magenta(x[large]))
   x
