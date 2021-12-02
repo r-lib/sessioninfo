@@ -33,7 +33,7 @@ BugReports: https://github.com/r-lib/sessioninfo/issues
 Depends: 
     R (>= 2.10)
 Imports:
-    cli (>= 3.0.1.9000),
+    cli (>= 3.1.0),
     tools,
     utils
 Suggests:
@@ -44,9 +44,8 @@ Suggests:
     rmarkdown,
     testthat,
     withr
-Remotes:
-    r-lib/cli
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2.9000
 Config/testthat/edition: 3
+Config/Needs/website: pkgdown
