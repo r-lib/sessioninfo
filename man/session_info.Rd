@@ -9,7 +9,8 @@ session_info(
   include_base = FALSE,
   info = c("auto", "all", "platform", "packages", "python", "external"),
   dependencies = NA,
-  to_file = FALSE
+  to_file = FALSE,
+  full_sha = FALSE
 )
 }
 \arguments{
@@ -42,6 +43,9 @@ as well. See the \code{dependencies} argument of \code{\link[utils:install.packa
 \item{to_file}{Whether to print the session information to a file.
 If \code{TRUE} the name of the file will be \code{session-info.txt}, but
 \code{to_file} may also be a string to specify the file name.}
+
+\item{full_sha}{Whether the full SHA for GitHub/Git repositories should
+be returned (\code{TRUE}), as opposed to the first 7 elements (default: \code{FALSE})}
 }
 \value{
 A \code{session_info} object.

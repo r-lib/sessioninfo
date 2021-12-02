@@ -35,6 +35,8 @@
 #'
 #' See [session_info()] for the description of the *printed* columns
 #' by `package_info` (as opposed to the *returned* columns).
+#' @param full_sha Whether the full SHA for GitHub/Git repositories should
+#'   be returned (`TRUE`), as opposed to the first 7 elements (default: `FALSE`)
 #'
 #' @export
 #' @examples
@@ -44,7 +46,8 @@
 package_info <- function(
   pkgs = c("!loaded", "!attached", "!installed")[1],
   include_base = FALSE,
-  dependencies = NA) {
+  dependencies = NA,
+  full_sha = FALSE) {
 
   if (is.null(pkgs)) pkgs <- "!loaded"
   if (identical(pkgs, "!loaded")) {
@@ -67,7 +70,7 @@ package_info <- function(
   )
 
   pkgs$date <- vapply(desc, pkg_date, character(1))
-  pkgs$source <- vapply(desc, pkg_source, character(1))
+  pkgs$source <- vapply(desc, pkg_source, character(1), full_sha = full_sha)
   pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
   libpath <- pkg_lib_paths()
@@ -146,7 +149,7 @@ pkg_source <- function(desc, full_sha = FALSE) {
 
     if (!is.null(desc$RemoteSha)) {
       # related to https://github.com/r-lib/remotes/issues/674
-      sha <- desc$GithubSHA1
+      sha <- desc$RemoteSha
       if (!full_sha) sha <- substr(sha, 1, 7)
       sha <- paste0("@", sha)
     } else {

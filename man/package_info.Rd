@@ -7,7 +7,8 @@
 package_info(
   pkgs = c("!loaded", "!attached", "!installed")[1],
   include_base = FALSE,
-  dependencies = NA
+  dependencies = NA,
+  full_sha = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,9 @@ false since base packages should always match the R version.}
 
 \item{dependencies}{Whether to include the (recursive) dependencies
 as well. See the \code{dependencies} argument of \code{\link[utils:install.packages]{utils::install.packages()}}.}
+
+\item{full_sha}{Whether the full SHA for GitHub/Git repositories should
+be returned (\code{TRUE}), as opposed to the first 7 elements (default: \code{FALSE})}
 }
 \value{
 A data frame with columns:

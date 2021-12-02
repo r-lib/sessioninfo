@@ -54,7 +54,8 @@ session_info <- function(
     include_base = FALSE,
     info = c("auto", "all", "platform", "packages", "python", "external"),
     dependencies = NA,
-    to_file = FALSE) {
+    to_file = FALSE,
+    full_sha = FALSE) {
 
   if (missing(info)) info <- "auto"
   choices <- c("platform", "packages", "python", "external")
@@ -81,7 +82,8 @@ session_info <- function(
         package_info(
           pkgs,
           include_base = include_base,
-          dependencies = dependencies
+          dependencies = dependencies,
+          full_sha = full_sha
         )
       },
       external = if ("external" %in% info) external_info(),
