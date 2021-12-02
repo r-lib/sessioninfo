@@ -106,15 +106,18 @@ pkg_date <- function (desc) {
   as.character(as.Date(strptime(date, "%Y-%m-%d")))
 }
 
-pkg_source <- function(desc) {
+pkg_source <- function(desc, full_sha = FALSE) {
 
   if (is.null(desc)) {
     NA_character_
   } else if (!is.null(desc$GithubSHA1)) {
+    # related to https://github.com/r-lib/remotes/issues/674
+    sha <- desc$GithubSHA1
+    if (!full_sha) sha <- substr(sha, 1, 7)
     str <- paste0("Github (",
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
-                  substr(desc$GithubSHA1, 1, 7), ")")
+                  sha, ")")
   } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
     if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
       pkg_source_cran(desc)
@@ -142,7 +145,10 @@ pkg_source <- function(desc) {
     }
 
     if (!is.null(desc$RemoteSha)) {
-      sha <- paste0("@", substr(desc$RemoteSha, 1, 7))
+      # related to https://github.com/r-lib/remotes/issues/674
+      sha <- desc$GithubSHA1
+      if (!full_sha) sha <- substr(sha, 1, 7)
+      sha <- paste0("@", sha)
     } else {
       sha <- NULL
     }
