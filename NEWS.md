@@ -1,6 +1,10 @@
 
 # development version
 
+* RStudio Package Manager (RSPM) and other repository sources are
+  now shown in the `source` column, if they set the `Repository`
+  field in `DESCRIPTION`.
+
 # 1.2.1
 
 * `package_info()` and `session_info()` now do not fail if the version

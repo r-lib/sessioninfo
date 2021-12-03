@@ -118,6 +118,8 @@ pkg_source <- function(desc) {
   } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
     if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
       pkg_source_cran(desc)
+    } else if (!is.null(desc$Repository)) {
+      str_trim(desc$Repository, 10)
     } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
       "Bioconductor"
     } else {
