@@ -28,7 +28,9 @@ variable, if set, or \code{(EN)} if unset.
 Information about the current platform
 }
 \examples{
+\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 platform_info()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Similar functions and objects in the base packages:

@@ -2,9 +2,9 @@
 #' Information about the currently loaded packages, or about a chosen set
 #'
 #' @param pkgs Which packages to show. It may be:
-#'   * `NULL` or `"!loaded"`: show all loaded packages,
-#'   * `"!attached"`: show all attached packages,
-#'   * `"!installed"`: show all installed packages,
+#'   * `NULL` or `"loaded"`: show all loaded packages,
+#'   * `"attached"`: show all attached packages,
+#'   * `"installed"`: show all installed packages,
 #'   * a character vector of package names. Their (hard) dependencies are
 #'     also shown by default, see the `dependencies` argument.
 #' @param include_base Include base packages in summary? By default this is
@@ -39,24 +39,24 @@
 #'   be returned (`TRUE`), as opposed to the first 7 elements (default: `FALSE`)
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' package_info()
 #' package_info("sessioninfo")
 
 package_info <- function(
-  pkgs = c("!loaded", "!attached", "!installed")[1],
+  pkgs = c("loaded", "attached", "installed")[1],
   include_base = FALSE,
   dependencies = NA,
   full_sha = FALSE) {
 
-  if (is.null(pkgs)) pkgs <- "!loaded"
-  if (identical(pkgs, "!loaded")) {
+  if (is.null(pkgs)) pkgs <- "loaded"
+  if (identical(pkgs, "!loaded") || identical(pkgs, "loaded")) {
     pkgs <- loaded_packages()
 
-  } else if (identical(pkgs, "!attached")) {
+  } else if (identical(pkgs, "!attached") || identical(pkgs, "attached")) {
     pkgs <- attached_packages()
 
-  } else if (identical(pkgs, "!installed")) {
+  } else if (identical(pkgs, "!installed") || identical(pkgs, "installed")) {
     pkgs <- installed_packages()
 
   } else {
@@ -124,6 +124,8 @@ pkg_source <- function(desc, full_sha = FALSE) {
   } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
     if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
       pkg_source_cran(desc)
+    } else if (!is.null(desc$Repository)) {
+      str_trim(desc$Repository, 10)
     } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
       "Bioconductor"
     } else {

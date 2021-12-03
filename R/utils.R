@@ -37,3 +37,12 @@ last <- function(x) {
 empty <- function(x) {
   grepl("^\\s*$", x)
 }
+
+str_trim <- function(x, width) {
+  stopifnot(width >= 2)
+  if (nchar(x) <= width) {
+    x
+  } else {
+    paste0(substr(x, 1, width - 1), "~")
+  }
+}

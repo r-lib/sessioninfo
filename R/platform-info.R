@@ -21,7 +21,7 @@
 #'   [base::.Platform], [base::Sys.getlocale()], [base::Sys.timezone()].
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' platform_info()
 
 platform_info <- function() {

@@ -29,7 +29,7 @@
 #'   [base::La_library], [base::La_version()], [base::libcurlVersion()].
 #'
 #' @export
-#' @examples
+#' @examplesIf FALSE
 #' external_info()
 
 external_info <- function() {

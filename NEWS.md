@@ -1,5 +1,19 @@
 
-# dev
+# development version
+
+* RStudio Package Manager (RSPM) and other repository sources are
+  now shown in the `source` column, if they set the `Repository`
+  field in `DESCRIPTION`.
+
+# 1.2.1
+
+* `package_info()` and `session_info()` now do not fail if the version
+  number of an installed package is invalid.
+
+* Better aliases for the list of attached, loaded and installed packages
+  in `package_inf()` and `session_info()`.
+
+# 1.2.0
 
 * New function `external_info()`, information about external software.
   It can be also requested with the new `info` argument of
