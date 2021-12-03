@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -49,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/r-lib/sessioninfo/">
+  <a href="https://github.com/r-lib/sessioninfo/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -66,18 +68,18 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="sessioninfo" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#sessioninfo" class="anchor"></a>sessioninfo</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="sessioninfo">sessioninfo<a class="anchor" aria-label="anchor" href="#sessioninfo"></a>
+</h1></div>
 <blockquote>
 <p>R Session Information</p>
 </blockquote>
 <!-- badges: start -->
-<p><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg" alt="Lifecycle: stable"></a> <a href="https://github.com/r-lib/sessioninfo/actions"><img src="https://github.com/r-lib/sessioninfo/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://www.r-pkg.org/pkg/sessioninfo"><img src="https://www.r-pkg.org/badges/version/sessioninfo"></a> <a href="https://www.r-pkg.org/pkg/sessioninfo"><img src="https://cranlogs.r-pkg.org/badges/sessioninfo" alt="CRAN RStudio mirror downloads"></a> <a href="https://codecov.io/github/r-lib/sessioninfo?branch=master"><img src="https://img.shields.io/codecov/c/github/r-lib/sessioninfo/master.svg" alt="Coverage Status"></a> <!-- badges: end --></p>
-<p>Query and print information about the current R session. It is similar to <code><a href="https://rdrr.io/r/utils/sessionInfo.html">utils::sessionInfo()</a></code>, but includes more information about packages, and where they were installed from.</p>
-<div id="differences-from-utilssessioninfo" class="section level2">
-<h2 class="hasAnchor">
-<a href="#differences-from-utilssessioninfo" class="anchor"></a>Differences from <code>utils::sessionInfo()</code>
+
+<p>Query and print information about the current R session. It is similar to <code><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">utils::sessionInfo()</a></code>, but includes more information about packages, and where they were installed from.</p>
+<div class="section level2">
+<h2 id="differences-from-utilssessioninfo">Differences from <code>utils::sessionInfo()</code>
+<a class="anchor" aria-label="anchor" href="#differences-from-utilssessioninfo"></a>
 </h2>
 <ul>
 <li>Additional platform details: time zone, pandoc version, RStudio version, etc.</li>
@@ -92,37 +94,37 @@
 <li>Option to show loaded (default), attached or installed packages, or the recursive dependencies of the specified packages.</li>
 </ul>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"sessioninfo"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"sessioninfo"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>Example output:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/620d140018fd85c7116517d2c3ab1062f3b356f7/man/figures/session-info.svg"></p>
-<div id="copying-to-the-clipboard" class="section level3">
-<h3 class="hasAnchor">
-<a href="#copying-to-the-clipboard" class="anchor"></a>Copying to the clipboard</h3>
-<p>You can use the <a href="https://cran.r-project.org/package=clipr"><code>clipr</code> package</a> to copy the session info to the clipboard:</p>
+<p><img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/620d140018fd85c7116517d2c3ab1062f3b356f7/reference/figures/session-info.svg"></p>
+<div class="section level3">
+<h3 id="copying-to-the-clipboard">Copying to the clipboard<a class="anchor" aria-label="anchor" href="#copying-to-the-clipboard"></a>
+</h3>
+<p>You can use the <a href="https://cran.r-project.org/package=clipr" class="external-link"><code>clipr</code> package</a> to copy the session info to the clipboard:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">clipr</span><span class="fu">::</span><span class="fu">write_clip</span><span class="op">(</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>(The current <code>clipr</code> version prints a warning, but you can ignore that.)</p>
 </div>
-<div id="writing-to-a-file" class="section level3">
-<h3 class="hasAnchor">
-<a href="#writing-to-a-file" class="anchor"></a>Writing to a file</h3>
+<div class="section level3">
+<h3 id="writing-to-a-file">Writing to a file<a class="anchor" aria-label="anchor" href="#writing-to-a-file"></a>
+</h3>
 <p>You can use the <code>to_file</code> argument of <code><a href="reference/session_info.html">session_info()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>to_file <span class="op">=</span> <span class="st">"session.log"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="external-software" class="section level3">
-<h3 class="hasAnchor">
-<a href="#external-software" class="anchor"></a>External software</h3>
+<div class="section level3">
+<h3 id="external-software">External software<a class="anchor" aria-label="anchor" href="#external-software"></a>
+</h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>info <span class="op">=</span> <span class="st">"external"</span><span class="op">)</span></code></pre></div>
 <pre><code>═ Session info  😶  🛬  🔚   ═════════════════════════════════════════════════
@@ -152,9 +154,9 @@
 
 ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
-<div id="python-configuration" class="section level3">
-<h3 class="hasAnchor">
-<a href="#python-configuration" class="anchor"></a>Python configuration</h3>
+<div class="section level3">
+<h3 id="python-configuration">Python configuration<a class="anchor" aria-label="anchor" href="#python-configuration"></a>
+</h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>info <span class="op">=</span> <span class="st">"python"</span><span class="op">)</span></code></pre></div>
 <pre><code>═ Session info  👩🏽‍🤝‍👨🏿  🇲🇩 👩🏿‍🎤   ═════════════════════════════════════════════════
@@ -170,9 +172,9 @@
 
 ──────────────────────────────────────────────────────────────────────────────</code></pre>
 </div>
-<div id="comparing-session-information" class="section level3">
-<h3 class="hasAnchor">
-<a href="#comparing-session-information" class="anchor"></a>Comparing session information</h3>
+<div class="section level3">
+<h3 id="comparing-session-information">Comparing session information<a class="anchor" aria-label="anchor" href="#comparing-session-information"></a>
+</h3>
 <p><code><a href="reference/session_diff.html">session_diff()</a></code> can retrieve the session info from an URL or the clipboard and compare it to the current session information:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_diff.html">session_diff</a></span><span class="op">(</span>new <span class="op">=</span> <span class="st">"https://github.com/r-lib/sessioninfo/issues/6"</span><span class="op">)</span></code></pre></div>
@@ -256,9 +258,9 @@
 <span id="cb10-78"><a href="#cb10-78"></a>  [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></code></pre></div>
 </div>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <p>GPL-2</p>
 </div>
 </div>
@@ -266,33 +268,51 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=sessioninfo">https://​cloud.r-project.org/​package=sessioninfo</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/r-lib/sessioninfo/">https://​github.com/​r-lib/​sessioninfo/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/r-lib/sessioninfo/issues">https://​github.com/​r-lib/​sessioninfo/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=sessioninfo" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/r-lib/sessioninfo/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/r-lib/sessioninfo/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing sessioninfo</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Gábor Csárdi <br><small class="roles"> Maintainer </small>  </li>
 <li>
-<a href="http://hadley.nz">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
+<a href="http://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>  </li>
 <li>Winston Chang <br><small class="roles"> Author </small>  </li>
 <li>Robert Flight <br><small class="roles"> Author </small>  </li>
 <li>Kirill Müller <br><small class="roles"> Author </small>  </li>
 <li>Jim Hester <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg" alt="Lifecycle: stable"></a></li>
+<li><a href="https://github.com/r-lib/sessioninfo/actions" class="external-link"><img src="https://github.com/r-lib/sessioninfo/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/sessioninfo" class="external-link"><img src="https://www.r-pkg.org/badges/version/sessioninfo"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/sessioninfo" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/sessioninfo" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://codecov.io/github/r-lib/sessioninfo?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/r-lib/sessioninfo/master.svg" alt="Coverage Status"></a></li>
 </ul>
 </div>
 
@@ -301,11 +321,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Gábor Csárdi, <a href="http://hadley.nz">Hadley Wickham</a>, Winston Chang, Robert Flight, Kirill Müller, Jim Hester.</p>
+  <p></p>
+<p>Developed by Gábor Csárdi, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, Winston Chang, Robert Flight, Kirill Müller, Jim Hester.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -313,6 +335,8 @@
 
   
 
+
+  
 
   </body>
 </html>
