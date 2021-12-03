@@ -114,7 +114,7 @@ pkg_source <- function(desc) {
     str <- paste0("Github (",
                   desc$GithubUsername, "/",
                   desc$GithubRepo, "@",
-                  substr(desc$GithubSHA1, 1, 7), ")")
+                  desc$GithubSHA1, ")")
   } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
     if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
       pkg_source_cran(desc)
@@ -144,7 +144,7 @@ pkg_source <- function(desc) {
     }
 
     if (!is.null(desc$RemoteSha)) {
-      sha <- paste0("@", substr(desc$RemoteSha, 1, 7))
+      sha <- paste0("@", desc$RemoteSha)
     } else {
       sha <- NULL
     }
@@ -220,6 +220,27 @@ pkg_md5_disk <- function(pkgdir) {
   order_by_name(structure(unname(md5_files), names = tolower(dll_files)))
 }
 
+subset_sha_source <- function(x) {
+  src <- x$source
+  sha_regex <- ".*/(.*@.*)\\)"
+  has_sha <- grepl(sha_regex, src)
+  src <- src[has_sha]
+  if (any(has_sha)) {
+    sub_src <- sub(sha_regex, "\\1", src)
+    sha <- sub(".*@", "", sub_src)
+    sha <- substr(sha, 1, 7)
+    sha <- mapply(function(orig, replacement) {
+      sub("@(.*)", paste0("@", replacement), x = orig)
+    }, sub_src, sha)
+    src <- mapply(function(orig, replacement) {
+      sub("(.*)/(.*@.*)\\)", paste0("\\1", "/", replacement, ")"), x = orig)
+    }, src, sha)
+    src <- unname(src)
+    x$source[has_sha] <- src
+  }
+  x
+}
+
 #' @export
 
 format.packages_info <- function(x, ...) {
@@ -227,6 +248,8 @@ format.packages_info <- function(x, ...) {
   unloaded <- is.na(x$loadedversion)
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
 
+  # Fix opposed to https://github.com/r-lib/sessioninfo/pull/59
+  x <- subset_sha_source(x)
   px <- data.frame(
     package      = x$package,
     "*"          = ifelse(x$attached, "*", ""),
