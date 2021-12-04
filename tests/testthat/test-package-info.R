@@ -51,7 +51,7 @@ test_that("pkg_source", {
 
   expect_identical(
     pkg_source(descs$debugme),
-    "Github (gaborcsardi/debugme@df8295a)"
+    "Github (gaborcsardi/debugme@df8295a75f8e26bec90386beb1c82b529427029f)"
   )
 
   expect_identical(pkg_source(descs$curl), "CRAN (R 3.3.3)")
