@@ -29,7 +29,6 @@ where they were installed from.
 * Information about the Python configuration is the reticulate package is
   loaded and configured.
 * Information about package libraries.
-* Emoji hash to be able to quickly tell if two sessions are equivalent.
 * Compare two session info outputs with the `session_diff()` function.
 * Option to show loaded (default), attached or installed packages, or
   the recursive dependencies of the specified packages.
@@ -77,9 +76,7 @@ sessioninfo::session_info(info = "external")
 ```
 
 ```
-═ Session info  😶  🛬  🔚   ═════════════════════════════════════════════════
- hash: face without mouth, airplane arrival, END arrow
-
+═ Session info ═══════════════════════════════════════════════════════════════
 ─ External software ──────────────────────────────────────────────────────────
  setting        value
  cairo          1.14.12
@@ -112,9 +109,7 @@ sessioninfo::session_info(info = "python")
 ```
 
 ```
-═ Session info  👩🏽‍🤝‍👨🏿  🇲🇩 👩🏿‍🎤   ═════════════════════════════════════════════════
- hash: woman and man holding hands: medium skin tone, dark skin tone, flag: Moldova, woman singer: dark skin tone
-
+═ Session info ═══════════════════════════════════════════════════════════════
 ─ Python configuration ───────────────────────────────────────────────────────
  python:         /Users/gaborcsardi/Library/r-miniconda/envs/r-reticulate/bin/python
  libpython:      /Users/gaborcsardi/Library/r-miniconda/envs/r-reticulate/lib/libpython3.6m.dylib
@@ -138,10 +133,7 @@ sessioninfo::session_diff(new = "https://github.com/r-lib/sessioninfo/issues/6")
 ```diff
 --- local
 +++ https://github.com/r-lib/sessioninfo/issues/6
--─ Session info  👂🏼  🎺  👡   ───────────────────────────────────────────────────
-- hash: ear: medium-light skin tone, trumpet, woman’s sandal
--
-+─ Session info  🤳🏾  😻  ⚒️   ────────────────────────────────────────────────────
+  Session info ──────────────────────────────────────────────────────────────────
   setting  value
   version  R version 4.1.1 (2021-08-10)
   os       macOS Mojave 10.14.6
