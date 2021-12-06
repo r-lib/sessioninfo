@@ -1,4 +1,6 @@
 
+# development version
+
 # 1.2.2
 
 * This version does not add an emoji hash to the output.
