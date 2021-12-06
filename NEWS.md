@@ -1,6 +1,8 @@
 
 # development version
 
+* This version does not add an emoji hash to the output.
+
 * The `source` column of the output data frame of `package_info()` (also
   part of `session_info()`), now contains the full SHA for packages installed
   from GitHub, instead of only the first seven characters. This makes it

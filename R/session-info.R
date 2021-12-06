@@ -90,8 +90,6 @@ session_info <- function(
     class = c("session_info", "list")
   )
 
-  si <- add_hash(si)
-
   if (is_string(to_file)) {
     old <- options(cli.num_colors = 1)
     on.exit(options(old), add = TRUE)
@@ -109,11 +107,10 @@ format.session_info <- function(x, ...) {
   has_platform <- !is.null(x$platform)
 
   c(if (!"platform" %in% names(x)) {
-      c(rule(paste("Session info", emo_hash(x)), double = TRUE), text_hash(x))
+      rule("Session info", double = TRUE)
     },
     if ("platform" %in% names(x)) {
-      c(rule(paste("Session info", emo_hash(x))),
-        text_hash(x),
+      c(rule(paste("Session info")),
         format(x$platform),
         ""
       )
@@ -149,19 +146,6 @@ has_emoji <- function () {
   } else {
     Sys.info()[["sysname"]] == "Darwin"
   }
-}
-
-emo_hash <- function(x) {
-  if (is.null(x$hash)) return("")
-  if (has_emoji()) {
-    paste0(" ", paste(x$hash$emoji, " ", collapse = ""))
-  } else {
-    ""
-  }
-}
-
-text_hash <- function(x) {
-  c(paste0(" hash: ", paste(x$hash$emo_text, collapse = ", ")), "")
 }
 
 #' @export
