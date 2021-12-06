@@ -47,7 +47,7 @@ Example output:
 sessioninfo::session_info()
 ```
 
-<img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/620d140018fd85c7116517d2c3ab1062f3b356f7/man/figures/session-info.svg">
+<img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/main/man/figures/session-info2.svg">
 
 ### Copying to the clipboard
 
