@@ -1,6 +1,6 @@
 Package: sessioninfo
 Title: R Session Information
-Version: 1.2.1.9000
+Version: 1.2.2
 Authors@R: 
     c(person(given = "Gábor",
              family = "Csárdi",
