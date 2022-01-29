@@ -61,6 +61,8 @@ get_session_info <- function(src, name = NULL, ...) {
     get_session_info_local(...)
   } else if (is_string(src) == 1 && src == "clipboard") {
     get_session_info_clipboard()
+  } else if (is_string(src) && is_gha_url(src)) {
+    get_session_info_gha(src)
   } else if (is_string(src) && grepl("https?://", src)) {
     get_session_info_url(src)
   } else {

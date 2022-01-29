@@ -1,0 +1,74 @@
+# taken from usethis
+# definitely designed for GitHub URLs but not overtly GitHub-specific
+# https://stackoverflow.com/questions/2514859/regular-expression-for-git-repository
+# https://git-scm.com/docs/git-clone#_git_urls
+# https://stackoverflow.com/questions/27745/getting-parts-of-a-url-regex
+github_url_regex <- paste0(
+  "^",
+  "(?<protocol>\\w+://)?",
+  "(?<user>.+@)?",
+  "(?<host>[^/:]+)",
+  "[/:]",
+  "(?<repo_owner>[^/]+)",
+  "/",
+  "(?<repo_name>[^/#]+)",
+  "(?<fragment>.*)",
+  "$"
+)
+
+parse_as_gha_url <- function(url) {
+  res <- re_match(url, github_url_regex)$groups
+  res$job_id <- re_match(res$fragment, "^/runs/(?<job_id>[0-9]+).*")$groups$job_id
+
+  ok <- res$host %in% "github.com" &
+    !is.na(res$repo_owner) & !is.na(res$repo_name) &!is.na(res$job_id)
+
+  data.frame(
+    owner  = ifelse(ok, res$repo_owner, NA_character_),
+    repo   = ifelse(ok, res$repo_name, NA_character_),
+    job_id = ifelse(ok, res$job_id, NA_character_),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+}
+
+is_gha_url <- function(url) {
+  res <- parse_as_gha_url(url)
+  !is.na(res$job_id)
+}
+
+get_session_info_gha <- function(url) {
+  if (!requireNamespace("gh", quietly = TRUE)) {
+    cli::cli_abort(c(
+      "The gh package is not available.",
+      "i" = "This appears to be the URL for a GitHub Actions (GHA) log:",
+      " " = "{.url {url}}",
+      "x" = "The {.pkg gh} package is required to get session info for GHA jobs."
+    ))
+  }
+
+  dat <- parse_as_gha_url(url)
+  meta <- gh::gh(
+    "/repos/{owner}/{repo}/actions/jobs/{job_id}",
+    owner = dat$owner, repo = dat$repo, job_id = dat$job_id
+  )
+  raw_log <- gh::gh(
+    "/repos/{owner}/{repo}/actions/jobs/{job_id}/logs",
+    owner = dat$owner, repo = dat$repo, job_id = dat$job_id
+  )
+  timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n"))
+  lines <- sub("^.+Z ", "", timestamped_lines)
+  start_pos <- grep("##[group]Session info", lines, fixed = TRUE)
+  endgroups <- grep("##[endgroup]", lines, fixed = TRUE)
+  end_pos <- min(endgroups[endgroups > start_pos])
+  si <- get_session_info_literal(lines[(start_pos + 1):(end_pos - 1)])
+  si$arg <- "github-actions"
+  si$name <- paste(
+    meta$name,
+    meta$conclusion,
+    paste("job", meta$id),
+    paste("run", meta$run_id),
+    sep = " | "
+  )
+  si
+}

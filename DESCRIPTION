@@ -39,6 +39,7 @@ Imports:
 Suggests:
     callr,
     covr,
+    gh,
     mockery,
     reticulate,
     rmarkdown,
