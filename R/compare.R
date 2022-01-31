@@ -30,7 +30,10 @@
 #' @examplesIf FALSE
 #' session_diff()
 
-session_diff <- function(old = "local", new = "clipboard", ...) {
+session_diff <- function(old = "local", new = "clipboard",
+                         packages = c("diff", "merge"), ...) {
+
+  packages <- match.arg(packages)
 
   oldname <- get_symbol_name(substitute(old))
   newname <- get_symbol_name(substitute(new))
@@ -41,7 +44,7 @@ session_diff <- function(old = "local", new = "clipboard", ...) {
   ret <- list(
     old = old,
     new = new,
-    diff = session_diff_text(old$text, new$text)
+    diff = session_diff_text(old$text, new$text, packages)
   )
 
   class(ret) <- c("session_diff", "list")
@@ -205,7 +208,9 @@ beginning <- function(x) {
   trimws(substr(paste0(x123, sep = "\n"), 1, 100))
 }
 
-session_diff_text <- function(old, new) {
+session_diff_text <- function(old, new, packages = c("diff", "merge")) {
+  packages <- match.arg(packages)
+
   old <- enc2utf8(old)
   new <- enc2utf8(new)
 
@@ -219,10 +224,16 @@ session_diff_text <- function(old, new) {
   old <- diff_fix_lines(old, min)
   new <- diff_fix_lines(new, min)
 
-  # expand thinner package info to match the wider one
+  package_fixup_fun <- switch(
+    packages,
+    # expands package info with fewer columns to match one with more
+    diff = expand_diff_text,
+    # full-joins package info to concentrate each diff in a single row
+    merge = merge_packages
+  )
   # do not error, in case we cannot parse sessioninfo output
   suppressWarnings(tryCatch({
-    exp <- expand_diff_text(old, new)
+    exp <- package_fixup_fun(old, new)
     old <- exp$old
     new <- exp$new
   }, error = function(e) NULL))
@@ -322,6 +333,55 @@ expand_diff_text <- function(old, new) {
   new <- insert_instead(new, npkgs$begin, npkgs$end, fmt_new)
 
   list(old = old, new = new)
+}
+
+merge_packages <- function(old, new) {
+  opkgs <- parse_pkgs(old)
+  npkgs <- parse_pkgs(new)
+
+  if (is.null(opkgs) || is.null(opkgs)) return(list(old = old, new = new))
+
+  names_to_keep <- c("package", "version", "source")
+  opkgs$pkgs <- opkgs$pkgs[names_to_keep]
+  npkgs$pkgs <- npkgs$pkgs[names_to_keep]
+  names(opkgs$pkgs) <- c("package", "old_version", "old_source")
+  names(npkgs$pkgs) <- c("package", "new_version", "new_source")
+
+  merge_res <- merge(opkgs$pkgs, npkgs$pkgs, all = TRUE)
+  merge_res <- with(merge_res,
+       data.frame(
+         package = package,
+         "v!=" = mark(is_different(old_version, new_version)),
+         old_version = old_version,
+         new_version = new_version,
+         "s!=" = mark(is_different(old_source, new_source)),
+         old_source = old_source,
+         new_source = new_source,
+         stringsAsFactors = FALSE,
+         row.names = NULL,
+         check.names = FALSE
+       )
+  )
+
+  oldopts <- options(cli.num_colors = 1)
+  on.exit(options(oldopts), add = TRUE)
+  fmt <- format_df(merge_res)
+
+  old <- insert_instead(old, opkgs$begin, opkgs$end, fmt)
+  new <- insert_instead(new, npkgs$begin, npkgs$end, fmt)
+
+  list(old = old, new = new)
+}
+
+is_different <- function(x, y) {
+  x_na <- is.na(x)
+  y_na <- is.na(y)
+  no_na <- !x_na & !y_na
+  xor(x_na, y_na) | (no_na & (x != y))
+}
+
+mark <- function(x, mark = ">>") {
+  ifelse(x, mark, "")
 }
 
 insert_instead <- function(orig, from, to, new) {
