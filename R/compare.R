@@ -4,6 +4,10 @@
 #' @param old,new A `session_info` object (the return value of
 #' [session_info()]), or a pointer to [session_info()] output. See details
 #' below.
+#' @param packages How to compare the package info for `old` and `new`:
+#' * `"diff"`: line diffs, in the style of `diff -u`
+#' * `"merge"`: merge the information into one data frame, with one row per
+#'   package. Only package `version` and `source` are compared.
 #' @param ... Passed to any new [session_info()] calls.
 #'
 #' @details

@@ -4,12 +4,24 @@
 \alias{session_diff}
 \title{Compare session information from two sources}
 \usage{
-session_diff(old = "local", new = "clipboard", ...)
+session_diff(
+  old = "local",
+  new = "clipboard",
+  packages = c("diff", "merge"),
+  ...
+)
 }
 \arguments{
 \item{old, new}{A \code{session_info} object (the return value of
 \code{\link[=session_info]{session_info()}}), or a pointer to \code{\link[=session_info]{session_info()}} output. See details
 below.}
+
+\item{packages}{How to compare the package info for \code{old} and \code{new}:
+\itemize{
+\item \code{"diff"}: line diffs, in the style of \code{diff -u}
+\item \code{"merge"}: merge the information into one data frame, with one row per
+package. Only package \code{version} and \code{source} are compared.
+}}
 
 \item{...}{Passed to any new \code{\link[=session_info]{session_info()}} calls.}
 }
