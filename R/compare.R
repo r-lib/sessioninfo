@@ -22,7 +22,7 @@
 #' * Any other URL starting with `http://` or `https://`. `session_diff()`
 #'   searches the HTML (or text) page for the session info header to find the
 #'   session info.
-#'   session info.
+#'
 #'
 #' @export
 #' @examplesIf FALSE

@@ -31,7 +31,6 @@ Typically has this form:\preformatted{https://github.com/OWNER/REPO/runs/JOB_ID?
 \item Any other URL starting with \verb{http://} or \verb{https://}. \code{session_diff()}
 searches the HTML (or text) page for the session info header to find the
 session info.
-session info.
 }
 }
 \examples{
