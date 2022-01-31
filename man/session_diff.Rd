@@ -25,9 +25,13 @@ session, and uses its output.
 \item \code{"clipboard"} takes the session info from the system clipboard.
 If the clipboard contains a URL, it is followed to download the
 session info.
-\item A URL starting with \verb{http://} or \verb{https://}. \code{session_diff} searches
-the HTML (or text) page for the session info header to find the session
-info.
+\item The URL where you inspect the results for a GitHub Actions job.
+Typically has this form:\preformatted{https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
+}
+\item Any other URL starting with \verb{http://} or \verb{https://}. \code{session_diff()}
+searches the HTML (or text) page for the session info header to find the
+session info.
+session info.
 }
 }
 \examples{

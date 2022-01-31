@@ -14,9 +14,15 @@
 #' * `"clipboard"` takes the session info from the system clipboard.
 #'   If the clipboard contains a URL, it is followed to download the
 #'   session info.
-#' * A URL starting with `http://` or `https://`. `session_diff` searches
-#'   the HTML (or text) page for the session info header to find the session
-#'   info.
+#' * The URL where you inspect the results for a GitHub Actions job.
+#'   Typically has this form:
+#'   ```
+#'   https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
+#'   ```
+#' * Any other URL starting with `http://` or `https://`. `session_diff()`
+#'   searches the HTML (or text) page for the session info header to find the
+#'   session info.
+#'   session info.
 #'
 #' @export
 #' @examplesIf FALSE
