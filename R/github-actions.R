@@ -58,10 +58,25 @@ get_session_info_gha <- function(url) {
   )
   timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n"))
   lines <- sub("^[^\\s]+\\s+", "", timestamped_lines, perl = TRUE)
-  start_pos <- grep("##[group]Session info", lines, fixed = TRUE)
-  endgroups <- grep("##[endgroup]", lines, fixed = TRUE)
-  end_pos <- min(endgroups[endgroups > start_pos])
-  si <- get_session_info_literal(lines[(start_pos + 1):(end_pos - 1)])
+
+  re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
+  cand <- grep(re_start, lines)
+  if (length(cand) == 0) stop("Cannot find session info at '", url, "'.")
+  lines <- lines[cand[1]:length(lines)]
+  lines[1] <- sub(paste0("^.*(", re_start, ")"), "\\1", lines[1])
+
+  grepl_end <- function(lines) {
+    grepl("^[ ]*\\[[0-9]\\] ", lines) |
+      grepl("^[ ]*[-\u2500]+$", lines)
+  }
+  end <- which(grepl_end(lines))[1]
+  if (is.na(end)) stop("Cannot parse session info from '", url, "'.")
+  while (end < length(lines) && grepl_end(lines[end + 1])) {
+    end <- end + 1
+  }
+
+  si <- get_session_info_literal(lines[1:end])
+
   si$arg <- "github-actions"
   si$name <- paste(
     meta$name,
