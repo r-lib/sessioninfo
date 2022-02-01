@@ -39,12 +39,12 @@ is_gha_url <- function(url) {
 
 get_session_info_gha <- function(url) {
   if (!requireNamespace("gh", quietly = TRUE)) {
-    cli::cli_abort(c(
-      "The gh package is not available.",
-      "i" = "This appears to be the URL for a GitHub Actions (GHA) log:",
-      " " = "{.url {url}}",
-      "x" = "The {.pkg gh} package is required to get session info for GHA jobs."
-    ))
+    stop(
+      "The gh package is not available.\n",
+      "This appears to be the URL for a GitHub Actions (GHA) log:\n",
+      url, "\n",
+      "You must install the gh package to get session info for GHA job logs."
+    )
   }
 
   dat <- parse_as_gha_url(url)
