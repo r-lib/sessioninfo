@@ -73,9 +73,12 @@ session, and uses its output.</p></li>
 <li><p><code>"clipboard"</code> takes the session info from the system clipboard.
 If the clipboard contains a URL, it is followed to download the
 session info.</p></li>
-<li><p>A URL starting with <code>http://</code> or <code>https://</code>. <code>session_diff</code> searches
-the HTML (or text) page for the session info header to find the session
-info.</p></li>
+<li><p>The URL where you inspect the results for a GitHub Actions job.
+Typically has this form:</p><div class="sourceCode"><pre><code>https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
+</code></pre></div></li>
+<li><p>Any other URL starting with <code>http://</code> or <code>https://</code>. <code>session_diff()</code>
+searches the HTML (or text) page for the session info header to find the
+session info.</p></li>
 </ul></div>
 
     <div id="ref-examples">
@@ -93,11 +96,11 @@ info.</p></li>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Gábor Csárdi, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, Winston Chang, Robert Flight, Kirill Müller, Jim Hester.</p>
+  <p></p><p>Developed by Gábor Csárdi, Hadley Wickham, Winston Chang, Robert Flight, Kirill Müller, Jim Hester.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
