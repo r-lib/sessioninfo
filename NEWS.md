@@ -1,6 +1,9 @@
 
 # development version
 
+* `session_diff()` now accepts the URL to a GitHub Actions log as the source for
+  `new` and/or `old` (@jennybc, #68).
+
 # 1.2.2
 
 * This version does not add an emoji hash to the output.
