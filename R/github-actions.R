@@ -57,7 +57,7 @@ get_session_info_gha <- function(url) {
     owner = dat$owner, repo = dat$repo, job_id = dat$job_id
   )
   timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n"))
-  lines <- sub("^[^\\s]+\\s+", "", timestamped_lines, perl = TRUE)
+  lines <- sub("^[^\\s]+\\s", "", timestamped_lines, perl = TRUE)
 
   re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
   cand <- grep(re_start, lines)
