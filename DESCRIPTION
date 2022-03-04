@@ -1,37 +1,26 @@
 Package: sessioninfo
 Title: R Session Information
 Version: 1.2.2.9000
-Authors@R: 
-    c(person(given = "Gábor",
-             family = "Csárdi",
-             role = "cre",
-             email = "csardi.gabor@gmail.com"),
-      person(given = "Hadley",
-             family = "Wickham",
-             role = "aut"),
-      person(given = "Winston",
-             family = "Chang",
-             role = "aut"),
-      person(given = "Robert",
-             family = "Flight",
-             role = "aut"),
-      person(given = "Kirill",
-             family = "Müller",
-             role = "aut"),
-      person(given = "Jim",
-             family = "Hester",
-             role = "aut"),
-      person(given = "R Core team",
-             role = "ctb"))
+Authors@R: c(
+    person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "cre"),
+    person("Hadley", "Wickham", role = "aut"),
+    person("Winston", "Chang", role = "aut"),
+    person("Robert", "Flight", role = "aut"),
+    person("Kirill", "Müller", role = "aut"),
+    person("Jim", "Hester", role = "aut"),
+    person("R Core team", role = "ctb"),
+    person("RStudio Pbc", role = c("cph", "fnd"))
+  )
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
-Description: Query and print information about the current R
-    session.  It is similar to 'utils::sessionInfo()', but includes more
-    information about packages, and where they were installed from.
+Description: Query and print information about the current R session.  It
+    is similar to 'utils::sessionInfo()', but includes more information
+    about packages, and where they were installed from.
 License: GPL-2
-URL: https://github.com/r-lib/sessioninfo#readme, https://r-lib.github.io/sessioninfo/
+URL: https://github.com/r-lib/sessioninfo#readme,
+    https://r-lib.github.io/sessioninfo/
 BugReports: https://github.com/r-lib/sessioninfo/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.4)
 Imports:
     cli (>= 3.1.0),
     tools,
@@ -45,9 +34,11 @@ Suggests:
     rmarkdown,
     testthat,
     withr
+Config/Needs/website:
+    pkgdown,
+    tidyverse/tidytemplate
+Config/testthat/edition: 3
+Config/testthat/parallel: true
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2.9000
-Config/testthat/edition: 3
-Config/Needs/website: pkgdown
-Config/testthat/parallel: true
