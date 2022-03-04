@@ -5,10 +5,10 @@
 
 <!-- badges: start -->
 [![Lifecycle: stable](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R build status](https://github.com/r-lib/sessioninfo/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/sessioninfo/actions)
+[![R-CMD-check](https://github.com/r-lib/sessioninfo/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/sessioninfo/actions/workflows/R-CMD-check.yaml)
 [![](https://www.r-pkg.org/badges/version/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
-[![Coverage Status](https://img.shields.io/codecov/c/github/r-lib/sessioninfo/master.svg)](https://codecov.io/github/r-lib/sessioninfo?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/sessioninfo/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/sessioninfo?branch=main)
 <!-- badges: end -->
 
 Query and print information about the current R session. It is similar to
