@@ -208,6 +208,12 @@ sessioninfo::session_diff(new = "https://github.com/r-lib/sessioninfo/issues/6")
   [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library
 ```
 
+## Code of Conduct
+
+Please note that the sessioninfo project is released with a
+[Contributor Code of Conduct](https://r-lib.github.io/sessioninfo/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
 ## License
 
 GPL-2
