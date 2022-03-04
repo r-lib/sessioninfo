@@ -8,7 +8,8 @@ Authors@R: c(
     person("Robert", "Flight", role = "aut"),
     person("Kirill", "Müller", role = "aut"),
     person("Jim", "Hester", role = "aut"),
-    person("R Core team", role = "ctb")
+    person("R Core team", role = "ctb"),
+    person("RStudio Pbc", role = c("cph", "fnd"))
   )
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Query and print information about the current R session.  It
