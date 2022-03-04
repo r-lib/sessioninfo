@@ -34,7 +34,9 @@ Suggests:
     rmarkdown,
     testthat,
     withr
-Config/Needs/website: pkgdown
+Config/Needs/website:
+    pkgdown,
+    tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Encoding: UTF-8
