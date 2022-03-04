@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/authors.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/index.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/authors.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/news/index.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/index.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/external_info.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/news/index.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/index.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/external_info.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/os_name.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/package_info.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/os_name.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/platform_info.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/package_info.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/python_info.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/platform_info.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/session_diff.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/python_info.html</loc>
   </url>
   <url>
-    <loc>https://r-lib.github.io/sessioninfo/reference/session_info.html</loc>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/session_diff.html</loc>
+  </url>
+  <url>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/session_info.html</loc>
+  </url>
+  <url>
+    <loc>https://r-lib.github.io/sessioninfo/dev/reference/sessioninfo-package.html</loc>
   </url>
 </urlset>

@@ -1,8 +1,8 @@
-pandoc: 2.7.3
+pandoc: 2.14.2
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-02-02T08:41Z
+last_built: 2022-03-04T15:42Z
 urls:
   reference: https://r-lib.github.io/sessioninfo/reference
   article: https://r-lib.github.io/sessioninfo/articles
