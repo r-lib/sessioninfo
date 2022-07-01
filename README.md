@@ -26,7 +26,7 @@ where they were installed from.
   etc.
 * Highlight packages from unusual sources.
 * Information about external software via `external_info()`.
-* Information about the Python configuration is the reticulate package is
+* Information about the Python configuration if the reticulate package is
   loaded and configured.
 * Information about package libraries.
 * Compare two session info outputs with the `session_diff()` function.
