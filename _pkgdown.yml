@@ -13,17 +13,6 @@ destination: docs
 development:
   mode: auto
 
-navbar:
-  type: default
-  left:
-  # TODO: uncomment once this vignette is added
-  #- text: Intro
-  #  href: articles/introduction.html
-  - text: Reference
-    href: reference/index.html
-  - text: News
-    href: news/index.html
-
 reference:
 - title: Session information
   contents:
