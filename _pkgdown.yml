@@ -1,4 +1,4 @@
-url: https://r-lib.github.io/sessioninfo
+url: https://sessioninfo.r-lib.org
 
 template:
   package: tidytemplate
@@ -6,7 +6,7 @@ template:
 
   includes:
     in_header: |
-      <script defer data-domain="r-lib.github.io/sessioninfo,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+      <script defer data-domain="sessioninfo.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 destination: docs
 

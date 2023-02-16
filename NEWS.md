@@ -1,10 +1,11 @@
 
-# development version
+# sessioninfo (development version)
 
+* update pkgdown url to sessioninfo.r-lib.org
 * `session_diff()` now accepts the URL to a GitHub Actions log as the source for
   `new` and/or `old` (@jennybc, #68).
 
-# 1.2.2
+# sessioninfo 1.2.2
 
 * This version does not add an emoji hash to the output.
 
@@ -19,7 +20,7 @@
   now shown in the `source` column, if they set the `Repository`
   field in `DESCRIPTION`.
 
-# 1.2.1
+# sessioninfo 1.2.1
 
 * `package_info()` and `session_info()` now do not fail if the version
   number of an installed package is invalid.
@@ -27,7 +28,7 @@
 * Better aliases for the list of attached, loaded and installed packages
   in `package_inf()` and `session_info()`.
 
-# 1.2.0
+# sessioninfo 1.2.0
 
 * New function `external_info()`, information about external software.
   It can be also requested with the new `info` argument of
@@ -73,7 +74,7 @@
 
 * The `source` column of the package list is now more informative.
 
-# 1.1.1
+# sessioninfo 1.1.1
 
 * `package_info()` and `session_info()` now detect locally installed packages 
   correctly if they have an empty `biocViews` field in `DESCRIPTION (@llrs, #25)
@@ -81,7 +82,7 @@
 * `package_info()` and `session_info()` now handle the case when a loaded
   package was removed from the disk.
 
-# 1.1.0
+# sessioninfo 1.1.0
 
 * `package_info()` now has a `dependencies` argument, to filter the type
   of dependent packages in the output (#22).
@@ -116,6 +117,6 @@
 * Do not consult the `max.print` option, for platform and package info
   (@jennybc, #13).
 
-# 1.0.0
+# sessioninfo 1.0.0
 
 First public release.
