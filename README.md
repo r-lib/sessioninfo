@@ -35,8 +35,17 @@ where they were installed from.
 
 ## Installation
 
+Install the released version from CRAN
+
 ```r
 install.packages("sessioninfo")
+```
+
+Or the development version from GitHub:
+
+```r
+# install.packages("pak")
+pak::pak("r-lib/sessioninfo")
 ```
 
 ## Usage
