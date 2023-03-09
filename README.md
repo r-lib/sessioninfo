@@ -56,7 +56,7 @@ Example output:
 sessioninfo::session_info()
 ```
 
-<img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/main/man/figures/session-info2.svg">
+<img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/main/man/figures/session-info2.svg" alt="Screenshot of a terminal window demonstrating example output of the sessioninfo function.">
 
 ### Copying to the clipboard
 
