@@ -95,21 +95,26 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
+<p>Install the released version from CRAN</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"sessioninfo"</span><span class="op">)</span></span></code></pre></div>
+<p>Or the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"r-lib/sessioninfo"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
 <p>Example output:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/main/man/figures/session-info2.svg"></p>
+<p><img width="1000" src="https://raw.githubusercontent.com/r-lib/sessioninfo/main/man/figures/session-info2.svg" alt="Screenshot of a terminal window demonstrating example output of the sessioninfo function."></p>
 <div class="section level3">
 <h3 id="copying-to-the-clipboard">Copying to the clipboard<a class="anchor" aria-label="anchor" href="#copying-to-the-clipboard"></a>
 </h3>
 <p>You can use the <a href="https://cran.r-project.org/package=clipr" class="external-link"><code>clipr</code> package</a> to copy the session info to the clipboard:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">clipr</span><span class="fu">::</span><span class="fu">write_clip</span><span class="op">(</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>(The current <code>clipr</code> version prints a warning, but you can ignore that.)</p>
 </div>
@@ -117,13 +122,13 @@
 <h3 id="writing-to-a-file">Writing to a file<a class="anchor" aria-label="anchor" href="#writing-to-a-file"></a>
 </h3>
 <p>You can use the <code>to_file</code> argument of <code><a href="reference/session_info.html">session_info()</a></code>:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>to_file <span class="op">=</span> <span class="st">"session.log"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="external-software">External software<a class="anchor" aria-label="anchor" href="#external-software"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>info <span class="op">=</span> <span class="st">"external"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>═ Session info ═══════════════════════════════════════════════════════════════
 ─ External software ──────────────────────────────────────────────────────────
@@ -153,7 +158,7 @@
 <div class="section level3">
 <h3 id="python-configuration">Python configuration<a class="anchor" aria-label="anchor" href="#python-configuration"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_info.html">session_info</a></span><span class="op">(</span>info <span class="op">=</span> <span class="st">"python"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>═ Session info ═══════════════════════════════════════════════════════════════
 ─ Python configuration ───────────────────────────────────────────────────────
@@ -170,83 +175,83 @@
 <h3 id="comparing-session-information">Comparing session information<a class="anchor" aria-label="anchor" href="#comparing-session-information"></a>
 </h3>
 <p><code><a href="reference/session_diff.html">session_diff()</a></code> can retrieve the session info from an URL or the clipboard and compare it to the current session information:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="reference/session_diff.html">session_diff</a></span><span class="op">(</span>new <span class="op">=</span> <span class="st">"https://github.com/r-lib/sessioninfo/issues/6"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- local</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ https://github.com/r-lib/sessioninfo/issues/6</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  Session info ──────────────────────────────────────────────────────────────────</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  setting  value</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  version  R version 4.1.1 (2021-08-10)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  os       macOS Mojave 10.14.6</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  system   x86_64, darwin17.0</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  ui       X11</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  language (EN)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  collate  en_US.UTF-8</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ctype    en_US.UTF-8</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  tz       Europe/Madrid</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  pandoc   2.7.3 @ /usr/local/bin/pandoc</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a> ─ Packages ─────────────────────────────────────────────────────────────────────</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  package     * version     date (UTC) lib source</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="st">- asciicast     1.0.0.9000  2021-10-10 [1] local</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="st">- cli           3.0.1.9000  2021-10-13 [1] local</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="va">+ cachem        1.0.6       2021-08-19 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="va">+ callr         3.7.0.9000  2021-10-01 [1] Github (r-lib/callr@ea5c3df)</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="va">+ cli           3.0.1.9000  2021-10-07 [1] Github (r-lib/cli@e9758aa)</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="va">+ clipr         0.7.1       2020-10-08 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="va">+ commonmark    1.7         2018-12-01 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  crayon        1.4.1       2021-02-08 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="st">- curl          4.3.2       2021-06-23 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>  desc          1.4.0.9000  2021-10-04 [1] local</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="va">+ devtools      2.4.2       2021-06-07 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="va">+ digest        0.6.28      2021-09-23 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  ellipsis      0.3.2       2021-04-29 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  fansi         0.5.0       2021-05-25 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="va">+ fastmap       1.1.0       2021-01-25 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="va">+ fs            1.5.0       2020-07-31 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  glue          1.4.2       2021-10-04 [1] local</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="st">- jsonlite      1.7.2       2020-12-09 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="va">+ knitr         1.34        2021-09-09 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  lifecycle     1.0.1       2021-09-24 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  magrittr      2.0.1       2020-11-17 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="va">+ memoise       2.0.0       2021-01-26 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  pillar        1.6.3       2021-09-26 [1] CRAN (R 4.1.1)</span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="va">+ pkgbuild      1.2.0       2020-12-15 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>  pkgconfig     2.0.3       2019-09-22 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  pkgload       1.2.2       2021-09-11 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  prettycode    1.1.0       2019-12-16 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="va">+ prettyunits   1.1.1       2020-01-24 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>  processx      3.5.2.9000  2021-09-15 [1] local</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>  prompt        1.0.0       2021-03-02 [1] local</span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>  ps            1.6.0       2021-02-28 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="va">+ purrr         0.3.4       2020-04-17 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>  R6            2.5.1       2021-08-19 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="st">- Rcpp          1.0.7       2021-07-07 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="st">- rlang         0.4.11      2021-04-30 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="va">+ remotes       2.4.0       2021-06-02 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="va">+ rlang         0.99.0.9000 2021-10-07 [1] Github (r-lib/rlang@3ba19df)</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="va">+ roxygen2      7.1.2       2021-10-04 [1] local</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>  rprojroot     2.0.2       2020-11-15 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="st">- sessioninfo * 1.1.1.9000  2021-10-13 [?] load_all()</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="st">- testthat    * 3.1.0       2021-10-04 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="st">- tibble        3.1.5       2021-09-30 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="va">+ rstudioapi    0.13        2020-11-12 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="va">+ sessioninfo * 1.1.1.9000  2021-10-05 [?] load_all()</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="va">+ stringi       1.7.4       2021-08-25 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="va">+ stringr       1.4.0       2019-02-10 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="va">+ testthat    * 3.0.4       2021-07-01 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="va">+ tibble        3.1.4       2021-08-25 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="va">+ usethis       2.0.1       2021-02-10 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>  utf8          1.2.2       2021-07-24 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="st">- uuid          0.1-4       2020-02-26 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="st">- V8            3.4.2       2021-05-01 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>  vctrs         0.3.8       2021-04-29 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>  withr         2.4.2       2021-04-18 [1] CRAN (R 4.1.0)</span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="va">+ xfun          0.26        2021-09-14 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="va">+ xml2          1.3.2       2020-04-23 [1] CRAN (R 4.1.0)</span></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a>  [1] /Users/gaborcsardi/Library/R/x86_64/4.1/library</span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>  [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode diff"><code class="sourceCode diff"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">--- local</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="dt">+++ https://github.com/r-lib/sessioninfo/issues/6</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  Session info ──────────────────────────────────────────────────────────────────</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  setting  value</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  version  R version 4.1.1 (2021-08-10)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  os       macOS Mojave 10.14.6</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  system   x86_64, darwin17.0</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ui       X11</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  language (EN)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  collate  en_US.UTF-8</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  ctype    en_US.UTF-8</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  tz       Europe/Madrid</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  pandoc   2.7.3 @ /usr/local/bin/pandoc</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a> ─ Packages ─────────────────────────────────────────────────────────────────────</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  package     * version     date (UTC) lib source</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="st">- asciicast     1.0.0.9000  2021-10-10 [1] local</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="st">- cli           3.0.1.9000  2021-10-13 [1] local</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="va">+ cachem        1.0.6       2021-08-19 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="va">+ callr         3.7.0.9000  2021-10-01 [1] Github (r-lib/callr@ea5c3df)</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="va">+ cli           3.0.1.9000  2021-10-07 [1] Github (r-lib/cli@e9758aa)</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="va">+ clipr         0.7.1       2020-10-08 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="va">+ commonmark    1.7         2018-12-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  crayon        1.4.1       2021-02-08 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="st">- curl          4.3.2       2021-06-23 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>  desc          1.4.0.9000  2021-10-04 [1] local</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="va">+ devtools      2.4.2       2021-06-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="va">+ digest        0.6.28      2021-09-23 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>  ellipsis      0.3.2       2021-04-29 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>  fansi         0.5.0       2021-05-25 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="va">+ fastmap       1.1.0       2021-01-25 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="va">+ fs            1.5.0       2020-07-31 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  glue          1.4.2       2021-10-04 [1] local</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="st">- jsonlite      1.7.2       2020-12-09 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="va">+ knitr         1.34        2021-09-09 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  lifecycle     1.0.1       2021-09-24 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  magrittr      2.0.1       2020-11-17 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="va">+ memoise       2.0.0       2021-01-26 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>  pillar        1.6.3       2021-09-26 [1] CRAN (R 4.1.1)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="va">+ pkgbuild      1.2.0       2020-12-15 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  pkgconfig     2.0.3       2019-09-22 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  pkgload       1.2.2       2021-09-11 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  prettycode    1.1.0       2019-12-16 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="va">+ prettyunits   1.1.1       2020-01-24 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>  processx      3.5.2.9000  2021-09-15 [1] local</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>  prompt        1.0.0       2021-03-02 [1] local</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  ps            1.6.0       2021-02-28 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="va">+ purrr         0.3.4       2020-04-17 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  R6            2.5.1       2021-08-19 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="st">- Rcpp          1.0.7       2021-07-07 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="st">- rlang         0.4.11      2021-04-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="va">+ remotes       2.4.0       2021-06-02 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="va">+ rlang         0.99.0.9000 2021-10-07 [1] Github (r-lib/rlang@3ba19df)</span></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="va">+ roxygen2      7.1.2       2021-10-04 [1] local</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>  rprojroot     2.0.2       2020-11-15 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="st">- sessioninfo * 1.1.1.9000  2021-10-13 [?] load_all()</span></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="st">- testthat    * 3.1.0       2021-10-04 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="st">- tibble        3.1.5       2021-09-30 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="va">+ rstudioapi    0.13        2020-11-12 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="va">+ sessioninfo * 1.1.1.9000  2021-10-05 [?] load_all()</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="va">+ stringi       1.7.4       2021-08-25 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="va">+ stringr       1.4.0       2019-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="va">+ testthat    * 3.0.4       2021-07-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="va">+ tibble        3.1.4       2021-08-25 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="va">+ usethis       2.0.1       2021-02-10 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>  utf8          1.2.2       2021-07-24 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="st">- uuid          0.1-4       2020-02-26 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="st">- V8            3.4.2       2021-05-01 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>  vctrs         0.3.8       2021-04-29 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>  withr         2.4.2       2021-04-18 [1] CRAN (R 4.1.0)</span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="va">+ xfun          0.26        2021-09-14 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="va">+ xml2          1.3.2       2020-04-23 [1] CRAN (R 4.1.0)</span></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>  [1] /Users/gaborcsardi/Library/R/x86_64/4.1/library</span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>  [2] /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -272,7 +277,8 @@
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></small></li>
 </ul>
 </div>
 
@@ -304,7 +310,8 @@
 <a href="https://krlmlr.info" class="external-link">Kirill Müller</a> <br><small class="roles"> Author </small>  </li>
 <li>
 <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a> <br><small class="roles"> Author </small>  </li>
-<li>RStudio Pbc <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li>
+<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -328,7 +335,7 @@
   <footer><div class="container">
   <div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://github.com/wch" class="external-link">Winston Chang</a>, Robert Flight, <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, RStudio Pbc.</p>
+<p>Developed by <a href="https://github.com/gaborcsardi" class="external-link">Gábor Csárdi</a>, <a href="http://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://github.com/wch" class="external-link">Winston Chang</a>, Robert Flight, <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
