@@ -26,8 +26,13 @@ session, and uses its output.
 If the clipboard contains a URL, it is followed to download the
 session info.
 \item The URL where you inspect the results for a GitHub Actions job.
-Typically has this form:\preformatted{https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
-}
+Typically has this form:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{https://github.com/OWNER/REPO/actions/runs/RUN_ID/jobs/HTML_ID
+}\if{html}{\out{</div>}}
+
+Internally, this URL is parsed so we can look up the job id, get the
+log file, and extract session info.
 \item Any other URL starting with \verb{http://} or \verb{https://}. \code{session_diff()}
 searches the HTML (or text) page for the session info header to find the
 session info.
