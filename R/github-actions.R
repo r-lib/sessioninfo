@@ -66,7 +66,7 @@ get_session_info_gha <- function(url) {
     "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs",
     owner = dat$owner, repo = dat$repo, run_id = dat$run_id
   )
-  html_urls <- lapply(jobs[["jobs"]], function(x) x[["html_url"]])
+  html_urls <- vapply(jobs[["jobs"]], function(x) x[["html_url"]], "")
   i <- which(html_urls == url)
   dat$job_id <- jobs[["jobs"]][[i]][["id"]]
 
