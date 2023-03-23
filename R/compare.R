@@ -17,8 +17,10 @@
 #' * The URL where you inspect the results for a GitHub Actions job.
 #'   Typically has this form:
 #'   ```
-#'   https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
+#'   https://github.com/OWNER/REPO/actions/runs/RUN_ID/jobs/HTML_ID
 #'   ```
+#'   Internally, this URL is parsed so we can look up the job id, get the
+#'   log file, and extract session info.
 #' * Any other URL starting with `http://` or `https://`. `session_diff()`
 #'   searches the HTML (or text) page for the session info header to find the
 #'   session info.

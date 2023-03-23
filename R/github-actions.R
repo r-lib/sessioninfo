@@ -16,17 +16,29 @@ github_url_regex <- paste0(
   "$"
 )
 
+github_fragment_regex <- paste0(
+  "/runs/",
+  "(?<run_id>[0-9]+)",
+  "/jobs/",
+  "(?<html_id>[0-9]+)",
+  "$"
+)
+
 parse_as_gha_url <- function(url) {
   res <- re_match(url, github_url_regex)$groups
-  res$job_id <- re_match(res$fragment, "^/runs/(?<job_id>[0-9]+).*")$groups$job_id
+  res2 <- re_match(res$fragment, github_fragment_regex)$groups
+  res$run_id <- res2$run_id
+  res$html_id <- res2$html_id
 
   ok <- res$host %in% "github.com" &
-    !is.na(res$repo_owner) & !is.na(res$repo_name) &!is.na(res$job_id)
+    !is.na(res$repo_owner) & !is.na(res$repo_name) &
+    !is.na(res$run_id) & !is.na(res$html_id)
 
   data.frame(
     owner  = ifelse(ok, res$repo_owner, NA_character_),
     repo   = ifelse(ok, res$repo_name, NA_character_),
-    job_id = ifelse(ok, res$job_id, NA_character_),
+    run_id = ifelse(ok, res$run_id, NA_character_),
+    html_id = ifelse(ok, res$html_id, NA_character_),
     stringsAsFactors = FALSE,
     row.names = NULL
   )
@@ -34,7 +46,7 @@ parse_as_gha_url <- function(url) {
 
 is_gha_url <- function(url) {
   res <- parse_as_gha_url(url)
-  !is.na(res$job_id)
+  !is.na(res$run_id)
 }
 
 get_session_info_gha <- function(url) {
@@ -48,6 +60,16 @@ get_session_info_gha <- function(url) {
   }
 
   dat <- parse_as_gha_url(url)
+  # the last ID in the browser URL is not the job_id!
+  # instead, we must lookup the job_id
+  jobs <- gh::gh(
+    "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs",
+    owner = dat$owner, repo = dat$repo, run_id = dat$run_id
+  )
+  html_urls <- vapply(jobs[["jobs"]], function(x) x[["html_url"]], "")
+  i <- which(html_urls == url)
+  dat$job_id <- jobs[["jobs"]][[i]][["id"]]
+
   meta <- gh::gh(
     "/repos/{owner}/{repo}/actions/jobs/{job_id}",
     owner = dat$owner, repo = dat$repo, job_id = dat$job_id
