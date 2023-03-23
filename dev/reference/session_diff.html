@@ -75,8 +75,10 @@ session, and uses its output.</p></li>
 If the clipboard contains a URL, it is followed to download the
 session info.</p></li>
 <li><p>The URL where you inspect the results for a GitHub Actions job.
-Typically has this form:</p><div class="sourceCode"><pre><code>https://github.com/OWNER/REPO/runs/JOB_ID?check_suite_focus=true
-</code></pre></div></li>
+Typically has this form:</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>OWNER<span class="sc">/</span>REPO<span class="sc">/</span>actions<span class="sc">/</span>runs<span class="sc">/</span>RUN_ID<span class="sc">/</span>jobs<span class="sc">/</span>HTML_ID</span></code></pre><p></p></div>
+<p>Internally, this URL is parsed so we can look up the job id, get the
+log file, and extract session info.</p></li>
 <li><p>Any other URL starting with <code>http://</code> or <code>https://</code>. <code>session_diff()</code>
 searches the HTML (or text) page for the session info header to find the
 session info.</p></li>
