@@ -68,6 +68,9 @@ get_session_info_gha <- function(url) {
   )
   html_urls <- vapply(jobs[["jobs"]], function(x) x[["html_url"]], "")
   i <- which(html_urls == url)
+  if (length(i) == 0) {
+    stop("Failed to find the job associated with '", url, "'; perhaps there was a later attempt?")
+  }
   dat$job_id <- jobs[["jobs"]][[i]][["id"]]
 
   meta <- gh::gh(
@@ -78,7 +81,7 @@ get_session_info_gha <- function(url) {
     "/repos/{owner}/{repo}/actions/jobs/{job_id}/logs",
     owner = dat$owner, repo = dat$repo, job_id = dat$job_id
   )
-  timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n"))
+  timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n|\n"))
   lines <- sub("^[^\\s]+\\s+", "", timestamped_lines, perl = TRUE)
 
   re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
