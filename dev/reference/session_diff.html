@@ -51,7 +51,12 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">session_diff</span><span class="op">(</span>old <span class="op">=</span> <span class="st">"local"</span>, new <span class="op">=</span> <span class="st">"clipboard"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">session_diff</span><span class="op">(</span></span>
+<span>  old <span class="op">=</span> <span class="st">"local"</span>,</span>
+<span>  new <span class="op">=</span> <span class="st">"clipboard"</span>,</span>
+<span>  packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"diff"</span>, <span class="st">"merge"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,6 +65,13 @@
 <dd><p>A <code>session_info</code> object (the return value of
 <code><a href="session_info.html">session_info()</a></code>), or a pointer to <code><a href="session_info.html">session_info()</a></code> output. See details
 below.</p></dd>
+
+
+<dt>packages</dt>
+<dd><p>How to compare the package info for <code>old</code> and <code>new</code>:</p><ul><li><p><code>"diff"</code>: line diffs, in the style of <code>diff -u</code></p></li>
+<li><p><code>"merge"</code>: merge the information into one data frame, with one row per
+package. Only package <code>version</code> and <code>source</code> are compared.</p></li>
+</ul></dd>
 
 
 <dt>...</dt>
