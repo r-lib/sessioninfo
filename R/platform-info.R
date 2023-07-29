@@ -15,6 +15,7 @@
 #'   * `date`: The current date.
 #'   * `rstudio`: RStudio format string, only added in RStudio.
 #'   * `pandoc`: pandoc version and path
+#'   * `quarto`: quarto version and path
 #'
 #' @seealso Similar functions and objects in the base packages:
 #'   [base::R.version.string], [utils::sessionInfo()], [base::version],
@@ -36,7 +37,8 @@ platform_info <- function() {
     tz = Sys.timezone(),
     date = format(Sys.Date()),
     rstudio = get_rstudio_version(),
-    pandoc = get_pandoc_version()
+    pandoc = get_pandoc_version(),
+    quarto = get_quarto_version()
   )))
 }
 
@@ -75,6 +77,26 @@ parse_pandoc_version <- function(path) {
     out <- system2(path, "--version", stdout = TRUE)[1]
     last(strsplit(out, " ", fixed = TRUE)[[1]])
   }, error = function(e) "NA")
+}
+
+get_quarto_version <- function() {
+  if (isNamespaceLoaded("quarto")) {
+    path <- quarto::quarto_path()
+    ver <- system("quarto -V", intern = TRUE)
+    if (is.null(path)) {
+      "NA (via quarto)"
+    } else {
+      paste0(ver, " @ ", path, "/ (via quarto)")
+    }
+  } else {
+    path <- Sys.which("quarto")
+    if (path == "") {
+      "NA"
+    } else {
+      ver <- system("quarto -V", intern = TRUE)
+      paste0(ver, " @ ", path)
+    }
+  }
 }
 
 #' @export
