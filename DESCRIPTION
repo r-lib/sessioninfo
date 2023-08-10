@@ -32,7 +32,6 @@ Suggests:
     mockery,
     reticulate,
     rmarkdown,
-    quarto,
     testthat,
     withr
 Config/Needs/website:
