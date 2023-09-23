@@ -29,3 +29,12 @@ test_that("print.platform_info ignores max.print", {
   out <- tail(strsplit(out, split = "\r?\n")[[1]], -1)
   expect_length(out, length(pi))
 })
+
+test_that("get_quarto_version", {
+  mockery::stub(get_quarto_version, "Sys.which", "")
+  expect_snapshot(get_quarto_version())
+
+  mockery::stub(get_quarto_version, "Sys.which", "/path/to/quarto")
+  mockery::stub(get_quarto_version, "system", "1.3.450")
+  expect_snapshot(get_quarto_version())
+})
