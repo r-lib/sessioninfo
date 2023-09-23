@@ -4,7 +4,7 @@ test_that("platform_info", {
   expect_equal(
     names(pi),
     c("version", "os", "system", "ui", "language", "collate", "ctype",
-      "tz", "date", "pandoc")
+      "tz", "date", "pandoc", "quarto")
   )
 
   ## This can be a variety of strings, e.g. "R Under development"
@@ -28,4 +28,13 @@ test_that("print.platform_info ignores max.print", {
   out <- capture_output(print(pi))
   out <- tail(strsplit(out, split = "\r?\n")[[1]], -1)
   expect_length(out, length(pi))
+})
+
+test_that("get_quarto_version", {
+  mockery::stub(get_quarto_version, "Sys.which", "")
+  expect_snapshot(get_quarto_version())
+
+  mockery::stub(get_quarto_version, "Sys.which", "/path/to/quarto")
+  mockery::stub(get_quarto_version, "system", "1.3.450")
+  expect_snapshot(get_quarto_version())
 })
