@@ -1,9 +1,13 @@
 
 # sessioninfo (development version)
 
-* update pkgdown url to sessioninfo.r-lib.org
+* Update pkgdown url to sessioninfo.r-lib.org
+
 * `session_diff()` now accepts the URL to a GitHub Actions log as the source for
   `new` and/or `old` (@jennybc, #68).
+
+* `session_info()` output now includes an explanation for symbol highlighting packages
+  attached to the search path (@IndrajeetPatil).
 
 # sessioninfo 1.2.2
 
