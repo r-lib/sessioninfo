@@ -1,4 +1,3 @@
-
 test_that("session_diff", {
   lines1 <- readLines(test_path("fixtures", "lines1.txt"))
   lines2 <- readLines(test_path("fixtures", "lines2.txt"))
@@ -149,7 +148,7 @@ test_that("find_session_info_in_html", {
 
   html <- html[
     !grepl("^(#&gt;)?[ ]*\\[[0-9]\\] ", html) &
-    !grepl("^(#&gt;)?[ ]*[-\u2500]+$", html)
+      !grepl("^(#&gt;)?[ ]*[-\u2500]+$", html)
   ]
   expect_error(
     find_session_info_in_html(url, html),
@@ -311,17 +310,17 @@ test_that("expand_diff_text", {
 
 test_that("insert_instead", {
   cases <- list(
-    list(1:10, 1,  1,  11:15, c(11:15, 2:10)),
-    list(1:10, 1,  3,  11:15, c(11:15, 4:10)),
-    list(1:10, 2,  2,  11:15, c(1, 11:15, 3:10)),
-    list(1:10, 2,  5,  11:15, c(1, 11:15, 6:10)),
-    list(1:10, 5,  10, 11:15, c(1:4, 11:15)),
+    list(1:10, 1, 1, 11:15, c(11:15, 2:10)),
+    list(1:10, 1, 3, 11:15, c(11:15, 4:10)),
+    list(1:10, 2, 2, 11:15, c(1, 11:15, 3:10)),
+    list(1:10, 2, 5, 11:15, c(1, 11:15, 6:10)),
+    list(1:10, 5, 10, 11:15, c(1:4, 11:15)),
     list(1:10, 10, 10, 11:15, c(1:9, 11:15)),
-    list(1:10, 1,  10, 11:15, c(11:15)),
-    list(1,    1,  1,  11:15, c(11:15)),
-    list(1:10, 0,  0,  11:15, c(11:15, 1:10)),
+    list(1:10, 1, 10, 11:15, c(11:15)),
+    list(1, 1, 1, 11:15, c(11:15)),
+    list(1:10, 0, 0, 11:15, c(11:15, 1:10)),
     list(1:10, 11, 11, 11:15, c(1:10, 11:15)),
-    list(1:10, 2,  1,  11:15, c(1, 11:15, 2:10))
+    list(1:10, 2, 1, 11:15, c(1, 11:15, 2:10))
   )
 
   for (i in seq_along(cases)) {
