@@ -95,6 +95,10 @@ test_that("loaded & on-disk version mismatch", {
   wh <- which(pi$package == "testthat")
   expect_false(pi$ondiskversion[wh] == pi$loadedversion[wh])
   expect_output(print(pi), "Loaded and on-disk version mismatch")
+
+  # testthat is attached
+  expect_output(print(pi), "testthat    * ")
+  expect_output(print(pi), "Packages attached to the search path")
 })
 
 test_that("deleted package", {

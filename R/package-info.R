@@ -242,6 +242,7 @@ format.packages_info <- function(x, ...) {
     check.names = FALSE
   )
 
+  anyattached <- any(x$attached)
   badloaded <- package_version(x$loadedversion, strict = FALSE) !=
     package_version(x$ondiskversion, strict = FALSE)
   badloaded <- !is.na(badloaded) & badloaded
@@ -301,6 +302,10 @@ format.packages_info <- function(x, ...) {
   )
 
   if ("!" %in% names(px)) fmt <- c(fmt, "")
+  if (anyattached) {
+    fmt <- c(fmt, paste0(" ", dng("*"), " ", dash(2),
+                         " Packages attached to the search path."))
+  }
   if (any(badloaded)) {
     fmt <- c(fmt, paste0(" ", dng("V"), " ", dash(2),
                          " Loaded and on-disk version mismatch."))

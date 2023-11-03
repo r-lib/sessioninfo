@@ -1,7 +1,7 @@
 
 #' @importFrom cli symbol
 
-rule <- function (..., pad = NULL, double = FALSE) {
+rule <- function(..., pad = NULL, double = FALSE) {
   if (is.null(pad)) pad <- if (double) symbol$double_line else symbol$line
   title <- if (length(list(...))) paste0(" ", ..., " ") else ""
 
