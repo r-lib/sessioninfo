@@ -1,10 +1,11 @@
-
 test_that("platform_info", {
   pi <- platform_info()
   expect_equal(
     names(pi),
-    c("version", "os", "system", "ui", "language", "collate", "ctype",
-      "tz", "date", "pandoc", "quarto")
+    c(
+      "version", "os", "system", "ui", "language", "collate", "ctype",
+      "tz", "date", "pandoc", "quarto"
+    )
   )
 
   ## This can be a variety of strings, e.g. "R Under development"

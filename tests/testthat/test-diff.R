@@ -1,4 +1,3 @@
-
 test_that("session_diff", {
   lines1 <- readLines(test_path("fixtures", "lines1.txt"))
   lines2 <- readLines(test_path("fixtures", "lines2.txt"))
@@ -149,7 +148,7 @@ test_that("find_session_info_in_html", {
 
   html <- html[
     !grepl("^(#&gt;)?[ ]*\\[[0-9]\\] ", html) &
-    !grepl("^(#&gt;)?[ ]*[-\u2500]+$", html)
+      !grepl("^(#&gt;)?[ ]*[-\u2500]+$", html)
   ]
   expect_error(
     find_session_info_in_html(url, html),

@@ -1,6 +1,4 @@
-
 test_that("package_info, loaded", {
-
   descs <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
   exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
@@ -10,7 +8,7 @@ test_that("package_info, loaded", {
     package_info,
     "pkg_desc",
     function(x, ...) alldsc[[x]]
-    )
+  )
   mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
 
   pi <- package_info()
@@ -18,7 +16,6 @@ test_that("package_info, loaded", {
 })
 
 test_that("package_info, dependent", {
-
   descs <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
   exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
@@ -75,8 +72,10 @@ test_that("pkg_source edge case, remote repo, no RemoteRepo", {
 
 test_that("pkg_md5_stored", {
   md5 <- pkg_md5_stored("fixtures")
-  exp <- c(`libs/i386/fansi.dll` = "7b96ab4bf019b0cfed86425634d640e8",
-           `libs/x64/fansi.dll` = "6503170d698e5a7916bf2457edc5de8d")
+  exp <- c(
+    `libs/i386/fansi.dll` = "7b96ab4bf019b0cfed86425634d640e8",
+    `libs/x64/fansi.dll` = "6503170d698e5a7916bf2457edc5de8d"
+  )
   expect_identical(md5, exp)
 })
 
@@ -90,9 +89,11 @@ test_that("pkg_md5_disk", {
   writeBin(charToRaw("bar\n"), con = file.path(tmp, "libs", "x64", "foo.dll"))
   md5 <- pkg_md5_disk(tmp)
 
-  exp <- c(`libs/i386/foo.dll` = "d3b07384d113edec49eaa6238ad5ff00",
-           `libs/x64/foo.dll` = "c157a79031e1c40f85931829bc5fc552")
-  expect_identical(md5,exp)
+  exp <- c(
+    `libs/i386/foo.dll` = "d3b07384d113edec49eaa6238ad5ff00",
+    `libs/x64/foo.dll` = "c157a79031e1c40f85931829bc5fc552"
+  )
+  expect_identical(md5, exp)
 })
 
 test_that("print.packages_info", {

@@ -1,6 +1,8 @@
-
 test_that("broken dll", {
-  if (.Platform$OS.type != "windows") { expect_true(TRUE); return() }
+  if (.Platform$OS.type != "windows") {
+    expect_true(TRUE)
+    return()
+  }
   skip_on_cran()
 
   ## To check this, we need a package with a dll.
@@ -27,7 +29,8 @@ test_that("broken dll", {
     },
     args = list(lib = lib),
     libpath = c(lib, .libPaths()),
-    timeout = 10)
+    timeout = 10
+  )
 
   expect_false(pi$md5ok[pi$package == "testthat"])
   expect_output(print(pi), "DLL MD5 mismatch, broken installation")
@@ -109,8 +112,10 @@ test_that("deleted package", {
   dir.create(lib <- tempfile())
   on.exit(unlink(lib, recursive = TRUE), add = TRUE)
   pkgfile <- normalizePath(paste0("fixtures/", foo, "_0.0.0.9000.tar.gz"))
-  install.packages(pkgfile, lib = lib, repos = NULL, type = "source",
-                   quiet = TRUE)
+  install.packages(pkgfile,
+    lib = lib, repos = NULL, type = "source",
+    quiet = TRUE
+  )
 
   pis <- callr::r(
     function(lib, foo) {

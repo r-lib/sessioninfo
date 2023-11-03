@@ -1,34 +1,33 @@
-
 test_that("dependent_packages", {
   ins <- readRDS("fixtures/installed.rda")
   dep <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
 
-  mockery::stub(dependent_packages, 'utils::installed.packages', ins)
+  mockery::stub(dependent_packages, "utils::installed.packages", ins)
   mockery::stub(
     dependent_packages,
-    'pkg_desc',
+    "pkg_desc",
     function(x) alldsc[[x]]
   )
   mockery::stub(
     dependent_packages,
-    'loadedNamespaces',
+    "loadedNamespaces",
     function() ins
   )
 
   mockery::stub(
     dependent_packages,
-    'getNamespaceVersion',
+    "getNamespaceVersion",
     function(x) alldsc[[x]]$Version
   )
   mockery::stub(
     dependent_packages,
-    'search',
+    "search",
     function() paste0("package:", dep$package[dep$attached])
   )
   mockery::stub(
     dependent_packages,
-    'getNamespaceInfo',
+    "getNamespaceInfo",
     function(x, ...) alldsc[[x]]$Version
   )
 
@@ -51,7 +50,8 @@ test_that("find_deps", {
   expect_equal(
     sort_ci(find_deps("devtools", ins)),
     sort_ci(
-      c("devtools", "callr", "httr", "utils", "tools", "methods", "memoise",
+      c(
+        "devtools", "callr", "httr", "utils", "tools", "methods", "memoise",
         "whisker", "digest", "rstudioapi", "jsonlite", "stats", "git2r",
         "withr", "pkgbuild", "pkgload", "curl", "crayon", "testthat",
         "BiocInstaller", "Rcpp", "MASS", "rmarkdown", "knitr", "hunspell",
@@ -61,7 +61,8 @@ test_that("find_deps", {
         "praise", "magrittr", "xml2", "BH", "yaml", "htmltools", "caTools",
         "base64enc", "stringr", "highr", "markdown", "stringi", "rex",
         "codetools", "stringdist", "xmlparsedata", "lazyeval", "parallel",
-        "brew", "commonmark")
+        "brew", "commonmark"
+      )
     )
   )
 
