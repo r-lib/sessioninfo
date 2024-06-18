@@ -3,7 +3,7 @@ test_that("platform_info", {
   pi <- platform_info()
   expect_equal(
     names(pi),
-    c("version", "os", "system", "ui", "language", "collate", "ctype",
+    c("version", "os", "system", "hostname", "ui", "language", "collate", "ctype",
       "tz", "date", "pandoc", "quarto")
   )
 

@@ -7,6 +7,8 @@
 #'   * `system`: CPU, and machine readable OS name, separated by a comma.
 #'   * `ui`: the user interface, e.g. `Rgui`, `RTerm`, etc. see `GUI`
 #'     in [base::.Platform].
+#'   * `hostname`: the name of the machine know on the network, see
+#'     `nodename` in [base::Sys.info()].
 #'   * `language`: The current language setting. The `LANGUAGE` environment
 #'     variable, if set, or `(EN)` if unset.
 #'   * `collate`: Collation rule, from the current locale.
@@ -30,6 +32,7 @@ platform_info <- function() {
     version = R.version.string,
     os = os_name(),
     system = version$system,
+    hostname = Sys.info()[["nodename"]],
     ui = .Platform$GUI,
     language = Sys.getenv("LANGUAGE", "(EN)"),
     collate = Sys.getlocale("LC_COLLATE"),
