@@ -14,6 +14,8 @@ A list with elements:
 \item \code{system}: CPU, and machine readable OS name, separated by a comma.
 \item \code{ui}: the user interface, e.g. \code{Rgui}, \code{RTerm}, etc. see \code{GUI}
 in \link[base:Platform]{base::.Platform}.
+\item \code{hostname}: the name of the machine know on the network, see
+\code{nodename} in \code{\link[base:Sys.info]{base::Sys.info()}}.
 \item \code{language}: The current language setting. The \code{LANGUAGE} environment
 variable, if set, or \code{(EN)} if unset.
 \item \code{collate}: Collation rule, from the current locale.
@@ -22,6 +24,7 @@ variable, if set, or \code{(EN)} if unset.
 \item \code{date}: The current date.
 \item \code{rstudio}: RStudio format string, only added in RStudio.
 \item \code{pandoc}: pandoc version and path
+\item \code{quarto}: quarto version and path
 }
 }
 \description{
