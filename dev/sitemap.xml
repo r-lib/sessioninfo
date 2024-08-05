@@ -1,45 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/external_info.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/os_name.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/package_info.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/platform_info.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/python_info.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/session_diff.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/session_info.html</loc>
-  </url>
-  <url>
-    <loc>https://sessioninfo.r-lib.org/dev/reference/sessioninfo-package.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://sessioninfo.r-lib.org/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/LICENSE.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/authors.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/index.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/news/index.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/external_info.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/index.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/os_name.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/package_info.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/platform_info.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/python_info.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/session_diff.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/session_info.html</loc></url>
+<url><loc>https://sessioninfo.r-lib.org/dev/reference/sessioninfo-package.html</loc></url>
 </urlset>
+
