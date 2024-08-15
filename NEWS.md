@@ -1,6 +1,8 @@
 
 # sessioninfo (development version)
 
+* `session_info()` no longer produces an error when `info` has length > 1 (@nash-delcamp-slp, #96).
+
 * Update pkgdown url to sessioninfo.r-lib.org
 
 * `session_diff()` now accepts the URL to a GitHub Actions log as the source for

@@ -58,9 +58,6 @@ session_info <- function(
 
   if (missing(info)) info <- "auto"
   choices <- c("platform", "packages", "python", "external")
-  if (info != "auto" && info != "all") {
-    info <- match.arg(info, choices, several.ok = TRUE)
-  }
   if ("all" %in% info) {
     info <- choices
   } else if ("auto" %in% info) {
@@ -69,6 +66,8 @@ session_info <- function(
       "packages",
       if (should_show_python(pkgs)) "python"
     )
+  } else {
+    info <- match.arg(info, choices, several.ok = TRUE)
   }
 
   stopifnot(is_flag(to_file) || is_string(to_file))
