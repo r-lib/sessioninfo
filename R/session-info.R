@@ -115,7 +115,7 @@ format.session_info <- function(x, ...) {
         ""
       )
     },
-    if ("packages" %in% names(x)) {
+    if ("packages" %in% names(x) && nrow(x$packages) > 0) {
       c(rule("Packages"), format(x$packages), "")
     },
     if ("external" %in% names(x)) {
