@@ -227,6 +227,9 @@ abbrev_long_sha <- function(x) {
 #' @export
 
 format.packages_info <- function(x, ...) {
+  if (nrow(x) == 0) {
+    return(cli::col_grey("No packages."))
+  }
 
   unloaded <- is.na(x$loadedversion)
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
