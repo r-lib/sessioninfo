@@ -19,7 +19,7 @@ github_url_regex <- paste0(
 github_fragment_regex <- paste0(
   "/runs/",
   "(?<run_id>[0-9]+)",
-  "/jobs/",
+  "/jobs?/",
   "(?<html_id>[0-9]+)",
   "$"
 )
