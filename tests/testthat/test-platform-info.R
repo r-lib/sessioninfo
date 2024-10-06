@@ -31,10 +31,10 @@ test_that("print.platform_info ignores max.print", {
 })
 
 test_that("get_quarto_version", {
-  mockery::stub(get_quarto_version, "Sys.which", "")
+  local_mocked_bindings(Sys.which = function(...) "")
   expect_snapshot(get_quarto_version())
 
-  mockery::stub(get_quarto_version, "Sys.which", "/path/to/quarto")
-  mockery::stub(get_quarto_version, "system", "1.3.450")
+  local_mocked_bindings(Sys.which = function(...) "/path/to/quarto")
+  local_mocked_bindings(system = function(...) "1.3.450")
   expect_snapshot(get_quarto_version())
 })

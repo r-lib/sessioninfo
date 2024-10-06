@@ -30,45 +30,35 @@ test_that("print.session_diff", {
 test_that("get_session_info 1", {
   arg <- NULL
   abort <- function(...) stop("test failure")
-  mockery::stub(get_session_info, "get_session_info_local", abort)
-  mockery::stub(get_session_info, "get_session_info_clipboard", abort)
-  mockery::stub(get_session_info, "get_session_info_url", abort)
-  mockery::stub(get_session_info, "get_session_info_literal", abort)
+  local_mocked_bindings(get_session_info_local = function() abort)
+  local_mocked_bindings(get_session_info_clipboard = function() abort)
+  local_mocked_bindings(get_session_info_url = function() abort)
+  local_mocked_bindings(get_session_info_literal = function() abort)
 
-  mockery::stub(
-    get_session_info,
-    "get_session_info_local",
-    function(...) arg <<- list(...)
+  local_mocked_bindings(
+    get_session_info_local = function(...) arg <<- list(...)
   )
   get_session_info("local", pkgs = "foo")
   expect_equal(arg, list(pkgs = "foo"))
 
   arg <- NULL
-  mockery::stub(get_session_info, "get_session_info_local", abort)
-  mockery::stub(
-    get_session_info,
-    "get_session_info_clipboard",
-    function(...) arg <<- list(...)
+  local_mocked_bindings(get_session_info_local = function() abort)
+  local_mocked_bindings(
+    get_session_info_clipboard = function(...) arg <<- list(...)
   )
   get_session_info("clipboard", pkgs = "foo")
   expect_equal(arg, list())
 
   arg <- NULL
-  mockery::stub(get_session_info, "get_session_info_clipboard", abort)
-  mockery::stub(
-    get_session_info,
-    "get_session_info_url",
-    function(...) arg <<- list(...)
-  )
+  local_mocked_bindings(get_session_info_clipboard = function() abort)
+  local_mocked_bindings(get_session_info_url = function(...) arg <<- list(...))
   get_session_info("https://acme.com", pkgs = "foo")
   expect_equal(arg, list("https://acme.com"))
 
   arg <- NULL
-  mockery::stub(get_session_info, "get_session_info_url", abort)
-  mockery::stub(
-    get_session_info,
-    "get_session_info_literal",
-    function(...) arg <<- list(...)
+  local_mocked_bindings(get_session_info_url = function() abort)
+  local_mocked_bindings(
+    get_session_info_literal = function(...) arg <<- list(...)
   )
   get_session_info(c("foo", "bar"), pkgs = "foo")
   expect_equal(arg, list(c("foo", "bar")))
@@ -83,7 +73,7 @@ test_that("get_session_info_local", {
 
 test_that("get_session_info_clipboard", {
   lines <- readLines(test_path("fixtures", "lines1.txt"))
-  mockery::stub(get_session_info_clipboard, "clipboard_read", lines)
+  local_mocked_bindings(clipboard_read = function() lines)
   clp <- get_session_info_clipboard()
   expect_equal(clp$arg, "<clipboard>")
   expect_equal(
@@ -91,7 +81,7 @@ test_that("get_session_info_clipboard", {
     get_session_info_literal(lines)$text
   )
 
-  mockery::stub(get_session_info_clipboard, "clipboard_read", "clipboard")
+  local_mocked_bindings(clipboard_read = function() "clipboard")
   expect_equal(get_session_info_clipboard()$text, "clipboard")
 })
 
@@ -102,12 +92,9 @@ test_that("get_session_info_url", {
   )
   close(gz)
 
-  mockery::stub(
-    get_session_info_url,
-    "utils::download.file",
-    function(url, destfile, ...) {
-      writeLines(html, destfile)
-    }
+  local_mocked_bindings(
+    download.file = function(url, destfile, ...) writeLines(html, destfile),
+    .package = "utils"
   )
 
   url <- "https://github.com/r-lib/sessioninfo/issues/6"
@@ -243,7 +230,7 @@ test_that("session_diff_text", {
   expect_snapshot(print(session_diff_text(x, y)))
 
   # if matching packages fails, we still have meaningful output
-  mockery::stub(session_diff_text, "expand_diff_text", function(...) stop())
+  local_mocked_bindings(expand_diff_text = function(...) stop())
   expect_snapshot(print(session_diff_text(x, y)))
 })
 

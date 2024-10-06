@@ -4,33 +4,15 @@ test_that("dependent_packages", {
   dep <- readRDS("fixtures/devtools-deps.rda")
   alldsc <- readRDS("fixtures/descs.rda")
 
-  mockery::stub(dependent_packages, 'utils::installed.packages', ins)
-  mockery::stub(
-    dependent_packages,
-    'pkg_desc',
-    function(x) alldsc[[x]]
-  )
-  mockery::stub(
-    dependent_packages,
-    'loadedNamespaces',
-    function() ins
-  )
+  local_mocked_bindings(installed.packages = function() ins, .package = "utils")
+  local_mocked_bindings(pkg_desc = function(x) alldsc[[x]])
+  local_mocked_bindings(loadedNamespaces = function() ins)
 
-  mockery::stub(
-    dependent_packages,
-    'getNamespaceVersion',
-    function(x) alldsc[[x]]$Version
+  local_mocked_bindings(getNamespaceVersion = function(x) alldsc[[x]]$Version)
+  local_mocked_bindings(
+    search = function() paste0("package:", dep$package[dep$attached])
   )
-  mockery::stub(
-    dependent_packages,
-    'search',
-    function() paste0("package:", dep$package[dep$attached])
-  )
-  mockery::stub(
-    dependent_packages,
-    'getNamespaceInfo',
-    function(x, ...) alldsc[[x]]$Version
-  )
+  local_mocked_bindings(getNamespaceInfo = function(x, ...) alldsc[[x]]$Version)
 
   exp <- dep[, setdiff(colnames(dep), c("path", "loadedpath"))]
   tec <- dependent_packages("devtools", NA)

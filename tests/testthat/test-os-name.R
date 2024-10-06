@@ -1,5 +1,7 @@
 
 test_that("unknown os name", {
-  mockery::stub(os_name, "utils::sessionInfo", list(running = NULL))
+  local_mocked_bindings(
+    sessionInfo = function(...) list(running = NULL), .package = "utils"
+  )
   expect_equal(os_name(), NA_character_)
 })

@@ -1,7 +1,7 @@
 
 test_that("session_info", {
   info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
-  mockery::stub(session_info, "package_info", pi)
+  local_mocked_bindings(package_info = function(...) pi)
 
   si <- session_info()
   expect_equal(si$platform, platform_info())
