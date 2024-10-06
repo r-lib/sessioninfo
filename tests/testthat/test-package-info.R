@@ -5,13 +5,9 @@ test_that("package_info, loaded", {
   alldsc <- readRDS("fixtures/descs.rda")
   exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
 
-  mockery::stub(package_info, "loaded_packages", descs)
-  mockery::stub(
-    package_info,
-    "pkg_desc",
-    function(x, ...) alldsc[[x]]
-    )
-  mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
+  local_mocked_bindings(loaded_packages = function() descs)
+  local_mocked_bindings(pkg_desc = function(x, ...) alldsc[[x]])
+  local_mocked_bindings(pkg_lib_paths = function() levels(exp$library))
 
   pi <- package_info()
   expect_identical(pi, exp)
@@ -23,13 +19,9 @@ test_that("package_info, dependent", {
   alldsc <- readRDS("fixtures/descs.rda")
   exp <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
 
-  mockery::stub(package_info, "dependent_packages", descs)
-  mockery::stub(
-    package_info,
-    "pkg_desc",
-    function(x, ...) alldsc[[x]]
-  )
-  mockery::stub(package_info, "pkg_lib_paths", levels(exp$library))
+  local_mocked_bindings(dependent_packages = function(...) descs)
+  local_mocked_bindings(pkg_desc = function(x, ...) alldsc[[x]])
+  local_mocked_bindings(pkg_lib_paths = function() levels(exp$library))
 
   pi <- package_info("devtools")
   expect_identical(pi, exp)

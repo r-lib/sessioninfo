@@ -29,10 +29,9 @@ Suggests:
     callr,
     covr,
     gh,
-    mockery,
     reticulate,
     rmarkdown,
-    testthat,
+    testthat (>= 3.2.0),
     withr
 Config/Needs/website:
     pkgdown,
