@@ -1,5 +1,5 @@
 
-# sessioninfo (development version)
+# sessioninfo 1.2.3
 
 * `session_info()` no longer produces an error when `info` has length > 1
   (@nash-delcamp-slp, #96).
