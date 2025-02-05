@@ -11,6 +11,10 @@
 * `session_info()` output now includes an explanation for symbol highlighting packages
   attached to the search path (@IndrajeetPatil).
 
+* `session_info()` and `platform_info()` now print the host name if the
+  `sessioninfo.include_hostname` global option is set to `TRUE`
+  (@certara-jcraig, #99).
+
 # sessioninfo 1.2.2
 
 * This version does not add an emoji hash to the output.
@@ -82,7 +86,7 @@
 
 # sessioninfo 1.1.1
 
-* `package_info()` and `session_info()` now detect locally installed packages 
+* `package_info()` and `session_info()` now detect locally installed packages
   correctly if they have an empty `biocViews` field in `DESCRIPTION (@llrs, #25)
 
 * `package_info()` and `session_info()` now handle the case when a loaded
