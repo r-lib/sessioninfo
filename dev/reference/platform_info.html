@@ -49,8 +49,9 @@
 <li><p><code>system</code>: CPU, and machine readable OS name, separated by a comma.</p></li>
 <li><p><code>ui</code>: the user interface, e.g. <code>Rgui</code>, <code>RTerm</code>, etc. see <code>GUI</code>
 in <a href="https://rdrr.io/r/base/base-defunct.html" class="external-link">base::.Platform</a>.</p></li>
-<li><p><code>hostname</code>: the name of the machine know on the network, see
-<code>nodename</code> in <code><a href="https://rdrr.io/r/base/Sys.info.html" class="external-link">base::Sys.info()</a></code>.</p></li>
+<li><p><code>hostname</code>: the name of the machine known on the network, see
+<code>nodename</code> in <code><a href="https://rdrr.io/r/base/Sys.info.html" class="external-link">base::Sys.info()</a></code>. For privacy, it is only included
+if the <code>sessioninfo.include_hostname</code> option is set to <code>TRUE</code>.</p></li>
 <li><p><code>language</code>: The current language setting. The <code>LANGUAGE</code> environment
 variable, if set, or <code>(EN)</code> if unset.</p></li>
 <li><p><code>collate</code>: Collation rule, from the current locale.</p></li>
