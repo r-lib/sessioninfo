@@ -14,8 +14,9 @@ A list with elements:
 \item \code{system}: CPU, and machine readable OS name, separated by a comma.
 \item \code{ui}: the user interface, e.g. \code{Rgui}, \code{RTerm}, etc. see \code{GUI}
 in \link[base:Platform]{base::.Platform}.
-\item \code{hostname}: the name of the machine know on the network, see
-\code{nodename} in \code{\link[base:Sys.info]{base::Sys.info()}}.
+\item \code{hostname}: the name of the machine known on the network, see
+\code{nodename} in \code{\link[base:Sys.info]{base::Sys.info()}}. For privacy, it is only included
+if the \code{sessioninfo.include_hostname} option is set to \code{TRUE}.
 \item \code{language}: The current language setting. The \code{LANGUAGE} environment
 variable, if set, or \code{(EN)} if unset.
 \item \code{collate}: Collation rule, from the current locale.

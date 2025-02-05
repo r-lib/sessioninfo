@@ -1,11 +1,15 @@
 
 test_that("platform_info", {
+  withr::local_options(sessioninfo.include_hostname = FALSE)
   pi <- platform_info()
-  expect_equal(
-    names(pi),
-    c("version", "os", "system", "hostname", "ui", "language", "collate", "ctype",
-      "tz", "date", "pandoc", "quarto")
+  nms <- c("version", "os", "system", "hostname", "ui", "language",
+    "collate", "ctype", "tz", "date", "pandoc", "quarto"
   )
+  expect_equal(names(pi), setdiff(nms, "hostname"))
+
+  withr::local_options(sessioninfo.include_hostname = TRUE)
+  pi <- platform_info()
+  expect_equal(names(pi), nms)
 
   ## This can be a variety of strings, e.g. "R Under development"
   expect_match(pi$version, "R ")
