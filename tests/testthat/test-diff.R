@@ -97,6 +97,8 @@ test_that("get_session_info_url", {
     .package = "utils"
   )
 
+  # Needs Internet connection
+  skip_on_cran()
   url <- "https://github.com/r-lib/sessioninfo/issues/6"
   expect_equal(
     get_session_info_url(url),
