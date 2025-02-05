@@ -1,3 +1,5 @@
+# sessioninfo (development version)
+
 
 # sessioninfo 1.2.3
 

@@ -1,6 +1,6 @@
 Package: sessioninfo
 Title: R Session Information
-Version: 1.2.3
+Version: 1.2.3.9000
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "cre"),
     person("Hadley", "Wickham", role = "aut"),
