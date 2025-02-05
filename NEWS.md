@@ -16,6 +16,9 @@
   `sessioninfo.include_hostname` global option is set to `TRUE`
   (@certara-jcraig, #99).
 
+* sessioninfo now does not leave behind detritus in the temporary
+  directory.
+
 # sessioninfo 1.2.2
 
 * This version does not add an emoji hash to the output.

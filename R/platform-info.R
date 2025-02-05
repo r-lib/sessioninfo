@@ -91,10 +91,14 @@ get_quarto_version <- function() {
     if (path == "") {
       "NA"
     } else {
-      ver <- system("quarto -V", intern = TRUE)[1]
+      tmp <- tempfile()
+      on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+      dir.create(tmp, recursive = TRUE, showWarnings = FALSE)
+      tmp <- normalizePath(tmp, winslash = "/")
+      ver <- system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", tmp))[1]
       paste0(ver, " @ ", path)
     }
-  }
+}
 
 #' @export
 
