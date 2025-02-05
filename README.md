@@ -220,8 +220,9 @@ sessioninfo::session_diff(new = "https://github.com/r-lib/sessioninfo/issues/6")
 ## Code of Conduct
 
 Please note that the sessioninfo project is released with a
-[Contributor Code of Conduct](https://r-lib.github.io/sessioninfo/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+[Contributor Code of Conduct](
+  https://sessioninfo.r-lib.org/dev/CODE_OF_CONDUCT.html). By contributing to
+this project, you agree to abide by its terms.
 
 ## License
 
