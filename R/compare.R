@@ -119,6 +119,14 @@ find_session_info_in_html <- function(url, lines) {
   cand <- grep(re_start, lines)
   if (length(cand) == 0) stop("Cannot find session info at '", url, "'.")
 
+  # in the new GH HTML the whole comment is a data field that we extract
+  if (any(grepl("\\n", lines, fixed = TRUE))) {
+    lines <- gsub("\\r", "", lines, fixed = TRUE)
+    lines <- unlist(strsplit(lines, "\\n", fixed = TRUE))
+    cand <- grep(re_start, lines)
+    if (length(cand) == 0) stop("Cannot find session info at '", url, "'.")
+  }
+
   # check if the URL has an anchor and that the anchor exists in HTML
   # if yes, then we "skip" there
   if (purl$anchor != "") {
