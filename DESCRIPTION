@@ -29,6 +29,7 @@ Suggests:
     callr,
     covr,
     gh,
+    quarto (>= 1.4),
     reticulate,
     rmarkdown,
     testthat (>= 3.2.0),

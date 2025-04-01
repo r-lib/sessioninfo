@@ -87,6 +87,21 @@ parse_pandoc_version <- function(path) {
 }
 
 get_quarto_version <- function() {
+  if (requireNamespace("quarto", quietly = TRUE)) {
+    path <- quarto::quarto_path()
+    ver <- try(
+      {
+        quarto::quarto_version()
+      },
+      silent = TRUE
+    )
+
+    if (inherits(ver, "try-error") || is.null(path)) {
+      return("NA")
+    }
+
+    paste0(ver, " @ ", path)
+  } else {
     path <- Sys.which("quarto")
     if (path == "") {
       "NA"
@@ -98,6 +113,7 @@ get_quarto_version <- function() {
       ver <- system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", tmp))[1]
       paste0(ver, " @ ", path)
     }
+  }
 }
 
 #' @export
