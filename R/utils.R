@@ -1,4 +1,3 @@
-
 `%||%` <- function(l, r) if (is.null(l)) r else l
 
 sort_ci <- function(x) {
@@ -27,7 +26,7 @@ order_by_name <- function(x) {
 }
 
 drop_null <- function(x) {
-  x[! vapply(x, is.null, logical(1))]
+  x[!vapply(x, is.null, logical(1))]
 }
 
 last <- function(x) {

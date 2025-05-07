@@ -1,4 +1,3 @@
-
 #' @importFrom cli symbol
 
 rule <- function(..., pad = NULL, double = FALSE) {

@@ -1,4 +1,3 @@
-
 #' Information about the current platform
 #'
 #' @return A list with elements:
@@ -50,14 +49,19 @@ platform_info <- function() {
 }
 
 get_rstudio_version <- function() {
-  tryCatch({
-    ver <- get("RStudio.Version", "tools:rstudio")()
-    paste0(
-      ver$long_version %||% ver$version,
-      if (!is.null(ver$release_name)) paste0(" ", ver$release_name),
-      " (", ver$mode, ")"
-    )
-  }, error = function(e) NULL)
+  tryCatch(
+    {
+      ver <- get("RStudio.Version", "tools:rstudio")()
+      paste0(
+        ver$long_version %||% ver$version,
+        if (!is.null(ver$release_name)) paste0(" ", ver$release_name),
+        " (",
+        ver$mode,
+        ")"
+      )
+    },
+    error = function(e) NULL
+  )
 }
 
 get_pandoc_version <- function() {
@@ -80,24 +84,29 @@ get_pandoc_version <- function() {
 }
 
 parse_pandoc_version <- function(path) {
-  tryCatch({
-    out <- system2(path, "--version", stdout = TRUE)[1]
-    last(strsplit(out, " ", fixed = TRUE)[[1]])
-  }, error = function(e) "NA")
+  tryCatch(
+    {
+      out <- system2(path, "--version", stdout = TRUE)[1]
+      last(strsplit(out, " ", fixed = TRUE)[[1]])
+    },
+    error = function(e) "NA"
+  )
 }
 
 get_quarto_version <- function() {
-    path <- Sys.which("quarto")
-    if (path == "") {
-      "NA"
-    } else {
-      tmp <- tempfile()
-      on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-      dir.create(tmp, recursive = TRUE, showWarnings = FALSE)
-      tmp <- normalizePath(tmp, winslash = "/")
-      ver <- system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", tmp))[1]
-      paste0(ver, " @ ", path)
-    }
+  path <- Sys.which("quarto")
+  if (path == "") {
+    "NA"
+  } else {
+    tmp <- tempfile()
+    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
+    dir.create(tmp, recursive = TRUE, showWarnings = FALSE)
+    tmp <- normalizePath(tmp, winslash = "/")
+    ver <- system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", tmp))[
+      1
+    ]
+    paste0(ver, " @ ", path)
+  }
 }
 
 #' @export
