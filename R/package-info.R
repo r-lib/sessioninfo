@@ -1,4 +1,3 @@
-
 #' Information about the currently loaded packages, or about a chosen set
 #'
 #' @param pkgs Which packages to show. It may be:
@@ -44,18 +43,15 @@
 package_info <- function(
   pkgs = c("loaded", "attached", "installed")[1],
   include_base = FALSE,
-  dependencies = NA) {
-
+  dependencies = NA
+) {
   if (is.null(pkgs)) pkgs <- "loaded"
   if (identical(pkgs, "!loaded") || identical(pkgs, "loaded")) {
     pkgs <- loaded_packages()
-
   } else if (identical(pkgs, "!attached") || identical(pkgs, "attached")) {
     pkgs <- attached_packages()
-
   } else if (identical(pkgs, "!installed") || identical(pkgs, "installed")) {
     pkgs <- installed_packages()
-
   } else {
     pkgs <- dependent_packages(pkgs, dependencies)
   }
@@ -63,7 +59,9 @@ package_info <- function(
   desc <- lapply(pkgs$package, pkg_desc, lib.loc = .libPaths())
 
   pkgs$is_base <- vapply(
-    desc, function(x) identical(x$Priority, "base"), logical(1)
+    desc,
+    function(x) identical(x$Priority, "base"),
+    logical(1)
   )
 
   pkgs$date <- vapply(desc, pkg_date, character(1))
@@ -74,7 +72,7 @@ package_info <- function(
   path <- ifelse(is.na(pkgs$loadedpath), pkgs$path, pkgs$loadedpath)
   pkgs$library <- factor(dirname(path), levels = libpath)
 
-  if (!include_base) pkgs <- pkgs[! pkgs$is_base, ]
+  if (!include_base) pkgs <- pkgs[!pkgs$is_base, ]
 
   rownames(pkgs) <- pkgs$package
   class(pkgs) <- c("packages_info", "data.frame")
@@ -83,7 +81,8 @@ package_info <- function(
 
 pkg_desc <- function(package, lib.loc = NULL) {
   desc <- suppressWarnings(
-    utils::packageDescription(package, lib.loc = lib.loc))
+    utils::packageDescription(package, lib.loc = lib.loc)
+  )
   if (inherits(desc, "packageDescription")) desc else NULL
 }
 
@@ -91,14 +90,12 @@ pkg_lib_paths <- function() {
   normalizePath(.libPaths(), winslash = "/")
 }
 
-pkg_date <- function (desc) {
+pkg_date <- function(desc) {
   if (!is.null(desc$`Date/Publication`)) {
     date <- desc$`Date/Publication`
-
   } else if (!is.null(desc$Built)) {
     built <- strsplit(desc$Built, "; ")[[1]]
     date <- built[3]
-
   } else {
     date <- NA_character_
   }
@@ -107,14 +104,18 @@ pkg_date <- function (desc) {
 }
 
 pkg_source <- function(desc) {
-
   if (is.null(desc)) {
     NA_character_
   } else if (!is.null(desc$GithubSHA1)) {
-    str <- paste0("Github (",
-                  desc$GithubUsername, "/",
-                  desc$GithubRepo, "@",
-                  desc$GithubSHA1, ")")
+    str <- paste0(
+      "Github (",
+      desc$GithubUsername,
+      "/",
+      desc$GithubRepo,
+      "@",
+      desc$GithubSHA1,
+      ")"
+    )
   } else if (!is.null(desc$RemoteType) && desc$RemoteType == "standard") {
     if (!is.null(desc$Repository) && desc$Repository == "CRAN") {
       pkg_source_cran(desc)
@@ -125,7 +126,6 @@ pkg_source <- function(desc) {
     } else {
       "Custom"
     }
-
   } else if (!is.null(desc$RemoteType) && desc$RemoteType != "cran") {
     # want to generate these:
     # remoteType (username/repo@commit)
@@ -158,17 +158,15 @@ pkg_source <- function(desc) {
     }
 
     str <- paste0(remote_type, user_repo_and_sha)
-
   } else if (!is.null(desc$Repository)) {
     pkg_source_cran(desc)
-
   } else if (!is.null(desc$biocViews) && desc$biocViews != "") {
     "Bioconductor"
-
-  } else if (isNamespaceLoaded(desc$Package) &&
-             !is.null(asNamespace(desc$Package)$.__DEVTOOLS__)) {
+  } else if (
+    isNamespaceLoaded(desc$Package) &&
+      !is.null(asNamespace(desc$Package)$.__DEVTOOLS__)
+  ) {
     "load_all()"
-
   } else {
     "local"
   }
@@ -201,7 +199,8 @@ pkg_md5_stored <- function(pkgdir) {
   md5file <- file.path(pkgdir, "MD5")
   md5 <- tryCatch(
     suppressWarnings(readLines(md5file)),
-    error = function(e) NULL)
+    error = function(e) NULL
+  )
   if (is.null(md5)) return(NULL)
   hash <- sub(" .*$", "", md5)
   filename <- sub("^[^ ]* \\*", "", md5)
@@ -215,7 +214,8 @@ pkg_md5_disk <- function(pkgdir) {
   setwd(pkgdir)
   dll_files <- file.path(
     "libs",
-    dir("libs", pattern = "[dD][lL][lL]$", recursive = TRUE))
+    dir("libs", pattern = "[dD][lL][lL]$", recursive = TRUE)
+  )
   md5_files <- tools::md5sum(dll_files)
   order_by_name(structure(unname(md5_files), names = tolower(dll_files)))
 }
@@ -235,12 +235,12 @@ format.packages_info <- function(x, ...) {
   flib <- function(x) ifelse(is.na(x), "?", as.integer(x))
 
   px <- data.frame(
-    package      = x$package,
-    "*"          = ifelse(x$attached, "*", ""),
-    version      = ifelse(unloaded, x$ondiskversion, x$loadedversion),
+    package = x$package,
+    "*" = ifelse(x$attached, "*", ""),
+    version = ifelse(unloaded, x$ondiskversion, x$loadedversion),
     "date (UTC)" = x$date,
-    lib          = paste0("[", flib(x$library), "]"),
-    source       = abbrev_long_sha(x$source),
+    lib = paste0("[", flib(x$library), "]"),
+    source = abbrev_long_sha(x$source),
     stringsAsFactors = FALSE,
     check.names = FALSE
   )
@@ -263,12 +263,13 @@ format.packages_info <- function(x, ...) {
   baddel <- is.na(x$ondiskversion)
   badpath[baddel] <- FALSE
 
-  if (any(badloaded) || any(badmd5) || any(badpath) ||  any(baddel)) {
+  if (any(badloaded) || any(badmd5) || any(badpath) || any(baddel)) {
     prob <- paste0(
       ifelse(badloaded, "V", ""),
       ifelse(badpath, "P", ""),
       ifelse(badmd5, "D", ""),
-      ifelse(baddel, "R", ""))
+      ifelse(baddel, "R", "")
+    )
     px <- cbind("!" = prob, px)
   }
 
@@ -306,24 +307,52 @@ format.packages_info <- function(x, ...) {
 
   if ("!" %in% names(px)) fmt <- c(fmt, "")
   if (anyattached) {
-    fmt <- c(fmt, paste0(" ", dng("*"), " ", dash(2),
-                         " Packages attached to the search path."))
+    fmt <- c(
+      fmt,
+      paste0(
+        " ",
+        dng("*"),
+        " ",
+        dash(2),
+        " Packages attached to the search path."
+      )
+    )
   }
   if (any(badloaded)) {
-    fmt <- c(fmt, paste0(" ", dng("V"), " ", dash(2),
-                         " Loaded and on-disk version mismatch."))
+    fmt <- c(
+      fmt,
+      paste0(
+        " ",
+        dng("V"),
+        " ",
+        dash(2),
+        " Loaded and on-disk version mismatch."
+      )
+    )
   }
-  if (any(badpath))  {
-    fmt <- c(fmt, paste0(" ", dng("P"), " ", dash(2),
-                         " Loaded and on-disk path mismatch."))
+  if (any(badpath)) {
+    fmt <- c(
+      fmt,
+      paste0(" ", dng("P"), " ", dash(2), " Loaded and on-disk path mismatch.")
+    )
   }
   if (any(badmd5)) {
-    fmt <- c(fmt, paste0(" ", dng("D"), " ", dash(2),
-                         " DLL MD5 mismatch, broken installation."))
+    fmt <- c(
+      fmt,
+      paste0(
+        " ",
+        dng("D"),
+        " ",
+        dash(2),
+        " DLL MD5 mismatch, broken installation."
+      )
+    )
   }
   if (any(baddel)) {
-    fmt <- c(fmt, paste0(" ", dng("R"), " ", dash(2),
-                         " Package was removed from disk."))
+    fmt <- c(
+      fmt,
+      paste0(" ", dng("R"), " ", dash(2), " Package was removed from disk.")
+    )
   }
 
   fmt

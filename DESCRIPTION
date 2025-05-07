@@ -9,7 +9,8 @@ Authors@R: c(
     person("Kirill", "Müller", role = "aut"),
     person("Jim", "Hester", role = "aut"),
     person("R Core team", role = "ctb"),
-    person("Posit Software, PBC", role = c("cph", "fnd"))
+    person("Posit Software, PBC", role = c("cph", "fnd"),
+           comment = c(ROR = "03wc8by49"))
   )
 Maintainer: Gábor Csárdi <csardi.gabor@gmail.com>
 Description: Query and print information about the current R session.  It
@@ -38,6 +39,7 @@ Config/Needs/website:
     tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true
+Config/usethis/last-upkeep: 2025-05-07
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

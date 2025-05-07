@@ -1,4 +1,3 @@
-
 #' @importFrom utils packageVersion
 
 loaded_packages <- function() {
@@ -19,7 +18,6 @@ installed_packages <- function() {
 }
 
 get_package_info <- function(packages) {
-
   ## 'base' is special, because getNamespaceInfo does not work on it.
   ## Luckily, the path for 'base' is just system.file()
 
@@ -28,7 +26,8 @@ get_package_info <- function(packages) {
     ## the disk. In this case we'll have NA
     tryCatch(
       as.character(packageVersion(pkg, lib.loc = .libPaths())),
-      error = function(e) NA_character_)
+      error = function(e) NA_character_
+    )
   }
 
   packages <- setdiff(packages, "base")
@@ -39,7 +38,8 @@ get_package_info <- function(packages) {
   path <- vapply(
     packages,
     function(p) system.file(package = p, lib.loc = .libPaths()),
-    character(1))
+    character(1)
+  )
   ## If we can't fine the package on disk, have NA instead of ""
   path[path == ""] <- NA_character_
   loadedpath <- vapply(packages, getNamespaceInfo, "", which = "path")

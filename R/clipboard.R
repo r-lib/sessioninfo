@@ -1,4 +1,3 @@
-
 get_os <- function() {
   if (.Platform$OS.type == "windows") {
     "win"

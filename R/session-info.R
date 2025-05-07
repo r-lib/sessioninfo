@@ -1,4 +1,3 @@
-
 #' Print session information
 #'
 #' This is [utils::sessionInfo()] re-written from scratch to both exclude
@@ -50,12 +49,12 @@
 #' session_info("sessioninfo")
 
 session_info <- function(
-    pkgs = c("loaded", "attached", "installed")[1],
-    include_base = FALSE,
-    info = c("auto", "all", "platform", "packages", "python", "external"),
-    dependencies = NA,
-    to_file = FALSE) {
-
+  pkgs = c("loaded", "attached", "installed")[1],
+  include_base = FALSE,
+  info = c("auto", "all", "platform", "packages", "python", "external"),
+  dependencies = NA,
+  to_file = FALSE
+) {
   if (missing(info)) info <- "auto"
   choices <- c("platform", "packages", "python", "external")
   if ("all" %in% info) {
@@ -102,17 +101,14 @@ session_info <- function(
 #' @export
 
 format.session_info <- function(x, ...) {
-
   has_platform <- !is.null(x$platform)
 
-  c(if (!"platform" %in% names(x)) {
+  c(
+    if (!"platform" %in% names(x)) {
       rule("Session info", double = TRUE)
     },
     if ("platform" %in% names(x)) {
-      c(rule(paste("Session info")),
-        format(x$platform),
-        ""
-      )
+      c(rule(paste("Session info")), format(x$platform), "")
     },
     if ("packages" %in% names(x) && nrow(x$packages) > 0) {
       c(rule("Packages"), format(x$packages), "")
@@ -135,7 +131,7 @@ as.character.session_info <- function(x, ...) {
   format(x, ...)
 }
 
-has_emoji <- function () {
+has_emoji <- function() {
   if (isTRUE(opt <- getOption("sessioninfo.emoji"))) {
     TRUE
   } else if (identical(opt, FALSE)) {

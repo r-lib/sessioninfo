@@ -1,8 +1,8 @@
-
 should_show_python <- function(pkgs) {
-  "reticulate" %in% pkgs ||
+  "reticulate" %in%
+    pkgs ||
     (isNamespaceLoaded("reticulate") &&
-     reticulate::py_available(initialize = FALSE))
+      reticulate::py_available(initialize = FALSE))
 }
 
 #' Python configuration
@@ -21,13 +21,14 @@ should_show_python <- function(pkgs) {
 #' session_info(info = "all")
 
 python_info <- function() {
-  conf <- if (isNamespaceLoaded("reticulate") &&
-              reticulate::py_available(initialize = FALSE)) {
+  conf <- if (
+    isNamespaceLoaded("reticulate") &&
+      reticulate::py_available(initialize = FALSE)
+  ) {
     tryCatch(
       reticulate::py_config(),
       error = function(err) {
-        c("`reticulate::py_config()` failed with error:",
-          conditionMessage(err))
+        c("`reticulate::py_config()` failed with error:", conditionMessage(err))
       }
     )
   } else {

@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/r-lib/sessioninfo/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/sessioninfo/actions/workflows/R-CMD-check.yaml)
 [![](https://www.r-pkg.org/badges/version/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/sessioninfo)](https://www.r-pkg.org/pkg/sessioninfo)
-[![Codecov test coverage](https://codecov.io/gh/r-lib/sessioninfo/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/sessioninfo?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/sessioninfo/graph/badge.svg)](https://app.codecov.io/gh/r-lib/sessioninfo)
 <!-- badges: end -->
 
 Query and print information about the current R session. It is similar to

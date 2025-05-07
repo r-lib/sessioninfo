@@ -1,4 +1,3 @@
-
 test_that("session_info", {
   info <- readRDS(paste0("fixtures/devtools-info-", .Platform$OS.type, ".rda"))
   local_mocked_bindings(package_info = function(...) pi)
@@ -11,7 +10,10 @@ test_that("session_info", {
 test_that("print.session_info", {
   si <- session_info()
   expect_output(print(si), "setting[ ]+value")
-  expect_output(print(si), "package[ ]+\\* version[ ]+date[ ][(]UTC[)][ ]+lib[ ]+source")
+  expect_output(
+    print(si),
+    "package[ ]+\\* version[ ]+date[ ][(]UTC[)][ ]+lib[ ]+source"
+  )
 })
 
 test_that("`info` can include one or multiple values", {
@@ -47,5 +49,4 @@ test_that("`info` can include one or multiple values", {
     c("platform", "python", "external"),
     ignore.order = TRUE
   )
-
 })

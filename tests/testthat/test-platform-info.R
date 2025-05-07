@@ -1,9 +1,19 @@
-
 test_that("platform_info", {
   withr::local_options(sessioninfo.include_hostname = FALSE)
   pi <- platform_info()
-  nms <- c("version", "os", "system", "hostname", "ui", "language",
-    "collate", "ctype", "tz", "date", "pandoc", "quarto"
+  nms <- c(
+    "version",
+    "os",
+    "system",
+    "hostname",
+    "ui",
+    "language",
+    "collate",
+    "ctype",
+    "tz",
+    "date",
+    "pandoc",
+    "quarto"
   )
   expect_equal(names(pi), setdiff(nms, "hostname"))
 

@@ -1,4 +1,3 @@
-
 #' Human readable name of the current operating system
 #'
 #' For example Windows 8.1 instead of Windows version 6.3.9600.

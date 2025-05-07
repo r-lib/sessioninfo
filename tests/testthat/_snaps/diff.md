@@ -248,6 +248,22 @@
       [54] ""                                                                              
       [55] "[1] C:/Users/ayip/Documents/R/R-4.0.4/library"                                 
 
+---
+
+    Code
+      find_session_info_in_html(url, html)
+    Condition
+      Error in `find_session_info_in_html()`:
+      ! Cannot parse session info from 'https://github.com/r-lib/sessioninfo/issues/6'.
+
+---
+
+    Code
+      find_session_info_in_html(url, html)
+    Condition
+      Error in `find_session_info_in_html()`:
+      ! Cannot find session info at 'https://github.com/r-lib/sessioninfo/issues/6'.
+
 # parse_url
 
     Code
@@ -266,6 +282,14 @@
       1    https                   github.com /r-lib/sessioninfo/issues/6
                         anchor
       1 issuecomment-937772467
+
+# get_session_info_literal
+
+    Code
+      get_session_info_literal(structure(1, class = "foo"))
+    Condition
+      Error in `get_session_info_literal()`:
+      ! Could not interpret a `foo` as a session info.
 
 # beginning
 

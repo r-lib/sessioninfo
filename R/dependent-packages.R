@@ -1,6 +1,4 @@
-
 dependent_packages <- function(pkgs, dependencies) {
-
   ideps <- interpret_dependencies(dependencies)
 
   pkgs <- find_deps(pkgs, utils::installed.packages(), ideps[[1]], ideps[[2]])
@@ -8,9 +6,16 @@ dependent_packages <- function(pkgs, dependencies) {
 
   loaded_pkgs <- pkgs %in% setdiff(loadedNamespaces(), "base")
   ondiskversion <- vapply(
-    desc, function(x) x$Version %||% NA_character_, character(1))
+    desc,
+    function(x) x$Version %||% NA_character_,
+    character(1)
+  )
   loadedversion <- rep(NA_character_, length(pkgs))
-  loadedversion[loaded_pkgs] <- vapply(pkgs[loaded_pkgs], getNamespaceVersion, "")
+  loadedversion[loaded_pkgs] <- vapply(
+    pkgs[loaded_pkgs],
+    getNamespaceVersion,
+    ""
+  )
   loadedpath <- rep(NA_character_, length(pkgs))
   loadedpath[loaded_pkgs] <-
     vapply(pkgs[loaded_pkgs], getNamespaceInfo, "", which = "path")
@@ -39,10 +44,13 @@ pkg_path_disk <- function(desc) {
   }
 }
 
-find_deps <- function(pkgs, available = utils::available.packages(),
-                      top_dep = c(dep_types_hard(), "Suggests"),
-                      rec_dep = dep_types_hard(), include_pkgs = TRUE) {
-
+find_deps <- function(
+  pkgs,
+  available = utils::available.packages(),
+  top_dep = c(dep_types_hard(), "Suggests"),
+  rec_dep = dep_types_hard(),
+  include_pkgs = TRUE
+) {
   if (length(pkgs) == 0 || identical(top_dep, FALSE)) return(character())
 
   if (length(top_dep) > 0) {
@@ -57,9 +65,9 @@ find_deps <- function(pkgs, available = utils::available.packages(),
       top_flat,
       db = available,
       which = rec_dep,
-      recursive = TRUE)
+      recursive = TRUE
+    )
     rec_flat <- unlist(rec, use.names = FALSE)
-
   } else {
     rec_flat <- character()
   }
@@ -78,13 +86,10 @@ interpret_dependencies <- function(dp) {
 
   if (isTRUE(dp)) {
     list(c(hard, "Suggests"), hard)
-
   } else if (identical(dp, FALSE)) {
     list(character(), character())
-
   } else if (is_na_scalar(dp)) {
     list(hard, hard)
-
   } else {
     list(dp, dp)
   }

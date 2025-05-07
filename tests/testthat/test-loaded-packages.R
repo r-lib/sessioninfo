@@ -1,4 +1,3 @@
-
 test_that("loaded_packages", {
   lp <- loaded_packages()
   expect_equal(sort_ci(lp$package), sort_ci(loadedNamespaces()))

@@ -1,4 +1,3 @@
-
 #' Information about related software
 #'
 #' @details
@@ -33,9 +32,12 @@
 #' external_info()
 
 external_info <- function() {
-
-  ex <- c(get_grsoft_version(), tcl = get_tcl_version(),
-          curl = libcurlVersion(), extSoftVersion())
+  ex <- c(
+    get_grsoft_version(),
+    tcl = get_tcl_version(),
+    curl = libcurlVersion(),
+    extSoftVersion()
+  )
   ex["lapack"] <- get_la_library()
   ex["lapack_version"] <- get_la_version()
   names(ex) <- gsub("^lib", "", names(ex))

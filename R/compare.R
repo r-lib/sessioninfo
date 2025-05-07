@@ -1,4 +1,3 @@
-
 #' Compare session information from two sources
 #'
 #' @param old,new A `session_info` object (the return value of
@@ -34,9 +33,12 @@
 #' @examplesIf FALSE
 #' session_diff()
 
-session_diff <- function(old = "local", new = "clipboard",
-                         packages = c("diff", "merge"), ...) {
-
+session_diff <- function(
+  old = "local",
+  new = "clipboard",
+  packages = c("diff", "merge"),
+  ...
+) {
   packages <- match.arg(packages)
 
   oldname <- get_symbol_name(substitute(old))
@@ -132,9 +134,9 @@ find_session_info_in_html <- function(url, lines) {
   if (purl$anchor != "") {
     anch <- which(
       grepl(paste0(" id=\"", purl$anchor, "\""), lines, fixed = TRUE) |
-      grepl(paste0(" id='", purl$anchor, "'"), lines, fixed = TRUE) |
-      grepl(paste0(" id = \"", purl$anchor, "\""), lines, fixed = TRUE) |
-      grepl(paste0(" id = '", purl$anchor, "'"), lines, fixed = TRUE)
+        grepl(paste0(" id='", purl$anchor, "'"), lines, fixed = TRUE) |
+        grepl(paste0(" id = \"", purl$anchor, "\""), lines, fixed = TRUE) |
+        grepl(paste0(" id = '", purl$anchor, "'"), lines, fixed = TRUE)
     )[1]
     if (!is.na(anch) && any(anch < cand)) {
       lines <- lines[anch:length(lines)]
@@ -165,7 +167,7 @@ find_session_info_in_html <- function(url, lines) {
   si
 }
 
-parse_url <- function (url) {
+parse_url <- function(url) {
   re_url <- paste0(
     "^(?<protocol>[a-zA-Z0-9]+)://",
     "(?:(?<username>[^@/:]+)(?::(?<password>[^@/]+))?@)?",
@@ -181,7 +183,6 @@ get_session_info_literal <- function(si) {
     old <- options(cli.num_colors = 1)
     on.exit(options(old), add = TRUE)
     list(arg = si, si = si, text = format(si))
-
   } else if (is.character(si)) {
     # in case it has ANSI sequences
     text <- cli::ansi_strip(si)
@@ -196,7 +197,6 @@ get_session_info_literal <- function(si) {
 
     check_session_info(text)
     list(arg = si, si = si, text = text)
-
   } else {
     stop("Could not interpret a `", class(si), "` as a session info.")
   }
@@ -244,11 +244,14 @@ session_diff_text <- function(old, new, packages = c("diff", "merge")) {
     merge = merge_packages
   )
   # do not error, in case we cannot parse sessioninfo output
-  suppressWarnings(tryCatch({
-    exp <- package_fixup_fun(old, new)
-    old <- exp$old
-    new <- exp$new
-  }, error = function(e) NULL))
+  suppressWarnings(tryCatch(
+    {
+      exp <- package_fixup_fun(old, new)
+      old <- exp$old
+      new <- exp$new
+    },
+    error = function(e) NULL
+  ))
 
   old2 <- gsub("\\s+", " ", old)
   new2 <- gsub("\\s+", " ", new)
@@ -316,10 +319,10 @@ expand_diff_text <- function(old, new) {
 
   # Add the "!" column if needed
   if ("!" %in% names(opkgs$pkgs) || "!" %in% names(npkgs$pkgs)) {
-    if (! "!" %in% names(opkgs$pkgs)) {
+    if (!"!" %in% names(opkgs$pkgs)) {
       opkgs$pkgs <- cbind("!" = "", opkgs$pkgs, stringsAsFactors = FALSE)
     }
-    if (! "!" %in% names(npkgs$pkgs)) {
+    if (!"!" %in% names(npkgs$pkgs)) {
       npkgs$pkgs <- cbind("!" = "", npkgs$pkgs, stringsAsFactors = FALSE)
     }
   }
@@ -339,7 +342,7 @@ expand_diff_text <- function(old, new) {
   oend <- opkgs$end - opkgs$begin + 1L
   nend <- oend + npkgs$end - npkgs$begin
   fmt_old <- c(fmt[1], fmt[2:oend])
-  fmt_new <- c(fmt[1], fmt[(oend+1):(nend)])
+  fmt_new <- c(fmt[1], fmt[(oend + 1):(nend)])
 
   old <- insert_instead(old, opkgs$begin, opkgs$end, fmt_old)
   new <- insert_instead(new, npkgs$begin, npkgs$end, fmt_new)
@@ -360,19 +363,20 @@ merge_packages <- function(old, new) {
   names(npkgs$pkgs) <- c("package", "new_version", "new_source")
 
   merge_res <- merge(opkgs$pkgs, npkgs$pkgs, all = TRUE)
-  merge_res <- with(merge_res,
-       data.frame(
-         package = package,
-         "v!=" = mark(is_different(old_version, new_version)),
-         old_version = old_version,
-         new_version = new_version,
-         "s!=" = mark(is_different(old_source, new_source)),
-         old_source = old_source,
-         new_source = new_source,
-         stringsAsFactors = FALSE,
-         row.names = NULL,
-         check.names = FALSE
-       )
+  merge_res <- with(
+    merge_res,
+    data.frame(
+      package = package,
+      "v!=" = mark(is_different(old_version, new_version)),
+      old_version = old_version,
+      new_version = new_version,
+      "s!=" = mark(is_different(old_source, new_source)),
+      old_source = old_source,
+      new_source = new_source,
+      stringsAsFactors = FALSE,
+      row.names = NULL,
+      check.names = FALSE
+    )
   )
 
   oldopts <- options(cli.num_colors = 1)
@@ -397,8 +401,8 @@ mark <- function(x, mark = ">>") {
 }
 
 insert_instead <- function(orig, from, to, new) {
-  pre <- if (from > 1) orig[1:(from-1)]
-  pst <- if (to < length(orig)) orig[(to+1):length(orig)]
+  pre <- if (from > 1) orig[1:(from - 1)]
+  pst <- if (to < length(orig)) orig[(to + 1):length(orig)]
   c(pre, new, pst)
 }
 
@@ -409,12 +413,14 @@ parse_pkgs <- function(lines) {
   if (length(begin) != 1 || length(begin) > length(lines)) return(NULL)
 
   # now find the end
-  end <- begin + grep(
-    "^\\s*[!a-zA-Z]",
-    lines[begin:length(lines)],
-    invert = TRUE,
-    perl = TRUE
-  )[1] - 2
+  end <- begin +
+    grep(
+      "^\\s*[!a-zA-Z]",
+      lines[begin:length(lines)],
+      invert = TRUE,
+      perl = TRUE
+    )[1] -
+    2
   if (is.na(end)) end <- length(lines)
 
   pkgs <- parse_pkgs_section(lines[begin:end])
@@ -429,7 +435,7 @@ parse_pkgs_section <- function(lines) {
   wth[length(wth)] <- max(nchar(lines))
   df <- utils::read.fwf(textConnection(lines), widths = wth)
   df[] <- lapply(df, trimws)
-  names(df) <- as.character(df[1,])
+  names(df) <- as.character(df[1, ])
   df <- df[-1, , drop = FALSE]
   rownames(df) <- NULL
   df

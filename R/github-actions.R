@@ -30,13 +30,16 @@ parse_as_gha_url <- function(url) {
   res$run_id <- res2$run_id
   res$html_id <- res2$html_id
 
-  ok <- res$host %in% "github.com" &
-    !is.na(res$repo_owner) & !is.na(res$repo_name) &
-    !is.na(res$run_id) & !is.na(res$html_id)
+  ok <- res$host %in%
+    "github.com" &
+    !is.na(res$repo_owner) &
+    !is.na(res$repo_name) &
+    !is.na(res$run_id) &
+    !is.na(res$html_id)
 
   data.frame(
-    owner  = ifelse(ok, res$repo_owner, NA_character_),
-    repo   = ifelse(ok, res$repo_name, NA_character_),
+    owner = ifelse(ok, res$repo_owner, NA_character_),
+    repo = ifelse(ok, res$repo_name, NA_character_),
     run_id = ifelse(ok, res$run_id, NA_character_),
     html_id = ifelse(ok, res$html_id, NA_character_),
     stringsAsFactors = FALSE,
@@ -54,7 +57,8 @@ get_session_info_gha <- function(url) {
     stop(
       "The gh package is not available.\n",
       "This appears to be the URL for a GitHub Actions (GHA) log:\n",
-      url, "\n",
+      url,
+      "\n",
       "You must install the gh package to get session info for GHA job logs."
     )
   }
@@ -64,22 +68,32 @@ get_session_info_gha <- function(url) {
   # instead, we must lookup the job_id
   jobs <- gh::gh(
     "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs",
-    owner = dat$owner, repo = dat$repo, run_id = dat$run_id
+    owner = dat$owner,
+    repo = dat$repo,
+    run_id = dat$run_id
   )
   html_urls <- vapply(jobs[["jobs"]], function(x) x[["html_url"]], "")
   i <- which(html_urls == url)
   if (length(i) == 0) {
-    stop("Failed to find the job associated with '", url, "'; perhaps there was a later attempt?")
+    stop(
+      "Failed to find the job associated with '",
+      url,
+      "'; perhaps there was a later attempt?"
+    )
   }
   dat$job_id <- jobs[["jobs"]][[i]][["id"]]
 
   meta <- gh::gh(
     "/repos/{owner}/{repo}/actions/jobs/{job_id}",
-    owner = dat$owner, repo = dat$repo, job_id = dat$job_id
+    owner = dat$owner,
+    repo = dat$repo,
+    job_id = dat$job_id
   )
   raw_log <- gh::gh(
     "/repos/{owner}/{repo}/actions/jobs/{job_id}/logs",
-    owner = dat$owner, repo = dat$repo, job_id = dat$job_id
+    owner = dat$owner,
+    repo = dat$repo,
+    job_id = dat$job_id
   )
   timestamped_lines <- unlist(strsplit(raw_log$message, split = "\r\n|\n"))
   lines <- sub("^[^\\s]+\\s", "", timestamped_lines, perl = TRUE)
