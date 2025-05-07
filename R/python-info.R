@@ -41,7 +41,7 @@ python_info <- function() {
 #' @export
 
 format.python_info <- function(x, ...) {
-  x <- NextMethod(x, ...)
+  x <- NextMethod()
   paste0(" ", unlist(strsplit(x, "\n", fixed = TRUE)))
 }
 
