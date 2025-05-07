@@ -8,5 +8,5 @@ test_that("sort_ci", {
 test_that("order_by_name", {
   expect_equal(order_by_name(list()), list())
 
-  expect_error(order_by_name(c("foo", "bar")), "no names")
+  expect_snapshot(error = TRUE, order_by_name(c("foo", "bar")))
 })

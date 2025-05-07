@@ -139,17 +139,11 @@ test_that("find_session_info_in_html", {
     !grepl("^(#&gt;)?[ ]*\\[[0-9]\\] ", html) &
       !grepl("^(#&gt;)?[ ]*[-\u2500]+$", html)
   ]
-  expect_error(
-    find_session_info_in_html(url, html),
-    "Cannot parse session info"
-  )
+  expect_snapshot(error = TRUE, find_session_info_in_html(url, html))
 
   re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
   html <- html[!grepl(re_start, html)]
-  expect_error(
-    find_session_info_in_html(url, html),
-    "Cannot find session info"
-  )
+  expect_snapshot(error = TRUE, find_session_info_in_html(url, html))
 })
 
 test_that("parse_url", {
@@ -198,9 +192,9 @@ test_that("get_session_info_literal", {
     list(arg = ktr2, si = ktr2, text = lines)
   )
 
-  expect_error(
-    get_session_info_literal(structure(1, class = "foo")),
-    "Could not interpret"
+  expect_snapshot(
+    error = TRUE,
+    get_session_info_literal(structure(1, class = "foo"))
   )
 })
 
