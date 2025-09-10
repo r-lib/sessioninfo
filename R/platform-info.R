@@ -98,13 +98,24 @@ get_quarto_version <- function() {
   if (path == "") {
     "NA"
   } else {
-    tmp <- tempfile()
-    on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
-    dir.create(tmp, recursive = TRUE, showWarnings = FALSE)
-    tmp <- normalizePath(tmp, winslash = "/")
-    ver <- system2("quarto", "-V", stdout = TRUE, env = paste0("TMPDIR=", tmp))[
-      1
-    ]
+    tmpdir <- tempfile("quarto-")
+    dir.create(tmpdir, recursive = TRUE, showWarnings = FALSE)
+    on.exit(unlink(tmpdir, recursive = TRUE), add = TRUE)
+
+    oldtmpdir <- Sys.getenv("TMPDIR", unset = NA)
+    on.exit(
+      {
+        if (is.na(oldtmpdir)) {
+          Sys.unsetenv("TMPDIR")
+        } else {
+          Sys.setenv(TMPDIR = oldtmpdir)
+        }
+      },
+      add = TRUE
+    )
+
+    Sys.setenv(TMPDIR = tmpdir)
+    ver <- system2("quarto", "-V", stdout = TRUE)[1]
     paste0(ver, " @ ", path)
   }
 }
