@@ -55,7 +55,9 @@ session_info <- function(
   dependencies = NA,
   to_file = FALSE
 ) {
-  if (missing(info)) info <- "auto"
+  if (missing(info)) {
+    info <- "auto"
+  }
   choices <- c("platform", "packages", "python", "external")
   if ("all" %in% info) {
     info <- choices
@@ -70,7 +72,9 @@ session_info <- function(
   }
 
   stopifnot(is_flag(to_file) || is_string(to_file))
-  if (is_flag(to_file) && to_file) to_file <- "session-info.txt"
+  if (is_flag(to_file) && to_file) {
+    to_file <- "session-info.txt"
+  }
 
   si <- structure(
     drop_null(list(
@@ -147,4 +151,188 @@ has_emoji <- function() {
 
 print.session_info <- function(x, ...) {
   cat(format(x), sep = "\n")
+}
+
+#' Convert session_info object to LaTeX
+#'
+#' @param object A `session_info` object created by [session_info()].
+#' @return `toLatex()` creates a character vector of class "Latex" containing
+#'   LaTeX markup. To render the output in Quarto or R Markdown, set the chunk
+#'   option `results` to `"asis"`.
+#' @rdname session_info
+#' @export
+#' @examples
+#' \dontrun{
+#' si <- session_info()
+#' toLatex(si)
+#'
+#' # If using in Quarto or R Markdown, set results to "asis":
+#' #
+#' # ```{r}
+#' # #| results: asis
+#' # toLatex(sessioninfo::session_info())
+#' # ```
+#' }
+toLatex.session_info <- function(object) {
+  z <- character()
+
+  # Platform section
+  if (!is.null(object$platform)) {
+    z <- c(z, "\\textbf{Session info}", "\\begin{itemize}\\raggedright")
+
+    for (name in names(object$platform)) {
+      value <- object$platform[[name]]
+      if (!is.null(value) && nzchar(value)) {
+        display_name <- switch(
+          name,
+          "os" = "OS",
+          "ui" = "UI",
+          "tz" = "Time zone",
+          str_sentence(name)
+        )
+        z <- c(z, paste0("  \\item ", display_name, ": \\verb|", value, "|"))
+      }
+    }
+    z <- c(z, "\\end{itemize}")
+  }
+
+  # Packages section
+  if (!is.null(object$packages)) {
+    z <- c(z, "\\textbf{Packages}", "\\begin{itemize}\\raggedright")
+
+    pkg_df <- object$packages
+    base_pkgs <- pkg_df$package[pkg_df$is_base]
+    other_pkgs <- pkg_df[!pkg_df$is_base, ]
+
+    if (length(base_pkgs) > 0) {
+      z <- c(
+        z,
+        strwrap(
+          paste(
+            "  \\item Base packages: ",
+            paste(sort(base_pkgs), collapse = ", ")
+          ),
+          indent = 2,
+          exdent = 4
+        )
+      )
+    }
+
+    if (nrow(other_pkgs) > 0) {
+      # Use ondiskversion when loadedversion is NA (for installed but
+      # not loaded packages)
+      versions <- ifelse(
+        is.na(other_pkgs$loadedversion),
+        other_pkgs$ondiskversion,
+        other_pkgs$loadedversion
+      )
+      pkg_strings <- paste0(other_pkgs$package, " (", versions, ")")
+      z <- c(
+        z,
+        strwrap(
+          paste(
+            "  \\item Other packages: ",
+            paste(pkg_strings, collapse = ", ")
+          ),
+          indent = 2,
+          exdent = 4
+        )
+      )
+    }
+    z <- c(z, "\\end{itemize}")
+  }
+
+  # External software section
+  if (!is.null(object$external)) {
+    z <- c(z, "\\textbf{External software}", "\\begin{itemize}\\raggedright")
+
+    # Handle BLAS/LAPACK specially like base R
+    z <- c(z, format_blas_lapack(object$external))
+
+    # Add other external software (excluding BLAS/LAPACK which we handled)
+    other_external <- object$external[
+      !names(object$external) %in%
+        c("BLAS", "lapack", "lapack_version")
+    ]
+
+    for (name in names(other_external)) {
+      value <- other_external[[name]]
+      if (!is.null(value) && nzchar(value)) {
+        display_name <- switch(
+          name,
+          "png" = "PNG",
+          "jpeg" = "JPEG",
+          "tiff" = "TIFF",
+          "tcl" = "TCL",
+          "curl" = "cURL",
+          "zlib" = "zlib",
+          "bzlib" = "bzlib",
+          "xz" = "XZ",
+          "deflate" = "deflate",
+          "PCRE" = "PCRE",
+          "ICU" = "ICU",
+          "TRE" = "TRE",
+          "iconv" = "iconv",
+          "readline" = "readline",
+          str_sentence(name)
+        )
+        z <- c(z, paste0("  \\item ", display_name, ": \\verb|", value, "|"))
+      }
+    }
+    z <- c(z, "\\end{itemize}")
+  }
+
+  # Python section
+  if (!is.null(object$python)) {
+    z <- c(z, "\\textbf{Python configuration}", "\\begin{itemize}\\raggedright")
+    python_status <- as.character(object$python)
+
+    if (grepl("not available", python_status, ignore.case = TRUE)) {
+      z <- c(z, "  \\item Python is not available")
+    } else {
+      z <- c(z, paste0("  \\item Python: \\verb|", python_status, "|"))
+    }
+    z <- c(z, "\\end{itemize}")
+  }
+
+  class(z) <- "Latex"
+  z
+}
+
+# Function for formatting BLAS/LAPACK info like utils::toLatex.sessionInfo()
+format_blas_lapack <- function(external) {
+  z <- character()
+
+  blas <- external$BLAS
+  lapack <- external$lapack
+
+  if (!is.null(blas) && !is.null(lapack) && nzchar(blas) && nzchar(lapack)) {
+    if (blas == lapack) {
+      z <- c(z, paste0("  \\item BLAS/LAPACK: \\verb|", blas, "|"))
+    } else {
+      z <- c(z, paste0("  \\item BLAS: \\verb|", blas, "|"))
+      z <- c(z, paste0("  \\item LAPACK: \\verb|", lapack, "|"))
+    }
+  } else {
+    if (!is.null(blas) && nzchar(blas)) {
+      z <- c(z, paste0("  \\item BLAS: \\verb|", blas, "|"))
+    }
+    if (!is.null(lapack) && nzchar(lapack)) {
+      z <- c(z, paste0("  \\item LAPACK: \\verb|", lapack, "|"))
+    }
+  }
+
+  # Add LAPACK version if available and different
+  lapack_ver <- external$lapack_version
+  if (
+    !is.null(lapack_ver) &&
+      nzchar(lapack_ver) &&
+      !is.null(lapack) &&
+      nzchar(lapack) &&
+      !grepl(lapack_ver, lapack, fixed = TRUE)
+  ) {
+    z <- c(z, paste0("  \\item LAPACK version: \\verb|", lapack_ver, "|"))
+  }
+
+  z
 }
