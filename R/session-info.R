@@ -160,6 +160,7 @@ print.session_info <- function(x, ...) {
 #'   LaTeX markup. To render the output in Quarto or R Markdown, set the chunk
 #'   option `results` to `"asis"`.
 #' @rdname session_info
+#' @importFrom utils toLatex
 #' @export
 #' @examples
 #' \dontrun{
