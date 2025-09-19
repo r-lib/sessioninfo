@@ -156,6 +156,7 @@ print.session_info <- function(x, ...) {
 #' Convert session_info object to LaTeX
 #'
 #' @param object A `session_info` object created by [session_info()].
+#' @param ... Not currently used.
 #' @return `toLatex()` creates a character vector of class "Latex" containing
 #'   LaTeX markup. To render the output in Quarto or R Markdown, set the chunk
 #'   option `results` to `"asis"`.
@@ -174,7 +175,7 @@ print.session_info <- function(x, ...) {
 #' # toLatex(sessioninfo::session_info())
 #' # ```
 #' }
-toLatex.session_info <- function(object) {
+toLatex.session_info <- function(object, ...) {
   z <- character()
 
   # Platform section

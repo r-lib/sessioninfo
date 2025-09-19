@@ -13,7 +13,7 @@ session_info(
   to_file = FALSE
 )
 
-\method{toLatex}{session_info}(object)
+\method{toLatex}{session_info}(object, ...)
 }
 \arguments{
 \item{pkgs}{Which packages to show. It may be:
@@ -47,6 +47,8 @@ If \code{TRUE} the name of the file will be \code{session-info.txt}, but
 \code{to_file} may also be a string to specify the file name.}
 
 \item{object}{A \code{session_info} object created by \code{\link[=session_info]{session_info()}}.}
+
+\item{...}{Not currently used.}
 }
 \value{
 A \code{session_info} object.
