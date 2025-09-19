@@ -36,6 +36,7 @@ external_info <- function() {
     get_grsoft_version(),
     tcl = get_tcl_version(),
     curl = libcurlVersion(),
+    rtools = get_rtools_version(),
     extSoftVersion()
   )
   ex["lapack"] <- get_la_library()
@@ -62,6 +63,23 @@ get_la_library <- function() {
 
 get_la_version <- function() {
   tryCatch(base::La_version(), error = function(err) NA_character_)
+}
+
+get_rtools_version <- function() {
+
+  if (!requireNamespace("pkgbuild", quietly = TRUE)) {
+    return()
+  }
+
+  # Currently no way to get version directly, see <https://github.com/r-lib/pkgbuild/issues/214>
+  tryCatch(
+    gsub(
+      ".+ ([0-9.]+).+",
+      "\\1",
+      capture.output(pkgbuild::find_rtools(debug = TRUE))[1]
+    ),
+    error = function(err) NA_character_)
+
 }
 
 #' @export
