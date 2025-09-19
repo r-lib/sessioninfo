@@ -76,7 +76,7 @@ get_rtools_version <- function() {
     gsub(
       ".+ ([0-9.]+).+",
       "\\1",
-      capture.output(pkgbuild::find_rtools(debug = TRUE))[1]
+      utils::capture.output(pkgbuild::find_rtools(debug = TRUE))[1]
     ),
     error = function(err) NA_character_)
 
