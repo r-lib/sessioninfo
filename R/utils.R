@@ -45,3 +45,7 @@ str_trim <- function(x, width) {
     paste0(substr(x, 1, width - 1), "~")
   }
 }
+
+str_sentence <- function(x) {
+  paste0(toupper(substr(x, 1, 1)), substr(x, 2, nchar(x)))
+}

@@ -1,5 +1,8 @@
 # sessioninfo (development version)
 
+* Added `toLatex()` method for `session_info` objects so that sessioninfo
+  details are more readable in LaTeX PDFs. (@andrewheiss, #82)
+
 * Fixed an issue where detecting the Quarto version on Windows could
   fail (@kevinushey, #122).
 

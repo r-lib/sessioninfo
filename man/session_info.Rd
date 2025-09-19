@@ -2,6 +2,7 @@
 % Please edit documentation in R/session-info.R
 \name{session_info}
 \alias{session_info}
+\alias{toLatex.session_info}
 \title{Print session information}
 \usage{
 session_info(
@@ -11,6 +12,8 @@ session_info(
   dependencies = NA,
   to_file = FALSE
 )
+
+\method{toLatex}{session_info}(object, ...)
 }
 \arguments{
 \item{pkgs}{Which packages to show. It may be:
@@ -42,6 +45,10 @@ as well. See the \code{dependencies} argument of \code{\link[utils:install.packa
 \item{to_file}{Whether to print the session information to a file.
 If \code{TRUE} the name of the file will be \code{session-info.txt}, but
 \code{to_file} may also be a string to specify the file name.}
+
+\item{object}{A \code{session_info} object created by \code{\link[=session_info]{session_info()}}.}
+
+\item{...}{Not currently used.}
 }
 \value{
 A \code{session_info} object.
@@ -49,6 +56,10 @@ A \code{session_info} object.
 If \code{to_file} is not \code{FALSE} then it is
 returned invisibly. (To print it to both a file and to the screen,
 use \code{(session_info(to_file = TRUE))}.)
+
+\code{toLatex()} creates a character vector of class "Latex" containing
+LaTeX markup. To render the output in Quarto or R Markdown, set the chunk
+option \code{results} to \code{"asis"}.
 }
 \description{
 This is \code{\link[utils:sessionInfo]{utils::sessionInfo()}} re-written from scratch to both exclude
@@ -81,4 +92,15 @@ is \emph{returned} (as opposed to \emph{printed}).
 session_info()
 session_info("sessioninfo")
 \dontshow{\}) # examplesIf}
+\dontrun{
+si <- session_info()
+toLatex(si)
+
+# If using in Quarto or R Markdown, set results to "asis":
+#
+# ```{r}
+# #| results: asis
+# toLatex(sessioninfo::session_info())
+# ```
+}
 }
