@@ -2,6 +2,7 @@
 
 * Fixed an issue where detecting the Quarto version on Windows could
   fail (@kevinushey, #122).
+* Add rtools version to session_info output (@libbymckenna, #58).
 
 # sessioninfo 1.2.3
 
