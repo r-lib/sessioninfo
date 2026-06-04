@@ -1,7 +1,7 @@
 # sessioninfo (development version)
 
-* Fixed an issue where detecting the Quarto version on Windows could
-  fail (@kevinushey, #122).
+* `session_info()` now does not print a spurious message on Windows when
+  looking up the Quarto version (@kevinushey, #122).
 
 # sessioninfo 1.2.3
 
