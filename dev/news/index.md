@@ -2,8 +2,9 @@
 
 ## sessioninfo (development version)
 
-- Fixed an issue where detecting the Quarto version on Windows could
-  fail ([@kevinushey](https://github.com/kevinushey),
+- [`session_info()`](https://sessioninfo.r-lib.org/dev/reference/session_info.md)
+  now does not print a spurious message on Windows when looking up the
+  Quarto version ([@kevinushey](https://github.com/kevinushey),
   [\#122](https://github.com/r-lib/sessioninfo/issues/122)).
 
 ## sessioninfo 1.2.3
