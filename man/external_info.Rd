@@ -35,12 +35,12 @@ Note that calling this function will attempt to load the tcltk and
 grDevices packages.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 external_info()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 Similar functions and objects in the base packages:
-\code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:extSoftVersion]{base::extSoftVersion}, \code{\link[tcltk:TclInterface]{tcltk::tclVersion()}}
+\code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:extSoftVersion]{base::extSoftVersion}, \code{\link[tcltk:tclVersion]{tcltk::tclVersion()}}
 \link[base:La_library]{base::La_library}, \code{\link[base:La_version]{base::La_version()}}, \code{\link[base:libcurlVersion]{base::libcurlVersion()}}.
 }

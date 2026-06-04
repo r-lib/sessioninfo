@@ -13,7 +13,7 @@ A list with elements:
 \item \code{os}: the OS name in human readable format, see \code{\link[=os_name]{os_name()}}.
 \item \code{system}: CPU, and machine readable OS name, separated by a comma.
 \item \code{ui}: the user interface, e.g. \code{Rgui}, \code{RTerm}, etc. see \code{GUI}
-in \link[base:Platform]{base::.Platform}.
+in \link[base:.Platform]{base::.Platform}.
 \item \code{hostname}: the name of the machine known on the network, see
 \code{nodename} in \code{\link[base:Sys.info]{base::Sys.info()}}. For privacy, it is only included
 if the \code{sessioninfo.include_hostname} option is set to \code{TRUE}.
@@ -32,12 +32,12 @@ variable, if set, or \code{(EN)} if unset.
 Information about the current platform
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 platform_info()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 Similar functions and objects in the base packages:
-\link[base:Version]{base::R.version.string}, \code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:Version]{base::version},
-\link[base:Platform]{base::.Platform}, \code{\link[base:locales]{base::Sys.getlocale()}}, \code{\link[base:timezones]{base::Sys.timezone()}}.
+\link[base:R.version.string]{base::R.version.string}, \code{\link[utils:sessionInfo]{utils::sessionInfo()}}, \link[base:version]{base::version},
+\link[base:.Platform]{base::.Platform}, \code{\link[base:Sys.getlocale]{base::Sys.getlocale()}}, \code{\link[base:Sys.timezone]{base::Sys.timezone()}}.
 }

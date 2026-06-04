@@ -77,7 +77,7 @@ See \code{\link[=package_info]{package_info()}} for the list of columns in the d
 is \emph{returned} (as opposed to \emph{printed}).
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 session_info()
 session_info("sessioninfo")
 \dontshow{\}) # examplesIf}
