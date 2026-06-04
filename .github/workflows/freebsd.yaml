@@ -36,7 +36,7 @@ jobs:
           pak-version: none
           install-pandoc: false
           install-quarto: false
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, RcppCore/Rcpp
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
