@@ -8,9 +8,9 @@ and where they were installed from.
 
 Useful links:
 
-- <https://github.com/r-lib/sessioninfo#readme>
-
 - <https://sessioninfo.r-lib.org>
+
+- <https://github.com/r-lib/sessioninfo>
 
 - Report bugs at <https://github.com/r-lib/sessioninfo/issues>
 
@@ -34,4 +34,5 @@ Other contributors:
 
 - R Core team \[contributor\]
 
-- Posit Software, PBC \[copyright holder, funder\]
+- Posit Software, PBC ([ROR](https://ror.org/03wc8by49)) \[copyright
+  holder, funder\]

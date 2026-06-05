@@ -26,13 +26,13 @@ Source:
 [`DESCRIPTION`](https://github.com/r-lib/sessioninfo/blob/main/DESCRIPTION)
 
 Wickham H, Chang W, Flight R, Müller K, Hester J (2026). *sessioninfo: R
-Session Information*. R package version 1.2.3.9000,
-<https://github.com/r-lib/sessioninfo#readme>.
+Session Information*. R package version 1.2.4.9000,
+<https://sessioninfo.r-lib.org>.
 
     @Manual{,
       title = {sessioninfo: R Session Information},
       author = {Hadley Wickham and Winston Chang and Robert Flight and Kirill Müller and Jim Hester},
       year = {2026},
-      note = {R package version 1.2.3.9000},
-      url = {https://github.com/r-lib/sessioninfo#readme},
+      note = {R package version 1.2.4.9000},
+      url = {https://sessioninfo.r-lib.org},
     }

@@ -20,7 +20,7 @@ A list with elements:
 - `system`: CPU, and machine readable OS name, separated by a comma.
 
 - `ui`: the user interface, e.g. `Rgui`, `RTerm`, etc. see `GUI` in
-  [base::.Platform](https://rdrr.io/r/base/base-defunct.html).
+  [base::.Platform](https://rdrr.io/r/base/Platform.html).
 
 - `hostname`: the name of the machine known on the network, see
   `nodename` in
@@ -48,10 +48,10 @@ A list with elements:
 ## See also
 
 Similar functions and objects in the base packages:
-[base::R.version.string](https://rdrr.io/r/base/base-defunct.html),
+[base::R.version.string](https://rdrr.io/r/base/Version.html),
 [`utils::sessionInfo()`](https://rdrr.io/r/utils/sessionInfo.html),
-[base::version](https://rdrr.io/r/base/base-defunct.html),
-[base::.Platform](https://rdrr.io/r/base/base-defunct.html),
+[base::version](https://rdrr.io/r/base/Version.html),
+[base::.Platform](https://rdrr.io/r/base/Platform.html),
 [`base::Sys.getlocale()`](https://rdrr.io/r/base/locales.html),
 [`base::Sys.timezone()`](https://rdrr.io/r/base/timezones.html).
 

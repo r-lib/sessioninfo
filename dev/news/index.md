@@ -2,6 +2,10 @@
 
 ## sessioninfo (development version)
 
+## sessioninfo 1.2.4
+
+CRAN release: 2026-06-04
+
 - [`session_info()`](https://sessioninfo.r-lib.org/dev/reference/session_info.md)
   now does not print a spurious message on Windows when looking up the
   Quarto version ([@kevinushey](https://github.com/kevinushey),
