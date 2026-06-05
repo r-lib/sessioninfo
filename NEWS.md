@@ -1,3 +1,5 @@
+# sessioninfo (development version)
+
 # sessioninfo 1.2.4
 
 * `session_info()` now does not print a spurious message on Windows when
