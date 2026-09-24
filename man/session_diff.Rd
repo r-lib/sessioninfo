@@ -51,7 +51,7 @@ session info.
 }
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 session_diff()
 \dontshow{\}) # examplesIf}
 }

@@ -2,7 +2,13 @@
 
 * Fixed an issue where detecting the Quarto version on Windows could
   fail (@kevinushey, #122).
+
 * Add rtools version to session_info output (@libbymckenna, #58).
+
+# sessioninfo 1.2.4
+
+* `session_info()` now does not print a spurious message on Windows when
+  looking up the Quarto version (@kevinushey, #122).
 
 # sessioninfo 1.2.3
 

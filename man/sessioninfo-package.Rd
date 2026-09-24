@@ -11,8 +11,8 @@ Query and print information about the current R session. It is similar to 'utils
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/r-lib/sessioninfo#readme}
   \item \url{https://sessioninfo.r-lib.org}
+  \item \url{https://github.com/r-lib/sessioninfo}
   \item Report bugs at \url{https://github.com/r-lib/sessioninfo/issues}
 }
 
@@ -32,7 +32,7 @@ Authors:
 Other contributors:
 \itemize{
   \item R Core team [contributor]
-  \item Posit Software, PBC [copyright holder, funder]
+  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
 }
 
 }
