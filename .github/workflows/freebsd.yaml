@@ -10,14 +10,14 @@ on:
         type: choice
         options:
         - '15.0'
-        - '14.2-pre'
+        - '14.2'
         - '14.1'
         - '14.0'
         - '13.4'
         - '13.3'
         - '13.2'
         - '12.4'
-        default: '14.1'
+        default: '15.0'
 
 name: freebsd.yaml
 
@@ -25,10 +25,10 @@ jobs:
   freebsd:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: r-hub/actions/setup-r-freebsd@main
         with:
-          release: ${{ github.event.inputs.release || '14.1' }}
+          release: ${{ github.event.inputs.release || '15.0' }}
       - uses: r-hub/actions/platform-info@v1
 
       - uses: r-lib/actions/setup-r-dependencies@v2
@@ -36,7 +36,7 @@ jobs:
           pak-version: none
           install-pandoc: false
           install-quarto: false
-          extra-packages: any::rcmdcheck
+          extra-packages: any::rcmdcheck, RcppCore/Rcpp
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2

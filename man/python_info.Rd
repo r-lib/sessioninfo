@@ -18,7 +18,7 @@ it does not have a \code{py_config} class.
 Python configuration
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (FALSE) withAutoprint(\{ # examplesIf}
 python_info()
 session_info(info = "all")
 \dontshow{\}) # examplesIf}

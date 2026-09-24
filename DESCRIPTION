@@ -1,6 +1,6 @@
 Package: sessioninfo
 Title: R Session Information
-Version: 1.2.3.9000
+Version: 1.2.4.9000
 Authors@R: c(
     person("Gábor", "Csárdi", , "csardi.gabor@gmail.com", role = "cre"),
     person("Hadley", "Wickham", role = "aut"),
@@ -17,10 +17,9 @@ Description: Query and print information about the current R session.  It
     is similar to 'utils::sessionInfo()', but includes more information
     about packages, and where they were installed from.
 License: GPL-2
-URL: https://github.com/r-lib/sessioninfo#readme,
-    https://sessioninfo.r-lib.org
+URL: https://sessioninfo.r-lib.org, https://github.com/r-lib/sessioninfo
 BugReports: https://github.com/r-lib/sessioninfo/issues
-Depends: 
+Depends:
     R (>= 3.4)
 Imports:
     cli (>= 3.1.0),
@@ -42,4 +41,4 @@ Config/testthat/parallel: true
 Config/usethis/last-upkeep: 2025-05-07
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+Config/roxygen2/version: 8.0.0

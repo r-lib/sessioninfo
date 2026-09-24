@@ -100,7 +100,9 @@ get_session_info_gha <- function(url) {
 
   re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
   cand <- grep(re_start, lines)
-  if (length(cand) == 0) stop("Cannot find session info at '", url, "'.")
+  if (length(cand) == 0) {
+    stop("Cannot find session info at '", url, "'.")
+  }
   lines <- lines[cand[1]:length(lines)]
   lines[1] <- sub(paste0("^.*(", re_start, ")"), "\\1", lines[1])
 
@@ -109,7 +111,9 @@ get_session_info_gha <- function(url) {
       grepl("^[ ]*[-\u2500]+$", lines)
   }
   end <- which(grepl_end(lines))[1]
-  if (is.na(end)) stop("Cannot parse session info from '", url, "'.")
+  if (is.na(end)) {
+    stop("Cannot parse session info from '", url, "'.")
+  }
   while (end < length(lines) && grepl_end(lines[end + 1])) {
     end <- end + 1
   }

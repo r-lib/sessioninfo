@@ -45,7 +45,9 @@ package_info <- function(
   include_base = FALSE,
   dependencies = NA
 ) {
-  if (is.null(pkgs)) pkgs <- "loaded"
+  if (is.null(pkgs)) {
+    pkgs <- "loaded"
+  }
   if (identical(pkgs, "!loaded") || identical(pkgs, "loaded")) {
     pkgs <- loaded_packages()
   } else if (identical(pkgs, "!attached") || identical(pkgs, "attached")) {
@@ -72,7 +74,9 @@ package_info <- function(
   path <- ifelse(is.na(pkgs$loadedpath), pkgs$path, pkgs$loadedpath)
   pkgs$library <- factor(dirname(path), levels = libpath)
 
-  if (!include_base) pkgs <- pkgs[!pkgs$is_base, ]
+  if (!include_base) {
+    pkgs <- pkgs[!pkgs$is_base, ]
+  }
 
   rownames(pkgs) <- pkgs$package
   class(pkgs) <- c("packages_info", "data.frame")
@@ -185,12 +189,20 @@ pkg_source_cran <- function(desc) {
 }
 
 pkg_md5ok_dlls <- function(desc) {
-  if (is.null(desc)) return(NA)
-  if (.Platform$OS.type != "windows") return(NA)
+  if (is.null(desc)) {
+    return(NA)
+  }
+  if (.Platform$OS.type != "windows") {
+    return(NA)
+  }
   pkgdir <- dirname(dirname(attr(desc, "file")))
-  if (!file.exists(file.path(pkgdir, "libs"))) return(TRUE)
+  if (!file.exists(file.path(pkgdir, "libs"))) {
+    return(TRUE)
+  }
   stored <- pkg_md5_stored(pkgdir)
-  if (is.null(stored)) return(NA)
+  if (is.null(stored)) {
+    return(NA)
+  }
   disk <- pkg_md5_disk(pkgdir)
   identical(stored, disk)
 }
@@ -201,7 +213,9 @@ pkg_md5_stored <- function(pkgdir) {
     suppressWarnings(readLines(md5file)),
     error = function(e) NULL
   )
-  if (is.null(md5)) return(NULL)
+  if (is.null(md5)) {
+    return(NULL)
+  }
   hash <- sub(" .*$", "", md5)
   filename <- sub("^[^ ]* \\*", "", md5)
   dll <- grep("[dD][lL][lL]$", filename)
@@ -305,7 +319,9 @@ format.packages_info <- function(x, ...) {
     }
   )
 
-  if ("!" %in% names(px)) fmt <- c(fmt, "")
+  if ("!" %in% names(px)) {
+    fmt <- c(fmt, "")
+  }
   if (anyattached) {
     fmt <- c(
       fmt,
