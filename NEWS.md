@@ -1,5 +1,8 @@
 # sessioninfo (development version)
 
+* Added `toLatex()` method for `session_info` objects so that sessioninfo
+  details are more readable in LaTeX PDFs. (@andrewheiss, #82)
+
 # sessioninfo 1.2.4
 
 * `session_info()` now does not print a spurious message on Windows when
