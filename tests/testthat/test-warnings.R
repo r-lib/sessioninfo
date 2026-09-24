@@ -16,7 +16,9 @@ test_that("broken dll", {
   file.copy(system.file(package = "testthat"), lib, recursive = TRUE)
 
   md5file <- file.path(lib, "testthat", "MD5")
-  if (!file.exists(md5file)) skip("Cannot test broken DLLs")
+  if (!file.exists(md5file)) {
+    skip("Cannot test broken DLLs")
+  }
   l <- readLines(md5file)
   dllline <- grep("testthat.dll", l)[1]
   substr(l[dllline], 2, 5) <- "xxxx"

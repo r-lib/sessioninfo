@@ -1,7 +1,9 @@
 #' @importFrom cli symbol
 
 rule <- function(..., pad = NULL, double = FALSE) {
-  if (is.null(pad)) pad <- if (double) symbol$double_line else symbol$line
+  if (is.null(pad)) {
+    pad <- if (double) symbol$double_line else symbol$line
+  }
   title <- if (length(list(...))) paste0(" ", ..., " ") else ""
 
   width <- max(cli::console_width() - cli::ansi_nchar(title, "width") - 3, 0)
@@ -37,14 +39,18 @@ format_df <- function(x, highlighters = NULL) {
   )
 
   cols <- lapply(cols, function(x) {
-    if (length(x) > 0) x[1] <- cli::col_grey(cli::style_italic(x[1]))
+    if (length(x) > 0) {
+      x[1] <- cli::col_grey(cli::style_italic(x[1]))
+    }
     x
   })
 
   for (idx in seq_along(highlighters)) {
     colname <- names(highlighters)[idx]
     colnum <- match(colname, names(x))
-    if (is.na(colnum)) next
+    if (is.na(colnum)) {
+      next
+    }
     cols[[colnum]][-1] <- highlighters[[idx]](cols[[colnum]][-1])
   }
 
@@ -54,7 +60,9 @@ format_df <- function(x, highlighters = NULL) {
 
 highlight_version <- function(x) {
   ver <- tryCatch(package_version(trimws(x)), error = function(err) NULL)
-  if (is.null(ver)) return(x)
+  if (is.null(ver)) {
+    return(x)
+  }
   large <- vapply(ver, function(x) any(unlist(x) >= 1234), logical(1))
   x[large] <- cli::style_bold(cli::col_magenta(x[large]))
   x

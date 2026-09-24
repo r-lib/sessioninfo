@@ -13,7 +13,9 @@
 
 os_name <- function() {
   x <- suppressWarnings(utils::sessionInfo("base")$running)
-  if (is.null(x)) return(NA_character_)
+  if (is.null(x)) {
+    return(NA_character_)
+  }
 
   x <- gsub("Service Pack", "SP", x)
 

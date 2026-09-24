@@ -85,7 +85,9 @@ get_session_info <- function(src, name = NULL, ...) {
   } else {
     get_session_info_literal(src)
   }
-  if (is.null(si$name)) si$name <- name
+  if (is.null(si$name)) {
+    si$name <- name
+  }
   si
 }
 
@@ -119,7 +121,9 @@ find_session_info_in_html <- function(url, lines) {
   purl <- parse_url(url)
   re_start <- "[-=\u2500\u2550][ ]Session info[ ]"
   cand <- grep(re_start, lines)
-  if (length(cand) == 0) stop("Cannot find session info at '", url, "'.")
+  if (length(cand) == 0) {
+    stop("Cannot find session info at '", url, "'.")
+  }
 
   # in the new GH HTML the whole comment is a data field that we extract
   if (any(grepl("\\n", lines, fixed = TRUE))) {
@@ -156,7 +160,9 @@ find_session_info_in_html <- function(url, lines) {
 
   end <- which(grepl_end(lines))[1]
 
-  if (is.na(end)) stop("Cannot parse session info from '", url, "'.")
+  if (is.na(end)) {
+    stop("Cannot parse session info from '", url, "'.")
+  }
   while (end < length(lines) && grepl_end(lines[end + 1])) {
     end <- end + 1
   }
@@ -266,7 +272,9 @@ session_diff_text <- function(old, new, packages = c("diff", "merge")) {
 
 diff_drop_empty <- function(x) {
   len <- length(x)
-  if (len == 0) return(x)
+  if (len == 0) {
+    return(x)
+  }
 
   empty <- rle(grepl("^\\s*$", x))
   pre <- if (empty$values[1]) {
@@ -276,7 +284,9 @@ diff_drop_empty <- function(x) {
     (len - utils::tail(empty$lengths, 1) + 1):len
   }
   del <- as.integer(c(pre, post))
-  if (length(del)) x <- x[-del]
+  if (length(del)) {
+    x <- x[-del]
+  }
 
   x
 }
@@ -315,7 +325,9 @@ expand_diff_text <- function(old, new) {
   opkgs <- parse_pkgs(old)
   npkgs <- parse_pkgs(new)
 
-  if (is.null(opkgs) || is.null(opkgs)) return(list(old = old, new = new))
+  if (is.null(opkgs) || is.null(opkgs)) {
+    return(list(old = old, new = new))
+  }
 
   # Add the "!" column if needed
   if ("!" %in% names(opkgs$pkgs) || "!" %in% names(npkgs$pkgs)) {
@@ -354,7 +366,9 @@ merge_packages <- function(old, new) {
   opkgs <- parse_pkgs(old)
   npkgs <- parse_pkgs(new)
 
-  if (is.null(opkgs) || is.null(opkgs)) return(list(old = old, new = new))
+  if (is.null(opkgs) || is.null(opkgs)) {
+    return(list(old = old, new = new))
+  }
 
   names_to_keep <- c("package", "version", "source")
   opkgs$pkgs <- opkgs$pkgs[names_to_keep]
@@ -410,7 +424,9 @@ parse_pkgs <- function(lines) {
   begin <- grep("^[-\u2500] Packages ", lines) + 1
 
   # back out if no Packages header
-  if (length(begin) != 1 || length(begin) > length(lines)) return(NULL)
+  if (length(begin) != 1 || length(begin) > length(lines)) {
+    return(NULL)
+  }
 
   # now find the end
   end <- begin +
@@ -421,7 +437,9 @@ parse_pkgs <- function(lines) {
       perl = TRUE
     )[1] -
     2
-  if (is.na(end)) end <- length(lines)
+  if (is.na(end)) {
+    end <- length(lines)
+  }
 
   pkgs <- parse_pkgs_section(lines[begin:end])
 
