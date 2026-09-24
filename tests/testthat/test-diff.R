@@ -110,7 +110,9 @@ test_that("find_session_info_in_html", {
   # of the emojis properly, and that messes up the output of the
   # character vector of lines. We also cannot compare the UTF-8 text
   # on Windows.
-  if (getRversion() < "4.0") skip("Needs R 4.0 at least")
+  if (getRversion() < "4.0") {
+    skip("Needs R 4.0 at least")
+  }
   skip_on_os("windows")
 
   html <- readLines(

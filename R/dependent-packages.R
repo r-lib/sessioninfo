@@ -51,7 +51,9 @@ find_deps <- function(
   rec_dep = dep_types_hard(),
   include_pkgs = TRUE
 ) {
-  if (length(pkgs) == 0 || identical(top_dep, FALSE)) return(character())
+  if (length(pkgs) == 0 || identical(top_dep, FALSE)) {
+    return(character())
+  }
 
   if (length(top_dep) > 0) {
     top <- tools::package_dependencies(pkgs, db = available, which = top_dep)

@@ -55,7 +55,9 @@ session_info <- function(
   dependencies = NA,
   to_file = FALSE
 ) {
-  if (missing(info)) info <- "auto"
+  if (missing(info)) {
+    info <- "auto"
+  }
   choices <- c("platform", "packages", "python", "external")
   if ("all" %in% info) {
     info <- choices
@@ -70,7 +72,9 @@ session_info <- function(
   }
 
   stopifnot(is_flag(to_file) || is_string(to_file))
-  if (is_flag(to_file) && to_file) to_file <- "session-info.txt"
+  if (is_flag(to_file) && to_file) {
+    to_file <- "session-info.txt"
+  }
 
   si <- structure(
     drop_null(list(
