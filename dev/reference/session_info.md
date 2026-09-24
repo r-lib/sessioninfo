@@ -16,6 +16,9 @@ session_info(
   dependencies = NA,
   to_file = FALSE
 )
+
+# S3 method for class 'session_info'
+toLatex(object, ...)
 ```
 
 ## Arguments
@@ -67,12 +70,24 @@ session_info(
   of the file will be `session-info.txt`, but `to_file` may also be a
   string to specify the file name.
 
+- object:
+
+  A `session_info` object created by `session_info()`.
+
+- ...:
+
+  Not currently used.
+
 ## Value
 
 A `session_info` object.
 
 If `to_file` is not `FALSE` then it is returned invisibly. (To print it
 to both a file and to the screen, use `(session_info(to_file = TRUE))`.)
+
+[`toLatex()`](https://rdrr.io/r/utils/toLatex.html) creates a character
+vector of class "Latex" containing LaTeX markup. To render the output in
+Quarto or R Markdown, set the chunk option `results` to `"asis"`.
 
 ## Details
 
@@ -107,4 +122,15 @@ if (FALSE) {
 session_info()
 session_info("sessioninfo")
 }
+if (FALSE) { # \dontrun{
+si <- session_info()
+toLatex(si)
+
+# If using in Quarto or R Markdown, set results to "asis":
+#
+# ```{r}
+# #| results: asis
+# toLatex(sessioninfo::session_info())
+# ```
+} # }
 ```

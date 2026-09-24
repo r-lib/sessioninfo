@@ -54,7 +54,10 @@ installed from).</p>
 <span>  info <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"all"</span>, <span class="st">"platform"</span>, <span class="st">"packages"</span>, <span class="st">"python"</span>, <span class="st">"external"</span><span class="op">)</span>,</span>
 <span>  dependencies <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  to_file <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'session_info'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/toLatex.html" class="external-link">toLatex</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,6 +99,14 @@ as well. See the <code>dependencies</code> argument of <code><a href="https://rd
 If <code>TRUE</code> the name of the file will be <code>session-info.txt</code>, but
 <code>to_file</code> may also be a string to specify the file name.</p></dd>
 
+
+<dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
+<dd><p>A <code>session_info</code> object created by <code>session_info()</code>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Not currently used.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -103,6 +114,9 @@ If <code>TRUE</code> the name of the file will be <code>session-info.txt</code>,
 <p>If <code>to_file</code> is not <code>FALSE</code> then it is
 returned invisibly. (To print it to both a file and to the screen,
 use <code>(session_info(to_file = TRUE))</code>.)</p>
+<p><code><a href="https://rdrr.io/r/utils/toLatex.html" class="external-link">toLatex()</a></code> creates a character vector of class "Latex" containing
+LaTeX markup. To render the output in Quarto or R Markdown, set the chunk
+option <code>results</code> to <code>"asis"</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -128,6 +142,17 @@ is <em>returned</em> (as opposed to <em>printed</em>).</p>
 <span class="r-in"><span><span class="fu">session_info</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">session_info</span><span class="op">(</span><span class="st">"sessioninfo"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="va">si</span> <span class="op">&lt;-</span> <span class="fu">session_info</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/toLatex.html" class="external-link">toLatex</a></span><span class="op">(</span><span class="va">si</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If using in Quarto or R Markdown, set results to "asis":</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># ```{r}</span></span></span>
+<span class="r-in"><span><span class="co"># #| results: asis</span></span></span>
+<span class="r-in"><span><span class="co"># toLatex(sessioninfo::session_info())</span></span></span>
+<span class="r-in"><span><span class="co"># ```</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

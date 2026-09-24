@@ -236,6 +236,7 @@ GPL-2
 ## Session information
 
 - [`session_info()`](https://sessioninfo.r-lib.org/dev/reference/session_info.md)
+  [`toLatex(`*`<session_info>`*`)`](https://sessioninfo.r-lib.org/dev/reference/session_info.md)
   : Print session information
 
 ## Advanced session information

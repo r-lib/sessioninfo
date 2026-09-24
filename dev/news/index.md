@@ -2,6 +2,11 @@
 
 ## sessioninfo (development version)
 
+- Added [`toLatex()`](https://rdrr.io/r/utils/toLatex.html) method for
+  `session_info` objects so that sessioninfo details are more readable
+  in LaTeX PDFs. ([@andrewheiss](https://github.com/andrewheiss),
+  [\#82](https://github.com/r-lib/sessioninfo/issues/82))
+
 ## sessioninfo 1.2.4
 
 CRAN release: 2026-06-04
