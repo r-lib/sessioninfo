@@ -24,6 +24,51 @@ test_that("package_info, dependent", {
   expect_identical(pi, exp)
 })
 
+test_that("package_info, package loaded from outside .libPaths()", {
+  skip_on_cran()
+
+  src <- withr::local_tempdir()
+  lib <- withr::local_tempdir()
+  dir.create(file.path(src, "sessioninfotestpkg"))
+  writeLines(
+    c(
+      "Package: sessioninfotestpkg",
+      "Version: 0.0.1",
+      "Title: Test",
+      "Description: Test.",
+      "License: GPL-3"
+    ),
+    file.path(src, "sessioninfotestpkg", "DESCRIPTION")
+  )
+  writeLines("", file.path(src, "sessioninfotestpkg", "NAMESPACE"))
+  utils::install.packages(
+    file.path(src, "sessioninfotestpkg"),
+    lib = lib,
+    repos = NULL,
+    type = "source",
+    quiet = TRUE
+  )
+
+  loadNamespace("sessioninfotestpkg", lib.loc = lib)
+  withr::defer(unloadNamespace("sessioninfotestpkg"))
+
+  pi <- package_info()
+  wh <- which(pi$package == "sessioninfotestpkg")
+  expect_false(is.na(pi$library[wh]))
+  expect_identical(
+    normalizePath(as.character(pi$library[wh])),
+    normalizePath(lib)
+  )
+})
+
+test_that("package_info, only base packages", {
+  pi <- package_info("base")
+  expect_s3_class(pi, "packages_info")
+  expect_equal(nrow(pi), 0)
+  expect_output(print(pi), "No packages")
+  expect_equal(nrow(package_info(c("stats", "utils"))), 0)
+})
+
 test_that("pkg_date", {
   crayon <- readRDS("fixtures/descs.rda")$crayon
   expect_equal(pkg_date(crayon), "2016-06-28")

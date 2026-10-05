@@ -70,13 +70,22 @@ package_info <- function(
   pkgs$source <- vapply(desc, pkg_source, character(1))
   pkgs$md5ok <- vapply(desc, pkg_md5ok_dlls, logical(1))
 
-  libpath <- pkg_lib_paths()
-  path <- ifelse(is.na(pkgs$loadedpath), pkgs$path, pkgs$loadedpath)
-  pkgs$library <- factor(dirname(path), levels = libpath)
-
   if (!include_base) {
     pkgs <- pkgs[!pkgs$is_base, ]
   }
+
+  libpath <- pkg_lib_paths()
+  path <- as.character(ifelse(
+    is.na(pkgs$loadedpath),
+    pkgs$path,
+    pkgs$loadedpath
+  ))
+  libdir <- dirname(path)
+  libdir[is.na(path)] <- NA_character_
+  pkgs$library <- factor(
+    libdir,
+    levels = c(libpath, setdiff(unique(libdir[!is.na(libdir)]), libpath))
+  )
 
   rownames(pkgs) <- pkgs$package
   class(pkgs) <- c("packages_info", "data.frame")

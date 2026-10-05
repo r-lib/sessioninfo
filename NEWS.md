@@ -3,6 +3,10 @@
 * Added `toLatex()` method for `session_info` objects so that sessioninfo
   details are more readable in LaTeX PDFs. (@andrewheiss, #82)
 
+* `package_info()` and `session_info()` now report the library of a package
+  that was loaded from a directory that is not in `.libPaths()`, instead of
+  `NA` (@taekop, #128).
+
 # sessioninfo 1.2.4
 
 * `session_info()` now does not print a spurious message on Windows when
